@@ -1,0 +1,20 @@
+الموقع/
+│
+├── index.html (الصفحة الرئيسية - محتوى غني)
+├── games.html (صفحة جميع الألعاب)
+├── about.html (من نحن - 300 كلمة)
+├── contact.html (اتصل بنا مع نموذج)
+├── privacy.html (سياسة الخصوصية - مفصلة)
+├── terms.html (شروط الاستخدام - مفصلة)
+│
+├── games/
+│   ├── xo/
+│   ├── snake/
+│   ├── memory/
+│   └── puzzle/
+│
+└── images/
+    ├── xo.jpg
+    ├── snake.jpg
+    ├── memory.jpg
+    └── puzzle.jpg
