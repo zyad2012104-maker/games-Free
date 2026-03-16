@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-O المتطورة - لعبة احترافية</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- إعلان أعلى الشاشة -->
+    <div class="top-ad">
+        <div class="ad-wrapper">
+            <span class="ad-badge">إعلان</span>
+            <div class="ad-content">
+                <img src="https://via.placeholder.com/728x90/2b5797/ffffff?text=🎮+العب+الآن+واحصل+على+مكافآت+يومية" alt="Advertisement">
+                <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-wrapper">
+        <!-- الشريط الجانبي الأيسر مع الإعلانات -->
+        <div class="left-ads-sidebar">
+            <div class="ad-vertical-card">
+                <span class="ad-badge-vertical">إعلان</span>
+                <div class="ad-vertical-content">
+                    <img src="https://via.placeholder.com/160x600/ffb900/000000?text=عرض+خاص" alt="Vertical Ad">
+                </div>
+            </div>
+            <div class="ad-vertical-card">
+                <span class="ad-badge-vertical">إعلان</span>
+                <div class="ad-vertical-content">
+                    <img src="https://via.placeholder.com/160x600/d83b01/ffffff?text=تطبيق+الجوال" alt="Vertical Ad">
+                </div>
+            </div>
+            <div class="ad-vertical-card">
+                <span class="ad-badge-vertical">إعلان</span>
+                <div class="ad-vertical-content">
+                    <img src="https://via.placeholder.com/160x600/28a745/ffffff?text=اشتراك+مميز" alt="Vertical Ad">
+                </div>
+            </div>
+        </div>
+
+        <!-- محتوى اللعبة الرئيسي -->
+        <div class="game-main-content">
+            <!-- رأس اللعبة -->
+            <div class="game-header">
+                <div class="game-title">
+                    <h1>❌⭕ X-O المتطورة</h1>
+                    <span class="version-badge">الإصدار 2.0</span>
+                </div>
+                <a href="../../index.html" class="back-to-home">
+                    <span>🔙</span> العودة للرئيسية
+                </a>
+            </div>
+
+            <!-- إعلان بداية اللعبة -->
+            <div class="start-ad" id="startAd">
+                <div class="ad-horizontal">
+                    <span class="ad-badge">إعلان بداية اللعبة</span>
+                    <div class="ad-content">
+                        <img src="https://via.placeholder.com/728x90/1e3f6e/ffffff?text=🎯+ابدأ+اللعب+الآن+وحصل+على+عملات+مجانية" alt="Start Ad">
+                        <button class="ad-close" onclick="closeStartAd()">✕</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة التحكم -->
+            <div class="control-panel">
+                <div class="control-group">
+                    <label>نوع اللعب:</label>
+                    <div class="custom-select">
+                        <select id="gameMode" onchange="changeGameMode()">
+                            <option value="computer">🤖 ضد الكمبيوتر</option>
+                            <option value="twoPlayer">👥 لاعبين</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>المستوى:</label>
+                    <div class="custom-select">
+                        <select id="level" onchange="changeLevel()">
+                            <option value="3">المستوى 1 (3×3)</option>
+                            <option value="4">المستوى 2 (4×4)</option>
+                            <option value="5">المستوى 3 (5×5)</option>
+                            <option value="6">المستوى 4 (6×6)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group" id="difficultyGroup">
+                    <label>مستوى الذكاء:</label>
+                    <div class="custom-select">
+                        <select id="difficulty">
+                            <option value="easy">🌟 سهل</option>
+                            <option value="medium">⚡ متوسط</option>
+                            <option value="hard">🔥 صعب</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة النتائج -->
+            <div class="score-panel">
+                <div class="player-card player-x">
+                    <div class="player-icon">❌</div>
+                    <div class="player-info">
+                        <span class="player-label" id="player1Label">اللاعب X</span>
+                        <span class="player-score" id="scoreX">0</span>
+                    </div>
+                </div>
+                <div class="vs-badge">VS</div>
+                <div class="player-card player-o">
+                    <div class="player-icon">⭕</div>
+                    <div class="player-info">
+                        <span class="player-label" id="player2Label">الكمبيوتر O</span>
+                        <span class="player-score" id="scoreO">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة اللعبة -->
+            <div class="game-board-area">
+                <div class="board-header">
+                    <div class="turn-indicator" id="turnIndicator">
+                        <span class="turn-text">دور اللاعب</span>
+                        <span class="turn-player" id="currentPlayerDisplay">X</span>
+                    </div>
+                    <div class="moves-indicator">
+                        <span class="moves-label">الحركات</span>
+                        <span class="moves-count" id="movesCounter">0/9</span>
+                    </div>
+                </div>
+
+                <div class="board-container">
+                    <div class="board-inner">
+                        <div class="board-grid" id="board" data-size="3"></div>
+                    </div>
+                </div>
+
+                <!-- إعلان كل 3 أدوار -->
+                <div class="turn-ad-container" id="turnAdContainer">
+                    <div class="turn-ad">
+                        <span class="ad-badge">إعلان بعد <span id="turnNumber">3</span> أدوار</span>
+                        <div class="ad-content">
+                            <img src="https://via.placeholder.com/468x60/ffb900/000000?text=⭐+عرض+خاص+للمثابرين" alt="Turn Ad">
+                            <button class="ad-close-small" onclick="closeTurnAd()">✕</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار التحكم -->
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="resetGame()">
+                    <span>🔄</span> لعبة جديدة
+                </button>
+                <button class="btn-secondary" onclick="resetScores()">
+                    <span>📊</span> تصفير النقاط
+                </button>
+            </div>
+
+            <!-- إحصائيات سريعة -->
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <span class="stat-icon">🎯</span>
+                    <span class="stat-label">إجمالي الحركات:</span>
+                    <span class="stat-value" id="totalMoves">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">📢</span>
+                    <span class="stat-label">الإعلانات:</span>
+                    <span class="stat-value" id="adsShown">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريط الجانبي الأيمن مع الإعلانات -->
+        <div class="right-ads-sidebar">
+            <div class="ad-square-card">
+                <span class="ad-badge-square">إعلان</span>
+                <div class="ad-square-content">
+                    <img src="https://via.placeholder.com/250x250/2b5797/ffffff?text=عرض+محدود" alt="Square Ad">
+                </div>
+            </div>
+            <div class="ad-square-card">
+                <span class="ad-badge-square">إعلان</span>
+                <div class="ad-square-content">
+                    <img src="https://via.placeholder.com/250x250/d83b01/ffffff?text=العاب+جديدة" alt="Square Ad">
+                </div>
+            </div>
+            <div class="ad-square-card">
+                <span class="ad-badge-square">إعلان</span>
+                <div class="ad-square-content">
+                    <img src="https://via.placeholder.com/250x250/28a745/ffffff?text=خصم+50%" alt="Square Ad">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إعلان أسفل الصفحة -->
+    <div class="bottom-ad">
+        <div class="ad-wrapper">
+            <span class="ad-badge">إعلان</span>
+            <div class="ad-content">
+                <img src="https://via.placeholder.com/728x90/1e3f6e/ffffff?text=🎯+شكراً+للعب+معنا+-+اكتشف+المزيد+من+الألعاب" alt="Bottom Ad">
+                <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

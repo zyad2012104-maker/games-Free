@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لعبة Puzzle الاحترافية - 50 مستوى</title>
+    
+    <!-- إعلانات Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .main-container {
+            display: flex;
+            width: 100%;
+            max-width: 1400px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* الإعلان الجانبي الأيسر */
+        .side-ad {
+            flex: 0 0 160px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-container {
+            width: 100%;
+            min-height: 250px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* المحتوى الرئيسي */
+        .game-wrapper {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* الإعلانات العلوية والسفلية */
+        .top-ad, .bottom-ad {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .game-header h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .level-info {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .level-info h2 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .level-info .level-number {
+            font-size: 3em;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            gap: 5px;
+            margin: 15px 0;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 15px;
+            aspect-ratio: 1;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .puzzle-piece {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.8em, 4vw, 1.5em);
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .puzzle-piece.empty {
+            background: #ddd;
+            cursor: default;
+        }
+
+        .puzzle-piece:hover:not(.empty) {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .puzzle-piece.movable {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 100px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+        }
+
+        .message {
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none;
+        }
+
+        .message.success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            transition: width 0.3s ease;
+        }
+
+        .level-selector {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .level-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #667eea;
+            background: transparent;
+            color: #667eea;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .level-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .level-btn.completed {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+            border-color: transparent;
+        }
+
+        .level-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .side-ad {
+                flex: 0 0 auto;
+                width: 100%;
+                min-height: 100px;
+                order: -1;
+            }
+            
+            .stats {
+                flex-direction: row;
+            }
+            
+            .btn {
+                width: calc(50% - 5px);
+            }
+            
+            .level-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+            }
+            
+            .stat-value {
+                font-size: 1.4em;
+            }
+            
+            .btn {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- الإعلان الجانبي الأيسر -->
+        <div class="side-ad">
+            <div class="ad-container">
+                <!-- إعلان Google Sidebar -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="vertical"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="game-wrapper">
+            <!-- الإعلان العلوي -->
+            <div class="top-ad">
+                <div class="ad-container">
+                    <!-- إعلان Google Top -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="XXXXXXXXXX"
+                         data-ad-format="horizontal"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+
+            <div class="game-container">
+                <div class="game-header">
+                    <h1>لعبة Puzzle</h1>
+                    <h3>50 مستوى من التحدي</h3>
+                </div>
+
+                <div class="level-info">
+                    <span>المستوى</span>
+                    <span class="level-number" id="currentLevel">1</span>
+                    <span>/ 50</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 2%"></div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="moves">0</span>
+                        <span class="stat-label">الحركات</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="time">00:00</span>
+                        <span class="stat-label">الوقت</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="bestMoves">0</span>
+                        <span class="stat-label">أفضل حركات</span>
+                    </div>
+                </div>
+
+                <div class="puzzle-grid" id="puzzleGrid"></div>
+
+                <div class="message" id="message">
+                    🎉 تهانينا! 🎉
+                </div>
+
+                <div class="level-selector" id="levelSelector"></div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" id="shuffleBtn">🔀 خلط</button>
+                    <button class="btn btn-secondary" id="resetBtn">🔄 إعادة</button>
+                    <button class="btn btn-primary" id="hintBtn">💡 تلميح</button>
+                    <button class="btn btn-success" id="nextLevelBtn">⏭ المستوى التالي</button>
+                </div>
+            </div>
+
+            <!-- الإعلان السفلي -->
+            <div class="bottom-ad">
+                <div class="ad-container">
+                    <!-- إعلان Google Bottom -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="XXXXXXXXXX"
+                         data-ad-format="horizontal"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class PuzzleGame {
+            constructor() {
+                this.currentLevel = 1;
+                this.maxLevel = 50;
+                this.completedLevels = this.loadCompletedLevels();
+                this.bestMoves = this.loadBestMoves();
+                
+                this.size = this.getSizeForLevel(this.currentLevel);
+                this.board = [];
+                this.emptyPos = { row: this.size - 1, col: this.size - 1 };
+                this.moves = 0;
+                this.timer = null;
+                this.seconds = 0;
+                this.gameStarted = false;
+                this.solved = false;
+                
+                this.init();
+                this.setupEventListeners();
+                this.updateLevelSelector();
+            }
+
+            getSizeForLevel(level) {
+                // زيادة الصعوبة مع المستوى
+                if (level <= 10) return 3;
+                if (level <= 25) return 4;
+                if (level <= 40) return 5;
+                return 6;
+            }
+
+            loadCompletedLevels() {
+                const saved = localStorage.getItem('puzzle_completed_levels');
+                return saved ? JSON.parse(saved) : [];
+            }
+
+            loadBestMoves() {
+                const saved = localStorage.getItem('puzzle_best_moves');
+                return saved ? JSON.parse(saved) : {};
+            }
+
+            saveProgress() {
+                localStorage.setItem('puzzle_completed_levels', JSON.stringify(this.completedLevels));
+                localStorage.setItem('puzzle_best_moves', JSON.stringify(this.bestMoves));
+            }
+
+            init() {
+                this.size = this.getSizeForLevel(this.currentLevel);
+                this.createBoard();
+                this.renderBoard();
+                this.startTimer();
+                this.updateLevelDisplay();
+                
+                // تحديث أفضل حركات للمستوى الحالي
+                const best = this.bestMoves[this.currentLevel] || 0;
+                document.getElementById('bestMoves').textContent = best;
+            }
+
+            createBoard() {
+                this.board = [];
+                let counter = 1;
+                for (let i = 0; i < this.size; i++) {
+                    const row = [];
+                    for (let j = 0; j < this.size; j++) {
+                        if (i === this.size - 1 && j === this.size - 1) {
+                            row.push(null);
+                        } else {
+                            row.push(counter++);
+                        }
+                    }
+                    this.board.push(row);
+                }
+                this.emptyPos = { row: this.size - 1, col: this.size - 1 };
+            }
+
+            renderBoard() {
+                const grid = document.getElementById('puzzleGrid');
+                grid.style.gridTemplateColumns = `repeat(${this.size}, 1fr)`;
+                
+                let html = '';
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        const value = this.board[i][j];
+                        const isEmpty = value === null;
+                        const isMovable = this.isMovable(i, j);
+                        
+                        html += `
+                            <div class="puzzle-piece ${isEmpty ? 'empty' : ''} ${isMovable && !this.solved ? 'movable' : ''}" 
+                                 data-row="${i}" 
+                                 data-col="${j}"
+                                 ${!isEmpty ? `style="background: linear-gradient(135deg, hsl(${value * 30}, 70%, 50%), hsl(${value * 30 + 40}, 70%, 50%))"` : ''}>
+                                ${isEmpty ? '' : value}
+                            </div>
+                        `;
+                    }
+                }
+                
+                grid.innerHTML = html;
+                
+                document.querySelectorAll('.puzzle-piece').forEach(piece => {
+                    piece.addEventListener('click', () => this.handlePieceClick(piece));
+                });
+            }
+
+            isMovable(row, col) {
+                return (Math.abs(row - this.emptyPos.row) + Math.abs(col - this.emptyPos.col)) === 1;
+            }
+
+            handlePieceClick(piece) {
+                if (this.solved) return;
+                
+                const row = parseInt(piece.dataset.row);
+                const col = parseInt(piece.dataset.col);
+                
+                if (this.isMovable(row, col)) {
+                    this.movePiece(row, col);
+                }
+            }
+
+            movePiece(row, col) {
+                this.board[this.emptyPos.row][this.emptyPos.col] = this.board[row][col];
+                this.board[row][col] = null;
+                this.emptyPos = { row, col };
+                
+                this.moves++;
+                document.getElementById('moves').textContent = this.moves;
+                
+                this.renderBoard();
+                
+                if (this.checkWin()) {
+                    this.gameWon();
+                }
+            }
+
+            checkWin() {
+                let counter = 1;
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        if (i === this.size - 1 && j === this.size - 1) {
+                            if (this.board[i][j] !== null) return false;
+                        } else {
+                            if (this.board[i][j] !== counter++) return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            gameWon() {
+                this.solved = true;
+                this.stopTimer();
+                
+                // تسجيل اكتمال المستوى
+                if (!this.completedLevels.includes(this.currentLevel)) {
+                    this.completedLevels.push(this.currentLevel);
+                }
+                
+                // تحديث أفضل حركات
+                if (!this.bestMoves[this.currentLevel] || this.moves < this.bestMoves[this.currentLevel]) {
+                    this.bestMoves[this.currentLevel] = this.moves;
+                    document.getElementById('bestMoves').textContent = this.moves;
+                }
+                
+                this.saveProgress();
+                
+                const message = document.getElementById('message');
+                message.classList.add('success');
+                message.innerHTML = `
+                    🎉 تهانينا! أكملت المستوى ${this.currentLevel}! 🎉<br>
+                    الحركات: ${this.moves} | الوقت: ${this.formatTime(this.seconds)}
+                `;
+                
+                this.updateLevelSelector();
+                this.updateLevelDisplay();
+                
+                // الانتقال التلقائي للمستوى التالي
+                if (this.currentLevel < this.maxLevel) {
+                    setTimeout(() => {
+                        this.nextLevel();
+                    }, 3000);
+                }
+            }
+
+            nextLevel() {
+                if (this.currentLevel < this.maxLevel) {
+                    this.currentLevel++;
+                    this.reset();
+                    this.updateLevelSelector();
+                }
+            }
+
+            prevLevel() {
+                if (this.currentLevel > 1) {
+                    this.currentLevel--;
+                    this.reset();
+                    this.updateLevelSelector();
+                }
+            }
+
+            goToLevel(level) {
+                if (level >= 1 && level <= this.maxLevel) {
+                    this.currentLevel = level;
+                    this.reset();
+                    this.updateLevelSelector();
+                }
+            }
+
+            shuffle() {
+                this.solved = false;
+                document.getElementById('message').classList.remove('success');
+                
+                for (let i = 0; i < 100; i++) {
+                    const possibleMoves = this.getPossibleMoves();
+                    const randomMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+                    this.board[this.emptyPos.row][this.emptyPos.col] = this.board[randomMove.row][randomMove.col];
+                    this.board[randomMove.row][randomMove.col] = null;
+                    this.emptyPos = randomMove;
+                }
+                
+                this.moves = 0;
+                document.getElementById('moves').textContent = this.moves;
+                this.renderBoard();
+                
+                if (!this.gameStarted) {
+                    this.startTimer();
+                    this.gameStarted = true;
+                }
+            }
+
+            getPossibleMoves() {
+                const moves = [];
+                const directions = [
+                    { row: -1, col: 0 },
+                    { row: 1, col: 0 },
+                    { row: 0, col: -1 },
+                    { row: 0, col: 1 }
+                ];
+                
+                for (const dir of directions) {
+                    const newRow = this.emptyPos.row + dir.row;
+                    const newCol = this.emptyPos.col + dir.col;
+                    
+                    if (newRow >= 0 && newRow < this.size && newCol >= 0 && newCol < this.size) {
+                        moves.push({ row: newRow, col: newCol });
+                    }
+                }
+                
+                return moves;
+            }
+
+            reset() {
+                this.solved = false;
+                document.getElementById('message').classList.remove('success');
+                this.init();
+                this.moves = 0;
+                document.getElementById('moves').textContent = this.moves;
+                
+                this.seconds = 0;
+                document.getElementById('time').textContent = '00:00';
+                this.startTimer();
+            }
+
+            hint() {
+                if (this.solved) return;
+                
+                let counter = 1;
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        if (i === this.size - 1 && j === this.size - 1) continue;
+                        
+                        if (this.board[i][j] !== counter) {
+                            for (let x = 0; x < this.size; x++) {
+                                for (let y = 0; y < this.size; y++) {
+                                    if (this.board[x][y] === counter) {
+                                        alert(`💡 تلميح: القطعة ${counter} يجب أن تكون في موقعها الصحيح`);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        counter++;
+                    }
+                }
+            }
+
+            startTimer() {
+                if (this.timer) clearInterval(this.timer);
+                
+                this.timer = setInterval(() => {
+                    if (!this.solved) {
+                        this.seconds++;
+                        document.getElementById('time').textContent = this.formatTime(this.seconds);
+                    }
+                }, 1000);
+            }
+
+            stopTimer() {
+                if (this.timer) {
+                    clearInterval(this.timer);
+                    this.timer = null;
+                }
+            }
+
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            updateLevelDisplay() {
+                document.getElementById('currentLevel').textContent = this.currentLevel;
+                const progress = (this.completedLevels.length / this.maxLevel) * 100;
+                document.getElementById('progressFill').style.width = `${progress}%`;
+            }
+
+            updateLevelSelector() {
+                const selector = document.getElementById('levelSelector');
+                let html = '';
+                
+                for (let i = 1; i <= this.maxLevel; i++) {
+                    let classes = 'level-btn';
+                    if (i === this.currentLevel) classes += ' active';
+                    if (this.completedLevels.includes(i)) classes += ' completed';
+                    
+                    html += `<button class="${classes}" data-level="${i}">${i}</button>`;
+                    
+                    // إضافة فاصل كل 10 مستويات
+                    if (i % 10 === 0 && i < this.maxLevel) {
+                        html += '<span style="width: 5px;"></span>';
+                    }
+                }
+                
+                selector.innerHTML = html;
+                
+                selector.querySelectorAll('.level-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const level = parseInt(btn.dataset.level);
+                        this.goToLevel(level);
+                    });
+                });
+            }
+
+            setupEventListeners() {
+                document.getElementById('shuffleBtn').addEventListener('click', () => this.shuffle());
+                document.getElementById('resetBtn').addEventListener('click', () => this.reset());
+                document.getElementById('hintBtn').addEventListener('click', () => this.hint());
+                document.getElementById('nextLevelBtn').addEventListener('click', () => this.nextLevel());
+            }
+        }
+
+        // تهيئة اللعبة
+        document.addEventListener('DOMContentLoaded', () => {
+            new PuzzleGame();
+        });
+    </script>
+</body>
+</html>
