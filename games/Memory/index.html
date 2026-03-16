@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>لعبة الذاكرة - مستويات تصاعدية</title>
     
-    <!-- Google AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    <!-- Google AdSense Code - مرة واحدة في الرأس -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
      crossorigin="anonymous"></script>
     
     <style>
@@ -37,7 +37,7 @@
 
         /* العمود الأيسر للإعلانات */
         .left-sidebar {
-            flex: 0 0 160px;
+            flex: 0 0 300px;
             position: sticky;
             top: 10px;
             display: flex;
@@ -53,7 +53,7 @@
 
         /* العمود الأيمن للإعلانات */
         .right-sidebar {
-            flex: 0 0 160px;
+            flex: 0 0 300px;
             position: sticky;
             top: 10px;
             display: flex;
@@ -77,37 +77,16 @@
             padding: 2px 0;
         }
 
-        .ad-content {
-            width: 100%;
-            min-height: 100px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 14px;
-        }
-
         /* إعلان علوي */
         .top-ad {
             width: 100%;
             margin-bottom: 15px;
         }
 
-        .top-ad .ad-content {
-            min-height: 90px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
         /* إعلان سفلي */
         .bottom-ad {
             width: 100%;
             margin-top: 15px;
-        }
-
-        .bottom-ad .ad-content {
-            min-height: 90px;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
 
         /* حاوية اللعبة */
@@ -310,6 +289,12 @@
         }
 
         /* تنسيقات للأجهزة المحمولة */
+        @media (max-width: 1200px) {
+            .left-sidebar, .right-sidebar {
+                flex: 0 0 250px;
+            }
+        }
+
         @media (max-width: 900px) {
             .layout {
                 flex-direction: column;
@@ -371,28 +356,34 @@
     <div class="layout">
         <!-- العمود الأيسر للإعلانات -->
         <div class="left-sidebar">
+            <!-- إعلان جانبي أيسر 1 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <div class="ad-content">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="XXXXXXXXXX"
-                         data-ad-format="vertical"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
+                <!-- إعلان_جانبي_أيسر_1 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="2904141418"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
             
+            <!-- إعلان جانبي أيسر 2 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <div class="ad-content">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="XXXXXXXXXX"
-                         data-ad-format="rectangle"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
+                <!-- إعلان_جانبي_أيسر_2 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="2904141418"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </div>
 
@@ -402,14 +393,16 @@
             <div class="top-ad">
                 <div class="ad-container">
                     <div class="ad-label">إعلان</div>
-                    <div class="ad-content">
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                             data-ad-slot="XXXXXXXXXX"
-                             data-ad-format="horizontal"></ins>
-                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                    </div>
+                    <!-- اعلان_اعلى_الموقع -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8584077826935053"
+                         data-ad-slot="2904141418"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
 
@@ -468,42 +461,50 @@
             <div class="bottom-ad">
                 <div class="ad-container">
                     <div class="ad-label">إعلان</div>
-                    <div class="ad-content">
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                             data-ad-slot="XXXXXXXXXX"
-                             data-ad-format="horizontal"></ins>
-                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                    </div>
+                    <!-- اعلان_اسفل_الموقع -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8584077826935053"
+                         data-ad-slot="2904141418"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
         </div>
 
         <!-- العمود الأيمن للإعلانات -->
         <div class="right-sidebar">
+            <!-- إعلان جانبي أيمن 1 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <div class="ad-content">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="XXXXXXXXXX"
-                         data-ad-format="vertical"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
+                <!-- إعلان_جانبي_أيمن_1 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="2904141418"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
             
+            <!-- إعلان جانبي أيمن 2 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <div class="ad-content">
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                         data-ad-slot="XXXXXXXXXX"
-                         data-ad-format="rectangle"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
+                <!-- إعلان_جانبي_أيمن_2 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="2904141418"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </div>
     </div>

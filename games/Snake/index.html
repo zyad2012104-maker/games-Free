@@ -53,16 +53,15 @@
         }
         
         .ad-space {
-            width: 120px;
+            width: 100%;
             min-height: 600px;
-            background: rgba(0, 0, 0, 0.3);
+            background: transparent;
             border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: rgba(255, 255, 255, 0.2);
-            border: 1px dashed rgba(255, 255, 255, 0.1);
+            overflow: hidden;
         }
         
         /* المحتوى الرئيسي */
@@ -87,16 +86,14 @@
         }
         
         .horizontal-ad {
-            width: 728px;
-            max-width: 100%;
-            height: 90px;
-            background: rgba(0, 0, 0, 0.3);
+            width: 100%;
+            min-height: 90px;
+            background: transparent;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: rgba(255, 255, 255, 0.2);
-            border: 1px dashed rgba(255, 255, 255, 0.1);
+            overflow: hidden;
         }
         
         /* حاوية اللعبة */
@@ -273,17 +270,8 @@
         }
         
         /* تنسيقات الإعلانات */
-        .ad-placeholder {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 14px;
-        }
-        
-        .ad-placeholder small {
-            display: block;
-            margin-top: 5px;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.1);
+        .adsbygoogle {
+            background: transparent;
         }
         
         /* تحسينات للموبايل */
@@ -298,10 +286,7 @@
             }
             
             .ad-space {
-                width: 100%;
                 min-height: 120px;
-                flex-direction: row;
-                gap: 20px;
             }
             
             .mobile-controls {
@@ -362,18 +347,27 @@
             }
         }
     </style>
+    
+    <!-- كود إعلان Google AdSense الرئيسي (مرة واحدة فقط في الرأس) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+         crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="page-wrapper">
         <!-- الإعلان الجانبي الأيسر -->
         <div class="sidebar-ad">
-            <div class="ad-label">Ad</div>
+            <div class="ad-label">إعلان</div>
             <div class="ad-space" id="sidebar-ad">
-                <div class="ad-placeholder">
-                    📺 إعلان جانبي<br>
-                    <small>160x600</small>
-                    <!-- ضع كود AdSense هنا -->
-                </div>
+                <!-- إعلان جانبي 160x600 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="2904141418"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </div>
         
@@ -381,13 +375,18 @@
         <div class="main-content">
             <!-- الإعلان العلوي -->
             <div class="top-ad">
-                <div class="ad-label">Ad</div>
+                <div class="ad-label">إعلان</div>
                 <div class="horizontal-ad" id="top-ad">
-                    <div class="ad-placeholder">
-                        📺 إعلان علوي<br>
-                        <small>728x90</small>
-                        <!-- ضع كود AdSense هنا -->
-                    </div>
+                    <!-- إعلان علوي 728x90 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8584077826935053"
+                         data-ad-slot="2904141418"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
             
@@ -423,13 +422,18 @@
             
             <!-- الإعلان السفلي -->
             <div class="bottom-ad">
-                <div class="ad-label">Ad</div>
+                <div class="ad-label">إعلان</div>
                 <div class="horizontal-ad" id="bottom-ad">
-                    <div class="ad-placeholder">
-                        📺 إعلان سفلي<br>
-                        <small>728x90</small>
-                        <!-- ضع كود AdSense هنا -->
-                    </div>
+                    <!-- إعلان سفلي 728x90 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-8584077826935053"
+                         data-ad-slot="2904141418"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
             
@@ -607,7 +611,7 @@
             ctx.arc(
                 food.x * GRID_SIZE + GRID_SIZE/2 - 3,
                 food.y * GRID_SIZE + GRID_SIZE/2 - 3,
-        3,
+                3,
                 0,
                 Math.PI * 2
             );
