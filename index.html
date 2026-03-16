@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع الألعاب المجانية</title>
     
-    <!-- سكربت AdSense للصفحات العادية - مرة واحدة فقط -->
+    <!-- ✅ رمز AdSense التابع لك - مرة واحدة فقط في الصفحة -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
     
     <style>
@@ -74,7 +74,7 @@
             font-size: 28px;
         }
 
-        /* إحصائيات الموقع - تصميم جديد */
+        /* إحصائيات الموقع - تصميم متطور */
         .stats {
             background: white;
             padding: 25px;
@@ -319,7 +319,7 @@
             <h1>🎮 موقع الألعاب المجانية</h1>
         </header>
 
-        <!-- إحصائيات الموقع - عداد الزوار الجديد -->
+        <!-- إحصائيات الموقع - عداد الزوار المتطور -->
         <div class="stats">
             <div class="stat-item">
                 <span class="stat-label">📅 تاريخ الإنشاء:</span>
@@ -351,7 +351,7 @@
                 </a>
             </div>
             
-            <!-- إعلان موبيل 1 -->
+            <!-- إعلان موبيل 1 (نسخة من الإعلان الجانبي 1) -->
             <div class="mobile-ad">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -376,7 +376,7 @@
                 </a>
             </div>
             
-            <!-- إعلان موبيل 2 -->
+            <!-- إعلان موبيل 2 (نسخة من الإعلان الجانبي 2) -->
             <div class="mobile-ad">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -410,86 +410,76 @@
         // ========== عداد الزيارات المتطور ==========
         (function() {
             try {
-                // الرقم الأساسي الذي نبدأ منه
-                const BASE_NUMBER = 2500500; // 2,500,500
-                
-                // مفتاح الحفظ في localStorage
+                // الرقم الأساسي 2,500,500
+                const BASE_NUMBER = 2500500;
                 const STORAGE_KEY = 'advanced_visitor_counter';
                 
-                // جلب البيانات المحفوظة أو إنشاء جديدة
+                // استرجاع البيانات المحفوظة
                 let counterData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
                     totalVisits: BASE_NUMBER,
                     lastVisitorNumber: BASE_NUMBER,
                     firstVisit: true
                 };
                 
-                // إذا كانت أول زيارة للموقع نهائياً
+                // إذا كانت أول زيارة
                 if (counterData.firstVisit) {
                     counterData.totalVisits = BASE_NUMBER;
                     counterData.lastVisitorNumber = BASE_NUMBER;
                     counterData.firstVisit = false;
                 }
                 
-                // زيادة العداد بمقدار 10 لكل زائر جديد
+                // زيادة العدد بمقدار 10
                 counterData.totalVisits += 10;
                 
-                // حساب رقم الزائر الحالي (إجمالي الزيارات - 9) لأننا نريد أن يكون أول زائر هو BASE_NUMBER + 1
-                // مثال: إذا totalVisits = 2,500,510 فإن الزائر الحالي = 2,500,501
+                // حساب رقم الزائر الحالي (إجمالي الزيارات - 9)
                 const currentVisitor = counterData.totalVisits - 9;
                 
                 // حفظ البيانات
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(counterData));
                 
-                // دالة لتنسيق الأرقام (إضافة فواصل)
+                // دالة تنسيق الأرقام
                 function formatNumber(number) {
                     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 }
                 
-                // عرض الأرقام في الصفحة
+                // عرض الأرقام
                 document.getElementById('totalVisits').textContent = formatNumber(counterData.totalVisits);
                 document.getElementById('visitorNumber').textContent = formatNumber(currentVisitor);
                 document.getElementById('creationDate').textContent = '15 يناير 2024';
                 
-                // ========== عرض الوقت الحالي ==========
+                // ========== عرض الوقت ==========
                 function updateTime() {
                     const now = new Date();
                     const hours = now.getHours().toString().padStart(2, '0');
                     const minutes = now.getMinutes().toString().padStart(2, '0');
                     const seconds = now.getSeconds().toString().padStart(2, '0');
-                    const timeString = `${hours}:${minutes}:${seconds}`;
-                    
-                    document.getElementById('visitTime').textContent = timeString;
+                    document.getElementById('visitTime').textContent = `${hours}:${minutes}:${seconds}`;
                 }
                 
-                // تحديث الوقت كل ثانية
                 updateTime();
                 setInterval(updateTime, 1000);
                 
-                // ========== تأثير حركي عند زيادة العداد ==========
+                // تأثير حركي
                 const totalElement = document.getElementById('totalVisits');
                 const visitorElement = document.getElementById('visitorNumber');
                 
                 totalElement.style.animation = 'none';
                 visitorElement.style.animation = 'none';
                 
-                // إعادة تشغيل الأنيميشن
                 setTimeout(() => {
                     totalElement.style.animation = 'countUp 0.5s ease-out';
                     visitorElement.style.animation = 'countUp 0.5s ease-out';
                 }, 100);
                 
-                // ========== للتجربة: عرض معلومات في الكونسول ==========
-                console.log('📊 إحصائيات الزوار:');
-                console.log('📈 إجمالي الزيارات:', formatNumber(counterData.totalVisits));
+                // عرض في الكونسول
+                console.log('✅ تم تحميل AdSense بنجاح');
+                console.log('📊 إجمالي الزيارات:', formatNumber(counterData.totalVisits));
                 console.log('👤 أنت الزائر رقم:', formatNumber(currentVisitor));
-                console.log('🕐 وقت الزيارة:', new Date().toLocaleTimeString('ar-EG'));
                 
             } catch(e) {
-                console.log('خطأ في الإحصائيات:', e);
+                console.log('خطأ:', e);
             }
         })();
     </script>
-    
-    <!-- ملاحظة: لا يوجد أي كود إضافي للإعلانات هنا -->
 </body>
 </html>

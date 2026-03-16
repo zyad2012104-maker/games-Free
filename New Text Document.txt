@@ -1,0 +1,127 @@
+كود اعلان صور اعلى الموقع
+
+
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>
+<!-- اعلان_اعلى_الموقع -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8584077826935053"
+     data-ad-slot="2904141418"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+كود اعلان صور جانب الموقع الموقع
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-8584077826935053"
+     data-ad-slot="9040442410"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+كود اعلان صور جانب الموقع الموقع
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>
+<!-- كود اعلان صور جانب الموقع الموقع -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8584077826935053"
+     data-ad-slot="8096225516"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+
+
+
+اعلان اسفل الموقع
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>
+<!-- اعلان اسفل الموقع -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8584077826935053"
+     data-ad-slot="3136510471"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+
+
+الخطوة الأولى: انسخ النص البرمجي والصقه بين العلامتين <head></head> في موقعك الإلكتروني.
+ضعْ هذا الرمز مرة واحدة بين علامتَي العنوان في محتوى HTML لصفحة AMP على موقعك الإلكتروني. يُحمِّل هذا النص البرمجي مكتبات الإعلانات التلقائية على AMP ذات الصلة.
+
+
+اعلانات تلقائيه 
+
+<script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+
+
+
+الخطوة الثانية: انسخ رمز الإعلان التلقائي على AMP والصقه بعد علامة <body> مباشرةً على صفحاتك.
+انسخ هذا الرمز والصقه مباشرةً بعد علامة <body> للصفحات التي ترغب في ظهور الإعلانات بها. مع العلم بأن موضع رمز الإعلان لا يعكس موضع ظهور الإعلان.
+
+<amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-8584077826935053">
+</amp-auto-ads>
+
+
+
+اعلان داخل العبه
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-8584077826935053"
+     data-ad-slot="5166809841"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+اعلان عند تشغيل العبه
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-8584077826935053"
+     data-ad-slot="9165764600"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+تنسيق الموبيل ليس مظبوط اريد فى الموبيل ازلة الاعلانات الجنابيه حتى 
+
+كود التحقق من الموقع
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
+     crossorigin="anonymous"></script>

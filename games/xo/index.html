@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>X-O المتطورة - لعبة إكس أو الاحترافية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- كود Google AdSense -->
+    
+    <!-- ===== أكواد AdSense الصحيحة (مرة واحدة فقط) ===== -->
+    <!-- رابط AMP للإعلانات التلقائية -->
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+    
+    <!-- كود AdSense الرئيسي (مرة واحدة فقط) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -32,16 +38,11 @@
         }
         
         /* ===== تنسيقات الإعلانات ===== */
-        .top-ad, .bottom-ad {
-            margin-bottom: 12px;
+        .ad-container {
+            margin-bottom: 15px;
             border-radius: 10px;
             overflow: hidden;
             background: #f8f9fa;
-            position: relative;
-            width: 100%;
-        }
-        
-        .ad-wrapper {
             position: relative;
             width: 100%;
             min-height: 90px;
@@ -63,27 +64,9 @@
             font-weight: 600;
         }
         
-        .ad-close {
-            position: absolute;
-            top: 3px;
-            left: 5px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            z-index: 10;
-        }
-        
         /* ===== الإعلانات الجانبية - تظهر فقط في الكمبيوتر ===== */
         .left-ads-sidebar, .right-ads-sidebar {
-            display: none; /* مخفية افتراضياً */
+            display: none;
         }
         
         /* ===== المحتوى الرئيسي ===== */
@@ -172,7 +155,6 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             -webkit-appearance: none;
             appearance: none;
         }
@@ -348,38 +330,6 @@
             50% { background: #a8e0b5; }
         }
         
-        /* إعلان الأدوار */
-        .turn-ad-container {
-            margin-top: 15px;
-            transition: all 0.3s;
-        }
-        
-        .turn-ad-container.hidden {
-            display: none;
-        }
-        
-        .turn-ad {
-            position: relative;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .ad-close-small {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 10px;
-            z-index: 10;
-        }
-        
         /* أزرار التحكم */
         .action-buttons {
             display: flex;
@@ -462,8 +412,8 @@
             }
             
             .left-ads-sidebar, .right-ads-sidebar {
-                display: flex; /* تظهر في الكمبيوتر */
-                width: 160px;
+                display: flex;
+                width: 200px;
                 flex-direction: column;
                 gap: 20px;
             }
@@ -474,26 +424,13 @@
                 overflow: hidden;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.1);
                 position: relative;
-                min-height: 250px;
-            }
-            
-            .ad-badge-vertical, .ad-badge-square {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                background: #ff4444;
-                color: white;
-                font-size: 10px;
-                padding: 2px 6px;
-                border-radius: 10px;
-                z-index: 2;
+                width: 100%;
             }
             
             .ad-vertical-content, .ad-square-content {
                 width: 100%;
-                height: 100%;
-                min-height: inherit;
                 background: #f5f5f5;
+                min-height: 250px;
             }
             
             .game-main-content {
@@ -543,52 +480,53 @@
     </style>
 </head>
 <body>
+    <!-- ===== إعلانات AMP التلقائية (بعد <body> مباشرة) ===== -->
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-8584077826935053"></amp-auto-ads>
+
     <div class="game-container">
-        <!-- إعلان أعلى الشاشة (يظهر في الجوال والكمبيوتر) -->
-        <div class="top-ad">
-            <div class="ad-wrapper">
-                <span class="ad-badge">إعلان</span>
-                <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
-                <!-- كود إعلان أعلى الموقع -->
-                <ins class="adsbygoogle"
-                     style="display:block; min-height: 90px; width: 100%;"
-                     data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+        <!-- ===== إعلان أعلى الموقع ===== -->
+        <div class="ad-container">
+            <span class="ad-badge">إعلان</span>
+            <!-- اعلان_اعلى_الموقع -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8584077826935053"
+                 data-ad-slot="2904141418"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
 
         <div class="game-wrapper">
-            <!-- الشريط الجانبي الأيسر مع الإعلانات (يظهر فقط في الكمبيوتر) -->
+            <!-- ===== الإعلانات الجانبية اليسرى (تظهر فقط في الكمبيوتر) ===== -->
             <div class="left-ads-sidebar">
-                <!-- إعلان يسار 1 -->
+                <!-- إعلان جانب الموقع 1 -->
                 <div class="ad-vertical-card">
-                    <span class="ad-badge-vertical">إعلان</span>
+                    <span class="ad-badge">إعلان</span>
                     <div class="ad-vertical-content">
+                        <!-- كود اعلان صور جانب الموقع -->
                         <ins class="adsbygoogle"
-                             style="display:block; min-height: 250px; width: 100%;"
+                             style="display:block"
+                             data-ad-format="autorelaxed"
                              data-ad-client="ca-pub-8584077826935053"
-                             data-ad-slot="2904141418"
-                             data-ad-format="vertical"
-                             data-full-width-responsive="true"></ins>
+                             data-ad-slot="9040442410"></ins>
                         <script>
                              (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
                 </div>
-                <!-- إعلان يسار 2 -->
+                <!-- إعلان جانب الموقع 2 -->
                 <div class="ad-vertical-card">
-                    <span class="ad-badge-vertical">إعلان</span>
+                    <span class="ad-badge">إعلان</span>
                     <div class="ad-vertical-content">
+                        <!-- كود اعلان صور جانب الموقع -->
                         <ins class="adsbygoogle"
-                             style="display:block; min-height: 250px; width: 100%;"
+                             style="display:block"
                              data-ad-client="ca-pub-8584077826935053"
-                             data-ad-slot="2904141418"
-                             data-ad-format="vertical"
+                             data-ad-slot="8096225516"
+                             data-ad-format="auto"
                              data-full-width-responsive="true"></ins>
                         <script>
                              (adsbygoogle = window.adsbygoogle || []).push({});
@@ -597,7 +535,7 @@
                 </div>
             </div>
 
-            <!-- محتوى اللعبة الرئيسي -->
+            <!-- ===== محتوى اللعبة الرئيسي ===== -->
             <div class="game-main-content">
                 <!-- رأس اللعبة -->
                 <div class="game-header">
@@ -609,21 +547,18 @@
                     </a>
                 </div>
 
-                <!-- إعلان بداية اللعبة (يظهر في الجوال والكمبيوتر) -->
-                <div class="top-ad" id="startAd" style="margin-bottom: 15px;">
-                    <div class="ad-wrapper">
-                        <span class="ad-badge">بداية</span>
-                        <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
-                        <ins class="adsbygoogle"
-                             style="display:block; min-height: 90px; width: 100%;"
-                             data-ad-client="ca-pub-8584077826935053"
-                             data-ad-slot="2904141418"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
+                <!-- ===== إعلان عند تشغيل العبة ===== -->
+                <div class="ad-container" id="startAd">
+                    <span class="ad-badge">إعلان تشغيل</span>
+                    <!-- اعلان عند تشغيل العبه -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="autorelaxed"
+                         data-ad-client="ca-pub-8584077826935053"
+                         data-ad-slot="9165764600"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
 
                 <!-- لوحة التحكم -->
@@ -699,21 +634,18 @@
                         </div>
                     </div>
 
-                    <!-- إعلان كل 3 أدوار (يظهر في الجوال والكمبيوتر) -->
-                    <div class="turn-ad-container hidden" id="turnAdContainer">
-                        <div class="turn-ad">
-                            <span class="ad-badge">بعد <span id="turnNumber">3</span></span>
-                            <button class="ad-close-small" onclick="closeTurnAd()">✕</button>
-                            <ins class="adsbygoogle"
-                                 style="display:block; min-height: 90px; width: 100%;"
-                                 data-ad-client="ca-pub-8584077826935053"
-                                 data-ad-slot="2904141418"
-                                 data-ad-format="auto"
-                                 data-full-width-responsive="true"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
+                    <!-- ===== إعلان داخل العبه (يظهر بعد 3 أدوار) ===== -->
+                    <div class="ad-container" id="turnAdContainer" style="display: none; margin-top: 15px;">
+                        <span class="ad-badge">إعلان داخلي</span>
+                        <!-- اعلان داخل العبه -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-format="autorelaxed"
+                             data-ad-client="ca-pub-8584077826935053"
+                             data-ad-slot="5166809841"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                 </div>
 
@@ -742,32 +674,33 @@
                 </div>
             </div>
 
-            <!-- الشريط الجانبي الأيمن مع الإعلانات (يظهر فقط في الكمبيوتر) -->
+            <!-- ===== الإعلانات الجانبية اليمنى (تظهر فقط في الكمبيوتر) ===== -->
             <div class="right-ads-sidebar">
-                <!-- إعلان يمين 1 -->
+                <!-- إعلان جانب الموقع 1 -->
                 <div class="ad-square-card">
-                    <span class="ad-badge-square">إعلان</span>
+                    <span class="ad-badge">إعلان</span>
                     <div class="ad-square-content">
+                        <!-- كود اعلان صور جانب الموقع -->
                         <ins class="adsbygoogle"
-                             style="display:block; min-height: 250px; width: 100%;"
+                             style="display:block"
+                             data-ad-format="autorelaxed"
                              data-ad-client="ca-pub-8584077826935053"
-                             data-ad-slot="2904141418"
-                             data-ad-format="rectangle"
-                             data-full-width-responsive="true"></ins>
+                             data-ad-slot="9040442410"></ins>
                         <script>
                              (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
                 </div>
-                <!-- إعلان يمين 2 -->
+                <!-- إعلان جانب الموقع 2 -->
                 <div class="ad-square-card">
-                    <span class="ad-badge-square">إعلان</span>
+                    <span class="ad-badge">إعلان</span>
                     <div class="ad-square-content">
+                        <!-- كود اعلان صور جانب الموقع -->
                         <ins class="adsbygoogle"
-                             style="display:block; min-height: 250px; width: 100%;"
+                             style="display:block"
                              data-ad-client="ca-pub-8584077826935053"
-                             data-ad-slot="2904141418"
-                             data-ad-format="rectangle"
+                             data-ad-slot="8096225516"
+                             data-ad-format="auto"
                              data-full-width-responsive="true"></ins>
                         <script>
                              (adsbygoogle = window.adsbygoogle || []).push({});
@@ -777,21 +710,19 @@
             </div>
         </div>
 
-        <!-- إعلان أسفل الصفحة (يظهر في الجوال والكمبيوتر) -->
-        <div class="bottom-ad" style="margin-top: 15px;">
-            <div class="ad-wrapper">
-                <span class="ad-badge">إعلان</span>
-                <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
-                <ins class="adsbygoogle"
-                     style="display:block; min-height: 90px; width: 100%;"
-                     data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+        <!-- ===== إعلان اسفل الموقع ===== -->
+        <div class="ad-container" style="margin-top: 15px;">
+            <span class="ad-badge">إعلان</span>
+            <!-- اعلان اسفل الموقع -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8584077826935053"
+                 data-ad-slot="3136510471"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 
@@ -807,7 +738,6 @@
         let moves = 0;
         let totalMoves = 0;
         let adsShown = 0;
-        let lastMoveIndex = -1;
         let turnCount = 0;
 
         // تهيئة اللعبة
@@ -815,7 +745,11 @@
             initGame();
             loadScores();
             setupEventListeners();
-            showStartAd();
+            
+            // إظهار إعلان البداية ثم إخفائه بعد 7 ثواني
+            setTimeout(() => {
+                hideStartAd();
+            }, 7000);
         });
 
         function initGame() {
@@ -874,7 +808,7 @@
             
             turnCount++;
             if (turnCount % 3 === 0 && gameActive) {
-                showTurnAd(turnCount);
+                showTurnAd();
             }
         }
 
@@ -1145,56 +1079,26 @@
             resetGame();
         }
 
-        // نظام الإعلانات
-        function showStartAd() {
-            const startAd = document.getElementById('startAd');
-            if (startAd) {
-                startAd.style.display = 'block';
-                adsShown++;
-                updateAdStats();
-                
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {}
-                
-                setTimeout(() => {
-                    closeStartAd();
-                }, 7000);
-            }
-        }
-
-        function closeStartAd() {
+        // ===== دوال إدارة الإعلانات =====
+        function hideStartAd() {
             const startAd = document.getElementById('startAd');
             if (startAd) {
                 startAd.style.display = 'none';
             }
         }
 
-        function showTurnAd(turnNumber) {
+        function showTurnAd() {
             const turnAd = document.getElementById('turnAdContainer');
             if (turnAd) {
-                document.getElementById('turnNumber').textContent = turnNumber;
-                turnAd.classList.remove('hidden');
+                turnAd.style.display = 'block';
                 adsShown++;
-                updateAdStats();
+                document.getElementById('adsShown').textContent = adsShown;
                 
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {}
-                
-                setTimeout(closeTurnAd, 5000);
+                // إخفاء بعد 5 ثواني
+                setTimeout(() => {
+                    turnAd.style.display = 'none';
+                }, 5000);
             }
-        }
-
-        function closeTurnAd() {
-            const turnAd = document.getElementById('turnAdContainer');
-            if (turnAd) {
-                turnAd.classList.add('hidden');
-            }
-        }
-
-        function updateAdStats() {
-            document.getElementById('adsShown').textContent = adsShown;
         }
 
         function setupEventListeners() {

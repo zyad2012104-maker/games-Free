@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>لعبة Puzzle الاحترافية - 50 مستوى</title>
     
-    <!-- إعلانات Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
-     crossorigin="anonymous"></script>
+    <!-- ⭐⭐⭐ رمز AdSense التابع لك - في head مرة واحدة فقط ⭐⭐⭐ -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+    
+    <!-- ⭐⭐⭐ إعلانات AMP التلقائية ⭐⭐⭐ -->
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
     
     <style>
         * {
@@ -29,17 +31,27 @@
         .main-container {
             display: flex;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             gap: 20px;
         }
 
-        /* الإعلان الجانبي الأيسر - يظهر فقط على الكمبيوتر */
+        /* الإعلان الجانبي الأيسر */
         .side-ad {
-            flex: 0 0 160px;
+            flex: 0 0 300px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             padding: 10px;
             min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-ad .ad-item {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            min-height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -58,17 +70,21 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        /* الإعلانات العلوية والسفلية */
-        .top-ad, .bottom-ad {
+        /* الإعلانات */
+        .top-ad, .bottom-ad, .in-game-ad {
             width: 100%;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             padding: 10px;
             margin: 10px 0;
-            min-height: 90px;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .in-game-ad {
+            margin: 15px 0;
         }
 
         .ad-container {
@@ -79,8 +95,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 14px;
             overflow: hidden;
         }
 
@@ -94,11 +108,6 @@
             font-size: 1.8em;
             margin-bottom: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .game-header h3 {
-            color: #666;
-            font-size: 1em;
         }
 
         .level-info {
@@ -307,161 +316,73 @@
             border-color: transparent;
         }
 
-        .level-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* تنسيقات خاصة للشاشات الكبيرة (كمبيوتر) */
+        /* تنسيقات سطح المكتب */
         @media (min-width: 1024px) {
             .btn {
                 padding: 10px 20px;
                 font-size: 1em;
             }
-            
-            .level-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 14px;
-            }
         }
 
-        /* تنسيقات للتابلت */
+        /* تنسيقات التابلت */
         @media (min-width: 769px) and (max-width: 1023px) {
             .side-ad {
-                flex: 0 0 120px;
-            }
-            
-            .puzzle-grid {
-                max-width: 400px;
+                flex: 0 0 250px;
             }
         }
 
-        /* تنسيقات للموبيل - إخفاء الإعلان الجانبي */
+        /* تنسيقات الموبيل */
         @media (max-width: 768px) {
-            body {
-                padding: 5px;
-            }
-            
             .main-container {
                 flex-direction: column;
             }
             
-            /* إخفاء الإعلان الجانبي تماماً في الموبيل */
             .side-ad {
-                display: none;
+                display: none; /* إخفاء الإعلان الجانبي في الموبيل */
             }
             
             .game-container {
                 padding: 12px;
             }
             
-            .game-header h1 {
-                font-size: 1.5em;
-            }
-            
-            .game-header h3 {
-                font-size: 0.9em;
-            }
-            
-            .level-info .level-number {
-                font-size: 2em;
-            }
-            
-            .stats {
-                padding: 8px;
-            }
-            
-            .stat-value {
-                font-size: 1.3em;
-            }
-            
-            .stat-label {
-                font-size: 0.7em;
-            }
-            
-            .puzzle-grid {
-                gap: 3px;
-                padding: 8px;
-                max-width: 100%;
-            }
-            
-            .puzzle-piece {
-                font-size: clamp(0.7em, 4vw, 1.1em);
-            }
-            
-            .controls {
-                gap: 5px;
-            }
-            
             .btn {
                 padding: 8px 10px;
                 font-size: 0.8em;
-                min-width: 60px;
-            }
-            
-            .level-selector {
-                max-height: 70px;
-            }
-            
-            .level-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 11px;
-                border-width: 1.5px;
-            }
-            
-            .top-ad, .bottom-ad {
-                min-height: 70px;
-                padding: 5px;
-            }
-            
-            .message {
-                font-size: 0.9em;
-                padding: 10px;
-            }
-        }
-
-        /* تنسيقات للشاشات الصغيرة جداً */
-        @media (max-width: 380px) {
-            .btn {
-                padding: 6px 8px;
-                font-size: 0.7em;
-                min-width: 50px;
-            }
-            
-            .level-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 10px;
-            }
-            
-            .stat-value {
-                font-size: 1.1em;
             }
         }
     </style>
 </head>
 <body>
+    <!-- ⭐⭐⭐ إعلانات AMP التلقائية - بعد وسم body مباشرة ⭐⭐⭐ -->
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-8584077826935053"></amp-auto-ads>
+
     <div class="main-container">
-        <!-- الإعلان الجانبي الأيسر - يظهر فقط على الكمبيوتر والتابلت -->
+        <!-- ⭐⭐⭐ الإعلان الجانبي الأيسر - إعلانين ⭐⭐⭐ -->
         <div class="side-ad">
-            <div class="ad-container">
-                <!-- إعلان Google Sidebar -->
+            <div class="ad-item">
+                <!-- إعلان جانبي 1 - تلقائي -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-format="autorelaxed"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="9040442410"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+            <div class="ad-item">
+                <!-- إعلان جانبي 2 - صور -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
-                     data-ad-format="vertical"
+                     data-ad-slot="8096225516"
+                     data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
         </div>
 
         <!-- المحتوى الرئيسي -->
         <div class="game-wrapper">
-            <!-- الإعلان العلوي -->
+            <!-- ⭐⭐⭐ الإعلان العلوي ⭐⭐⭐ -->
             <div class="top-ad">
                 <div class="ad-container">
                     <!-- اعلان_اعلى_الموقع -->
@@ -471,9 +392,7 @@
                          data-ad-slot="2904141418"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
 
@@ -508,7 +427,29 @@
                     </div>
                 </div>
 
+                <!-- ⭐⭐⭐ إعلان داخل اللعبة (قبل الشبكة) ⭐⭐⭐ -->
+                <div class="in-game-ad">
+                    <!-- اعلان داخل العبه -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="autorelaxed"
+                         data-ad-client="ca-pub-8584077826935053"
+                         data-ad-slot="5166809841"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+
                 <div class="puzzle-grid" id="puzzleGrid"></div>
+
+                <!-- ⭐⭐⭐ إعلان عند تشغيل اللعبة (بعد الشبكة) ⭐⭐⭐ -->
+                <div class="in-game-ad" id="gameStartAd" style="display: none;">
+                    <!-- اعلان عند تشغيل العبه -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="autorelaxed"
+                         data-ad-client="ca-pub-8584077826935053"
+                         data-ad-slot="9165764600"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
 
                 <div class="message" id="message">
                     🎉 تهانينا! 🎉
@@ -524,19 +465,17 @@
                 </div>
             </div>
 
-            <!-- الإعلان السفلي -->
+            <!-- ⭐⭐⭐ الإعلان السفلي ⭐⭐⭐ -->
             <div class="bottom-ad">
                 <div class="ad-container">
-                    <!-- اعلان_اسفل_الموقع -->
+                    <!-- اعلان اسفل الموقع -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-8584077826935053"
-                         data-ad-slot="2904141418"
+                         data-ad-slot="3136510471"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
         </div>
@@ -549,6 +488,7 @@
                 this.maxLevel = 50;
                 this.completedLevels = this.loadCompletedLevels();
                 this.bestMoves = this.loadBestMoves();
+                this.gameStarted = false;
                 
                 this.size = this.getSizeForLevel(this.currentLevel);
                 this.board = [];
@@ -556,23 +496,11 @@
                 this.moves = 0;
                 this.timer = null;
                 this.seconds = 0;
-                this.gameStarted = false;
                 this.solved = false;
                 
                 this.init();
                 this.setupEventListeners();
                 this.updateLevelSelector();
-                
-                // إعادة تحميل الإعلانات
-                this.reloadAds();
-            }
-
-            reloadAds() {
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {
-                    console.log('AdSense error:', e);
-                }
             }
 
             getSizeForLevel(level) {
@@ -659,6 +587,10 @@
             }
 
             handlePieceClick(piece) {
+                if (!this.gameStarted) {
+                    this.gameStarted = true;
+                    this.showGameStartAd();
+                }
                 if (this.solved) return;
                 
                 const row = parseInt(piece.dataset.row);
@@ -667,6 +599,16 @@
                 if (this.isMovable(row, col)) {
                     this.movePiece(row, col);
                 }
+            }
+
+            showGameStartAd() {
+                const adElement = document.getElementById('gameStartAd');
+                adElement.style.display = 'block';
+                
+                // إخفاء الإعلان بعد 5 ثواني
+                setTimeout(() => {
+                    adElement.style.display = 'none';
+                }, 5000);
             }
 
             movePiece(row, col) {
@@ -735,7 +677,6 @@
                     this.currentLevel++;
                     this.reset();
                     this.updateLevelSelector();
-                    this.reloadAds();
                 }
             }
 
@@ -744,12 +685,12 @@
                     this.currentLevel = level;
                     this.reset();
                     this.updateLevelSelector();
-                    this.reloadAds();
                 }
             }
 
             shuffle() {
                 this.solved = false;
+                this.gameStarted = true;
                 document.getElementById('message').classList.remove('success');
                 
                 for (let i = 0; i < 100; i++) {
@@ -763,11 +704,6 @@
                 this.moves = 0;
                 document.getElementById('moves').textContent = this.moves;
                 this.renderBoard();
-                
-                if (!this.gameStarted) {
-                    this.startTimer();
-                    this.gameStarted = true;
-                }
             }
 
             getPossibleMoves() {

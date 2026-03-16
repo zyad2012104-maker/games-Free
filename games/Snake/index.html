@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>لعبة الثعبان - Snake Game</title>
+    
+    <!-- ========== كود AdSense الرئيسي (مرة واحدة فقط) ========== -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+    
+    <!-- ========== إعلانات AMP التلقائية ========== -->
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -279,23 +286,19 @@
                 flex-direction: column;
             }
             
-            /* إخفاء الإعلان الجانبي تماماً في الموبايل */
             .sidebar-ad {
                 display: none;
             }
             
-            /* جعل المحتوى الرئيسي كامل العرض */
             .main-content {
                 width: 100%;
             }
             
-            /* تحسين حجم الكانفاس للموبايل */
             canvas {
                 max-width: 100%;
                 height: auto;
             }
             
-            /* تكبير أزرار التحكم للموبايل */
             .mobile-controls {
                 max-width: 100%;
                 padding: 10px;
@@ -306,7 +309,6 @@
                 font-size: 1.8em;
             }
             
-            /* تحسين الإحصائيات */
             .stats {
                 gap: 10px;
             }
@@ -317,14 +319,12 @@
                 min-width: 100px;
             }
             
-            /* تحسين الأزرار */
             .controls button {
                 padding: 12px 20px;
                 min-width: 120px;
                 font-size: 1em;
             }
             
-            /* تحسين الإعلانات الأفقية */
             .top-ad, .bottom-ad {
                 padding: 8px;
             }
@@ -334,7 +334,6 @@
             }
         }
         
-        /* تحسينات للشاشات الصغيرة جداً */
         @media (max-width: 480px) {
             body {
                 padding: 5px;
@@ -392,16 +391,10 @@
                 font-size: 1.2em;
             }
             
-            .game-over button {
-                padding: 12px 25px;
-                font-size: 1em;
-            }
-            
             .instructions {
                 font-size: 0.8em;
             }
             
-            /* تحسين الإعلانات */
             .top-ad, .bottom-ad {
                 padding: 5px;
             }
@@ -411,7 +404,6 @@
             }
         }
         
-        /* تحسينات للشاشات المتوسطة (تابلت) */
         @media (min-width: 901px) and (max-width: 1200px) {
             .sidebar-ad {
                 width: 140px;
@@ -426,23 +418,22 @@
             }
         }
     </style>
-    
-    <!-- كود إعلان Google AdSense الرئيسي -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
-         crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- ========== إعلانات AMP التلقائية بعد وسم <body> مباشرة ========== -->
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-8584077826935053"></amp-auto-ads>
+    
     <div class="page-wrapper">
-        <!-- الإعلان الجانبي الأيسر - يظهر فقط في الكمبيوتر -->
+        <!-- ========== الإعلان الجانبي الأيسر (يظهر فقط في الكمبيوتر) ========== -->
         <div class="sidebar-ad">
             <div class="ad-label">إعلان</div>
             <div class="ad-space" id="sidebar-ad">
+                <!-- إعلان جانبي 160x600 - صور متجاوبة -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="9040442410"
+                     data-ad-format="autorelaxed"></ins>
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -451,10 +442,11 @@
         
         <!-- المحتوى الرئيسي -->
         <div class="main-content">
-            <!-- الإعلان العلوي -->
+            <!-- ========== الإعلان العلوي ========== -->
             <div class="top-ad">
                 <div class="ad-label">إعلان</div>
                 <div class="horizontal-ad" id="top-ad">
+                    <!-- إعلان علوي 728x90 - صور متجاوبة -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-8584077826935053"
@@ -497,14 +489,15 @@
                 </div>
             </div>
             
-            <!-- الإعلان السفلي -->
+            <!-- ========== الإعلان السفلي ========== -->
             <div class="bottom-ad">
                 <div class="ad-label">إعلان</div>
                 <div class="horizontal-ad" id="bottom-ad">
+                    <!-- إعلان سفلي 728x90 - صور متجاوبة -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-8584077826935053"
-                         data-ad-slot="2904141418"
+                         data-ad-slot="3136510471"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
                     <script>
@@ -519,6 +512,30 @@
         </div>
     </div>
     
+    <!-- ========== إعلان عند تشغيل اللعبة (يظهر داخل اللعبة) ========== -->
+    <div style="display: none;" id="game-start-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-format="autorelaxed"
+             data-ad-client="ca-pub-8584077826935053"
+             data-ad-slot="9165764600"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <!-- ========== إعلان داخل اللعبة ========== -->
+    <div style="display: none;" id="in-game-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-format="autorelaxed"
+             data-ad-client="ca-pub-8584077826935053"
+             data-ad-slot="5166809841"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
     <div class="overlay" id="overlay"></div>
     <div class="game-over" id="gameOver">
         <h2>🎮 Game Over</h2>
@@ -527,7 +544,7 @@
     </div>
 
     <script>
-        // إعدادات اللعبة
+        // ========== إعدادات اللعبة ==========
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
@@ -585,6 +602,9 @@
                 gameLoopRunning = true;
                 requestAnimationFrame(gameLoop);
             }
+            
+            // عرض إعلان بدء اللعبة
+            showGameStartAd();
         }
 
         function generateFood() {
@@ -722,6 +742,11 @@
                 if (score % 30 === 0) {
                     speed = Math.max(70, speed - 5);
                 }
+                
+                // عرض إعلان داخل اللعبة عند كل 50 نقطة
+                if (score % 50 === 0) {
+                    showInGameAd();
+                }
             } else {
                 snake.pop();
             }
@@ -784,7 +809,18 @@
             nextDirection = newDir;
         }
 
-        // التحكم بلوحة المفاتيح
+        // ========== وظائف عرض الإعلانات ==========
+        function showGameStartAd() {
+            console.log('عرض إعلان بدء اللعبة');
+            // يمكن إضافة منطق عرض الإعلان هنا
+        }
+        
+        function showInGameAd() {
+            console.log('عرض إعلان داخل اللعبة');
+            // يمكن إضافة منطق عرض الإعلان هنا
+        }
+
+        // ========== التحكم بلوحة المفاتيح ==========
         document.addEventListener('keydown', (e) => {
             if (!gameRunning || gamePaused || gameOverFlag) return;
             
@@ -808,7 +844,7 @@
             }
         });
 
-        // التحكم باللمس
+        // ========== التحكم باللمس ==========
         let touchStartX = 0;
         let touchStartY = 0;
         

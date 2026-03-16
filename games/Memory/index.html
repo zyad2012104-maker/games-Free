@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>لعبة الذاكرة - مستويات تصاعدية</title>
     
-    <!-- Google AdSense Code - مرة واحدة في الرأس -->
+    <!-- ========== أكواد AdSense الصحيحة (مرة واحدة فقط) ========== -->
+    
+    <!-- 1️⃣ كود AdSense الأساسي (مرة واحدة في الرأس) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
      crossorigin="anonymous"></script>
+    
+    <!-- 2️⃣ كود AMP Auto Ads للإعلانات التلقائية -->
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
     
     <style>
         * {
@@ -67,6 +74,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         .ad-label {
@@ -87,6 +95,14 @@
         .bottom-ad {
             width: 100%;
             margin-top: 15px;
+        }
+
+        /* إعلان داخل اللعبة */
+        .in-game-ad {
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
         }
 
         /* حاوية اللعبة */
@@ -297,33 +313,27 @@
 
         /* ========== تنسيقات الموبيل ========== */
         @media (max-width: 900px) {
-            /* تغيير اتجاه التخطيط إلى عمودي */
             .layout {
                 flex-direction: column;
             }
 
-            /* إخفاء الإعلانات الجانبية تماماً على الموبيل */
             .left-sidebar, .right-sidebar {
                 display: none !important;
             }
 
-            /* جعل المحتوى الرئيسي يأخذ العرض كاملاً */
             .main-content {
                 width: 100%;
             }
 
-            /* تصغير حجم الخط للعناوين */
             h1 {
                 font-size: 2em;
                 margin-bottom: 15px;
             }
 
-            /* تقليل المسافات الداخلية */
             .game-container {
                 padding: 15px;
             }
 
-            /* تحسين شريط المستوى للموبيل */
             .level-progress {
                 padding: 15px;
             }
@@ -337,7 +347,6 @@
                 padding: 5px 15px;
             }
 
-            /* توزيع صناديق الإحصائيات بشكل أفضل */
             .stats {
                 gap: 10px;
             }
@@ -351,7 +360,6 @@
                 font-size: 1.3em;
             }
 
-            /* تحسين شبكة البطاقات للموبيل */
             .board {
                 gap: 8px;
                 margin: 20px 0;
@@ -361,7 +369,6 @@
                 font-size: 1.8em;
             }
 
-            /* تحسين الأزرار للموبيل */
             .controls {
                 flex-direction: column;
                 gap: 10px;
@@ -373,24 +380,17 @@
                 font-size: 1em;
             }
 
-            /* تحسين صندوق الرسائل */
             .message {
                 font-size: 1.1em;
                 padding: 12px;
                 min-height: 50px;
             }
 
-            /* تحسين الإعلانات العلوية والسفلية للموبيل */
             .top-ad, .bottom-ad {
                 margin: 10px 0;
             }
-
-            .ad-container {
-                border-radius: 8px;
-            }
         }
 
-        /* تنسيقات للشاشات الصغيرة جداً */
         @media (max-width: 400px) {
             .game-container {
                 padding: 10px;
@@ -419,7 +419,6 @@
             }
         }
 
-        /* تحسين شاشة اللمس */
         @media (hover: none) {
             .card:not(.flipped):not(.matched):hover {
                 transform: none;
@@ -435,32 +434,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- ========== AMP Auto Ads (مباشرة بعد body) ========== -->
+    <amp-auto-ads type="adsense"
+            data-ad-client="ca-pub-8584077826935053">
+    </amp-auto-ads>
+
     <div class="layout">
-        <!-- العمود الأيسر للإعلانات - يظهر فقط على الكمبيوتر -->
+        <!-- العمود الأيسر للإعلانات - للكمبيوتر فقط -->
         <div class="left-sidebar">
-            <!-- إعلان جانبي أيسر 1 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <!-- إعلان_جانبي_أيسر_1 -->
+                <!-- إعلان جانبي أيسر 1 - صور جانبية -->
                 <ins class="adsbygoogle"
                      style="display:block"
+                     data-ad-format="autorelaxed"
                      data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="9040442410"></ins>
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
             
-            <!-- إعلان جانبي أيسر 2 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <!-- إعلان_جانبي_أيسر_2 -->
+                <!-- إعلان جانبي أيسر 2 - صور جانبية -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
+                     data-ad-slot="8096225516"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
                 <script>
@@ -471,7 +472,7 @@
 
         <!-- المحتوى الرئيسي -->
         <div class="main-content">
-            <!-- إعلان علوي - يظهر على جميع الأجهزة -->
+            <!-- إعلان علوي - يظهر للجميع -->
             <div class="top-ad">
                 <div class="ad-container">
                     <div class="ad-label">إعلان</div>
@@ -523,7 +524,39 @@
                     </div>
                 </div>
 
+                <!-- إعلان داخل اللعبة (بين الإحصائيات والبطاقات) -->
+                <div class="in-game-ad">
+                    <div class="ad-container">
+                        <div class="ad-label">إعلان</div>
+                        <!-- اعلان داخل العبه -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-format="autorelaxed"
+                             data-ad-client="ca-pub-8584077826935053"
+                             data-ad-slot="5166809841"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+
                 <div class="board" id="board"></div>
+
+                <!-- إعلان عند تشغيل اللعبة (بعد البطاقات) -->
+                <div class="in-game-ad">
+                    <div class="ad-container">
+                        <div class="ad-label">إعلان</div>
+                        <!-- اعلان عند تشغيل العبه -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-format="autorelaxed"
+                             data-ad-client="ca-pub-8584077826935053"
+                             data-ad-slot="9165764600"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
 
                 <div class="controls">
                     <button id="newGameBtn">
@@ -539,15 +572,15 @@
                 </div>
             </div>
 
-            <!-- إعلان سفلي - يظهر على جميع الأجهزة -->
+            <!-- إعلان سفلي - يظهر للجميع -->
             <div class="bottom-ad">
                 <div class="ad-container">
                     <div class="ad-label">إعلان</div>
-                    <!-- اعلان_اسفل_الموقع -->
+                    <!-- اعلان اسفل الموقع -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-8584077826935053"
-                         data-ad-slot="2904141418"
+                         data-ad-slot="3136510471"
                          data-ad-format="auto"
                          data-full-width-responsive="true"></ins>
                     <script>
@@ -557,31 +590,28 @@
             </div>
         </div>
 
-        <!-- العمود الأيمن للإعلانات - يظهر فقط على الكمبيوتر -->
+        <!-- العمود الأيمن للإعلانات - للكمبيوتر فقط -->
         <div class="right-sidebar">
-            <!-- إعلان جانبي أيمن 1 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <!-- إعلان_جانبي_أيمن_1 -->
+                <!-- إعلان جانبي أيمن 1 - صور جانبية (نفس كود الأيسر) -->
                 <ins class="adsbygoogle"
                      style="display:block"
+                     data-ad-format="autorelaxed"
                      data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
+                     data-ad-slot="9040442410"></ins>
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
             
-            <!-- إعلان جانبي أيمن 2 -->
             <div class="ad-container">
                 <div class="ad-label">إعلان</div>
-                <!-- إعلان_جانبي_أيمن_2 -->
+                <!-- إعلان جانبي أيمن 2 - صور جانبية -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="2904141418"
+                     data-ad-slot="8096225516"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
                 <script>
@@ -611,19 +641,19 @@
 
                 // تعريف المستويات
                 this.levels = [
-                    { name: 'سهل جداً', cols: 2, rows: 2, timeBonus: 60 },      // المستوى 1 - 4 بطاقات
-                    { name: 'سهل', cols: 4, rows: 2, timeBonus: 90 },            // المستوى 2 - 8 بطاقات
-                    { name: 'متوسط', cols: 4, rows: 3, timeBonus: 120 },         // المستوى 3 - 12 بطاقة
-                    { name: 'متوسط +', cols: 4, rows: 4, timeBonus: 150 },       // المستوى 4 - 16 بطاقة
-                    { name: 'صعب', cols: 6, rows: 4, timeBonus: 180 },           // المستوى 5 - 24 بطاقة
-                    { name: 'صعب جداً', cols: 6, rows: 5, timeBonus: 210 },      // المستوى 6 - 30 بطاقة
-                    { name: 'خبير', cols: 8, rows: 4, timeBonus: 240 },          // المستوى 7 - 32 بطاقة
-                    { name: 'خبير +', cols: 8, rows: 5, timeBonus: 270 },        // المستوى 8 - 40 بطاقة
-                    { name: 'محترف', cols: 8, rows: 6, timeBonus: 300 },         // المستوى 9 - 48 بطاقة
-                    { name: 'أسطوري', cols: 10, rows: 6, timeBonus: 360 }        // المستوى 10 - 60 بطاقة
+                    { name: 'سهل جداً', cols: 2, rows: 2 },
+                    { name: 'سهل', cols: 4, rows: 2 },
+                    { name: 'متوسط', cols: 4, rows: 3 },
+                    { name: 'متوسط +', cols: 4, rows: 4 },
+                    { name: 'صعب', cols: 6, rows: 4 },
+                    { name: 'صعب جداً', cols: 6, rows: 5 },
+                    { name: 'خبير', cols: 8, rows: 4 },
+                    { name: 'خبير +', cols: 8, rows: 5 },
+                    { name: 'محترف', cols: 8, rows: 6 },
+                    { name: 'أسطوري', cols: 10, rows: 6 }
                 ];
 
-                this.currentLevel = 0; // 0-based index
+                this.currentLevel = 0;
                 this.maxLevel = this.levels.length;
                 
                 this.cards = [];
@@ -634,12 +664,6 @@
                 this.seconds = 0;
                 this.canFlip = true;
                 this.totalPairs = 0;
-                
-                // إحصائيات المستوى
-                this.levelStats = {
-                    moves: 0,
-                    time: 0
-                };
 
                 this.icons = [
                     'fa-heart', 'fa-star', 'fa-moon', 'fa-sun', 'fa-cloud', 'fa-tree', 
@@ -652,7 +676,6 @@
                 ];
 
                 this.init();
-                this.refreshAds();
             }
 
             init() {
@@ -664,23 +687,11 @@
                 this.newGameBtn.addEventListener('click', () => {
                     this.currentLevel = 0;
                     this.startNewGame();
-                    this.refreshAds();
                 });
                 
                 this.restartLevelBtn.addEventListener('click', () => {
                     this.restartLevel();
-                    this.refreshAds();
                 });
-            }
-
-            refreshAds() {
-                if (window.adsbygoogle) {
-                    try {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    } catch (e) {
-                        console.log('AdSense error:', e);
-                    }
-                }
             }
 
             startNewGame() {
@@ -720,16 +731,13 @@
                 const totalCards = level.cols * level.rows;
                 this.totalPairs = totalCards / 2;
                 
-                // تحديث عرض المستوى
                 this.currentLevelSpan.textContent = this.currentLevel + 1;
                 this.maxLevelSpan.textContent = this.maxLevel;
                 this.levelNameSpan.textContent = level.name;
                 
-                // تحديث شريط التقدم
                 const progress = ((this.currentLevel) / (this.maxLevel - 1)) * 100;
                 this.progressFill.style.width = `${progress}%`;
                 
-                // تحديث معلومات المستوى التالي
                 if (this.currentLevel < this.maxLevel - 1) {
                     this.nextLevelInfo.textContent = `المستوى التالي: ${this.levels[this.currentLevel + 1].name}`;
                 } else {
@@ -746,16 +754,10 @@
                 const totalCards = level.cols * level.rows;
                 const pairCount = totalCards / 2;
                 
-                // اختيار الأيقونات المطلوبة
                 const selectedIcons = this.icons.slice(0, pairCount);
-                
-                // تكرار كل أيقونة مرتين
                 let cardIcons = [...selectedIcons, ...selectedIcons];
-                
-                // خلط البطاقات
                 cardIcons = this.shuffleArray(cardIcons);
 
-                // إنشاء مصفوفة البطاقات
                 this.cards = cardIcons.map((icon, index) => ({
                     id: index,
                     icon: icon,
@@ -795,7 +797,6 @@
                 if (card.isMatched || card.isFlipped) return;
                 if (this.flippedCards.length >= 2) return;
 
-                // قلب البطاقة
                 card.isFlipped = true;
                 cardElement.classList.add('flipped');
                 
@@ -812,7 +813,6 @@
                 const [card1, card2] = this.flippedCards;
                 
                 if (card1.card.icon === card2.card.icon) {
-                    // تطابق
                     setTimeout(() => {
                         card1.card.isMatched = true;
                         card2.card.isMatched = true;
@@ -832,7 +832,6 @@
                         }
                     }, 500);
                 } else {
-                    // غير متطابقين
                     this.canFlip = false;
                     setTimeout(() => {
                         card1.card.isFlipped = false;
@@ -850,18 +849,11 @@
             levelComplete() {
                 this.stopTimer();
                 
-                // حفظ إحصائيات المستوى
-                this.levelStats.moves = this.moves;
-                this.levelStats.time = this.seconds;
-                
                 if (this.currentLevel < this.maxLevel - 1) {
-                    // الانتقال للمستوى التالي
                     this.currentLevel++;
                     
-                    // رسالة احتفالية
                     this.updateMessage(`🎉 مستوى رائع! انتقلت إلى المستوى ${this.currentLevel + 1}: ${this.getCurrentLevel().name} 🎉`);
                     
-                    // تأثير احتفالي
                     if (typeof confetti === 'function') {
                         confetti({
                             particleCount: 100,
@@ -870,23 +862,19 @@
                         });
                     }
                     
-                    // تأخير قبل بدء المستوى الجديد
                     setTimeout(() => {
                         this.startNewGame();
                     }, 3000);
                 } else {
-                    // الفوز باللعبة كاملة
                     this.gameComplete();
                 }
             }
 
             gameComplete() {
                 this.updateMessage(`
-                    🏆 تهانينا! لقد أكملت جميع المستويات! 🏆<br>
-                    إجمالي الحركات: ${this.calculateTotalMoves()} | إجمالي الوقت: ${this.formatTime(this.calculateTotalTime())}
+                    🏆 تهانينا! لقد أكملت جميع المستويات! 🏆
                 `);
                 
-                // احتفال كبير
                 if (typeof confetti === 'function') {
                     for (let i = 0; i < 5; i++) {
                         setTimeout(() => {
@@ -898,14 +886,6 @@
                         }, i * 200);
                     }
                 }
-            }
-
-            calculateTotalMoves() {
-                return this.moves;
-            }
-
-            calculateTotalTime() {
-                return this.seconds;
             }
 
             shuffleArray(array) {
