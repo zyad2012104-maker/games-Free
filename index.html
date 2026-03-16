@@ -193,6 +193,8 @@
             }
         }
     </style>
+    <!-- سكربت AdSense مرة واحدة فقط في الرأس -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -200,8 +202,7 @@
     <div class="left-ads">
         <!-- الإعلان الجانبي الأول - صيغة auto -->
         <div class="ad-box">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
-            <!-- اعلان جانبي 1 -->
+            <!-- اعلان جانبي 1 - كود 8096225516 -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-8584077826935053"
@@ -213,7 +214,7 @@
         
         <!-- الإعلان الجانبي الثاني - صيغة autorelaxed -->
         <div class="ad-box">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+            <!-- اعلان جانبي 2 - كود 9040442410 -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="autorelaxed"
@@ -227,8 +228,7 @@
     <div class="main">
         <!-- إعلان أعلى الموقع (صور) -->
         <div class="ad-top">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
-            <!-- اعلان_اعلى_الموقع -->
+            <!-- اعلان_اعلى_الموقع - كود 2904141418 -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-8584077826935053"
@@ -273,8 +273,7 @@
             
             <!-- إعلان موبيل 1 (بين اللعبة 1 واللعبة 2) -->
             <div class="mobile-ad-between">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
-                <!-- اعلان_جانبي_1 (مكرر للموبيل) -->
+                <!-- اعلان_جانبي_1 للموبيل - كود 8096225516 -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-8584077826935053"
@@ -300,8 +299,7 @@
             
             <!-- إعلان موبيل 2 (بين اللعبة 3 واللعبة 4) -->
             <div class="mobile-ad-between">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
-                <!-- اعلان_جانبي_2 (مكرر للموبيل) -->
+                <!-- اعلان_جانبي_2 للموبيل - كود 9040442410 -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-format="autorelaxed"
@@ -320,8 +318,7 @@
 
         <!-- إعلان أسفل الموقع -->
         <div class="ad-bottom">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
-            <!-- اعلان اسفل الموقع -->
+            <!-- اعلان اسفل الموقع - كود 3136510471 -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-8584077826935053"
@@ -358,25 +355,19 @@
             document.getElementById('creationDate').innerText = '15 يناير 2024';
 
             // ========== تهيئة الإعلانات ==========
+            // تأخير بسيط لضمان تحميل الصفحة بالكامل
             setTimeout(function() {
                 if (typeof adsbygoogle !== 'undefined') {
                     try {
-                        // تهيئة جميع الإعلانات في الصفحة
-                        var adCount = 0;
-                        for (var i = 0; i < adsbygoogle.length; i++) {
-                            if (adsbygoogle[i] && typeof adsbygoogle[i].push === 'function') {
-                                adsbygoogle[i].push({});
-                                adCount++;
-                            }
-                        }
-                        console.log('تم تهيئة ' + adCount + ' إعلان بنجاح');
+                        // سيتم تهيئة الإعلانات تلقائياً بواسطة AdSense
+                        console.log('✅ تم تحميل AdSense بنجاح');
                     } catch (e) {
-                        console.log('خطأ في تهيئة الإعلانات:', e);
+                        console.log('❌ خطأ في AdSense:', e);
                     }
                 } else {
-                    console.log('AdSense لم يتم تحميله بعد');
+                    console.log('⏳ AdSense لم يتم تحميله بعد');
                 }
-            }, 500);
+            }, 1000);
         })();
     </script>
 </body>
