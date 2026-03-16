@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع الألعاب المجانية</title>
     
-    <!-- سكربت AdSense - مرة واحدة فقط في الصفحة -->
+    <!-- سكربت AdSense للصفحات العادية - مرة واحدة فقط -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
     
     <style>
@@ -262,7 +262,7 @@
                 </a>
             </div>
             
-            <!-- إعلان موبيل 1 -->
+            <!-- إعلان موبيل 1 (نسخة من الإعلان الجانبي 1) -->
             <div class="mobile-ad">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -287,7 +287,7 @@
                 </a>
             </div>
             
-            <!-- إعلان موبيل 2 -->
+            <!-- إعلان موبيل 2 (نسخة من الإعلان الجانبي 2) -->
             <div class="mobile-ad">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -318,29 +318,25 @@
     </div>
 
     <script>
-        // كود إحصائيات الزوار - بسيط ونظيف
+        // كود إحصائيات الزوار فقط - لا يوجد أي كود للإعلانات هنا
         (function() {
             try {
                 const now = new Date();
                 const today = now.toDateString();
                 const month = now.getMonth() + '-' + now.getFullYear();
                 
-                // قراءة الإحصائيات
                 let stats = JSON.parse(localStorage.getItem('site_stats')) || {
                     total: 0,
                     daily: {},
                     monthly: {}
                 };
                 
-                // تحديث الأرقام
                 stats.total++;
                 stats.daily[today] = (stats.daily[today] || 0) + 1;
                 stats.monthly[month] = (stats.monthly[month] || 0) + 1;
                 
-                // حفظ
                 localStorage.setItem('site_stats', JSON.stringify(stats));
                 
-                // عرض الأرقام
                 document.getElementById('totalVisits').textContent = stats.total;
                 document.getElementById('dayVisits').textContent = stats.daily[today] || 0;
                 document.getElementById('monthVisits').textContent = stats.monthly[month] || 0;
@@ -351,7 +347,5 @@
             }
         })();
     </script>
-    
-    <!-- لا يوجد أي كود إضافي للإعلانات هنا -->
 </body>
 </html>
