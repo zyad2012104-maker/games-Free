@@ -29,12 +29,11 @@
         .main-container {
             display: flex;
             width: 100%;
-            max-width: 1400px;
+            max-width: 1200px;
             gap: 20px;
-            flex-wrap: wrap;
         }
 
-        /* الإعلان الجانبي الأيسر */
+        /* الإعلان الجانبي الأيسر - يظهر فقط على الكمبيوتر */
         .side-ad {
             flex: 0 0 160px;
             background: rgba(255, 255, 255, 0.1);
@@ -44,18 +43,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .ad-container {
-            width: 100%;
-            min-height: 250px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
         }
 
         /* المحتوى الرئيسي */
@@ -84,34 +71,47 @@
             justify-content: center;
         }
 
+        .ad-container {
+            width: 100%;
+            min-height: 90px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
         .game-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .game-header h1 {
             color: #333;
-            font-size: 2em;
+            font-size: 1.8em;
             margin-bottom: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .game-header h3 {
+            color: #666;
+            font-size: 1em;
         }
 
         .level-info {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            padding: 15px;
+            padding: 10px;
             border-radius: 15px;
-            margin: 15px 0;
+            margin: 10px 0;
             text-align: center;
         }
 
-        .level-info h2 {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-
         .level-info .level-number {
-            font-size: 3em;
+            font-size: 2.5em;
             font-weight: bold;
             display: inline-block;
             margin: 0 10px;
@@ -120,41 +120,39 @@
         .stats {
             display: flex;
             justify-content: space-around;
-            margin: 15px 0;
-            padding: 15px;
+            margin: 10px 0;
+            padding: 12px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 15px;
             color: white;
-            flex-wrap: wrap;
-            gap: 10px;
+            gap: 5px;
         }
 
         .stat-item {
             text-align: center;
             flex: 1;
-            min-width: 80px;
         }
 
         .stat-value {
-            font-size: 1.8em;
+            font-size: 1.5em;
             font-weight: bold;
             display: block;
         }
 
         .stat-label {
-            font-size: 0.8em;
+            font-size: 0.75em;
             opacity: 0.9;
         }
 
         .puzzle-grid {
             display: grid;
-            gap: 5px;
-            margin: 15px 0;
+            gap: 4px;
+            margin: 10px 0;
             background: #f0f0f0;
-            padding: 15px;
+            padding: 10px;
             border-radius: 15px;
             aspect-ratio: 1;
-            max-width: 500px;
+            max-width: 450px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -166,22 +164,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(0.8em, 4vw, 1.5em);
+            font-size: clamp(0.8em, 3.5vw, 1.3em);
             font-weight: bold;
             color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .puzzle-piece.empty {
             background: #ddd;
             cursor: default;
-        }
-
-        .puzzle-piece:hover:not(.empty) {
-            transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .puzzle-piece.movable {
@@ -198,32 +191,28 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 8px;
+            margin: 15px 0;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 8px 15px;
             border: none;
             border-radius: 25px;
-            font-size: 1em;
+            font-size: 0.9em;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            min-width: 100px;
+            letter-spacing: 0.5px;
+            flex: 1 1 auto;
+            min-width: 70px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .btn-secondary {
@@ -238,10 +227,10 @@
 
         .message {
             text-align: center;
-            margin: 15px 0;
-            padding: 15px;
+            margin: 10px 0;
+            padding: 12px;
             border-radius: 10px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
             display: none;
         }
@@ -266,10 +255,10 @@
 
         .progress-bar {
             width: 100%;
-            height: 10px;
+            height: 8px;
             background: #f0f0f0;
-            border-radius: 5px;
-            margin: 15px 0;
+            border-radius: 4px;
+            margin: 10px 0;
             overflow: hidden;
         }
 
@@ -282,17 +271,17 @@
         .level-selector {
             display: flex;
             justify-content: center;
-            gap: 5px;
-            margin: 15px 0;
+            gap: 4px;
+            margin: 10px 0;
             flex-wrap: wrap;
-            max-height: 100px;
+            max-height: 80px;
             overflow-y: auto;
             padding: 5px;
         }
 
         .level-btn {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border: 2px solid #667eea;
             background: transparent;
             color: #667eea;
@@ -303,7 +292,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .level-btn.active {
@@ -319,55 +308,142 @@
         }
 
         .level-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
+        /* تنسيقات خاصة للشاشات الكبيرة (كمبيوتر) */
+        @media (min-width: 1024px) {
+            .btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            
+            .level-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+        }
+
+        /* تنسيقات للتابلت */
+        @media (min-width: 769px) and (max-width: 1023px) {
+            .side-ad {
+                flex: 0 0 120px;
+            }
+            
+            .puzzle-grid {
+                max-width: 400px;
+            }
+        }
+
+        /* تنسيقات للموبيل - إخفاء الإعلان الجانبي */
         @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
             .main-container {
                 flex-direction: column;
             }
             
+            /* إخفاء الإعلان الجانبي تماماً في الموبيل */
             .side-ad {
-                flex: 0 0 auto;
-                width: 100%;
-                min-height: 100px;
-                order: -1;
+                display: none;
+            }
+            
+            .game-container {
+                padding: 12px;
+            }
+            
+            .game-header h1 {
+                font-size: 1.5em;
+            }
+            
+            .game-header h3 {
+                font-size: 0.9em;
+            }
+            
+            .level-info .level-number {
+                font-size: 2em;
             }
             
             .stats {
-                flex-direction: row;
-            }
-            
-            .btn {
-                width: calc(50% - 5px);
-            }
-            
-            .level-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .game-container {
-                padding: 10px;
+                padding: 8px;
             }
             
             .stat-value {
-                font-size: 1.4em;
+                font-size: 1.3em;
+            }
+            
+            .stat-label {
+                font-size: 0.7em;
+            }
+            
+            .puzzle-grid {
+                gap: 3px;
+                padding: 8px;
+                max-width: 100%;
+            }
+            
+            .puzzle-piece {
+                font-size: clamp(0.7em, 4vw, 1.1em);
+            }
+            
+            .controls {
+                gap: 5px;
             }
             
             .btn {
+                padding: 8px 10px;
+                font-size: 0.8em;
+                min-width: 60px;
+            }
+            
+            .level-selector {
+                max-height: 70px;
+            }
+            
+            .level-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 11px;
+                border-width: 1.5px;
+            }
+            
+            .top-ad, .bottom-ad {
+                min-height: 70px;
+                padding: 5px;
+            }
+            
+            .message {
                 font-size: 0.9em;
-                padding: 8px 15px;
+                padding: 10px;
+            }
+        }
+
+        /* تنسيقات للشاشات الصغيرة جداً */
+        @media (max-width: 380px) {
+            .btn {
+                padding: 6px 8px;
+                font-size: 0.7em;
+                min-width: 50px;
+            }
+            
+            .level-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 10px;
+            }
+            
+            .stat-value {
+                font-size: 1.1em;
             }
         }
     </style>
 </head>
 <body>
     <div class="main-container">
-        <!-- الإعلان الجانبي الأيسر -->
+        <!-- الإعلان الجانبي الأيسر - يظهر فقط على الكمبيوتر والتابلت -->
         <div class="side-ad">
             <div class="ad-container">
                 <!-- إعلان Google Sidebar -->
@@ -444,7 +520,7 @@
                     <button class="btn btn-primary" id="shuffleBtn">🔀 خلط</button>
                     <button class="btn btn-secondary" id="resetBtn">🔄 إعادة</button>
                     <button class="btn btn-primary" id="hintBtn">💡 تلميح</button>
-                    <button class="btn btn-success" id="nextLevelBtn">⏭ المستوى التالي</button>
+                    <button class="btn btn-success" id="nextLevelBtn">⏭ التالي</button>
                 </div>
             </div>
 
@@ -500,7 +576,6 @@
             }
 
             getSizeForLevel(level) {
-                // زيادة الصعوبة مع المستوى
                 if (level <= 10) return 3;
                 if (level <= 25) return 4;
                 if (level <= 40) return 5;
@@ -529,7 +604,6 @@
                 this.startTimer();
                 this.updateLevelDisplay();
                 
-                // تحديث أفضل حركات للمستوى الحالي
                 const best = this.bestMoves[this.currentLevel] || 0;
                 document.getElementById('bestMoves').textContent = best;
             }
@@ -628,12 +702,10 @@
                 this.solved = true;
                 this.stopTimer();
                 
-                // تسجيل اكتمال المستوى
                 if (!this.completedLevels.includes(this.currentLevel)) {
                     this.completedLevels.push(this.currentLevel);
                 }
                 
-                // تحديث أفضل حركات
                 if (!this.bestMoves[this.currentLevel] || this.moves < this.bestMoves[this.currentLevel]) {
                     this.bestMoves[this.currentLevel] = this.moves;
                     document.getElementById('bestMoves').textContent = this.moves;
@@ -651,7 +723,6 @@
                 this.updateLevelSelector();
                 this.updateLevelDisplay();
                 
-                // الانتقال التلقائي للمستوى التالي
                 if (this.currentLevel < this.maxLevel) {
                     setTimeout(() => {
                         this.nextLevel();
@@ -662,15 +733,6 @@
             nextLevel() {
                 if (this.currentLevel < this.maxLevel) {
                     this.currentLevel++;
-                    this.reset();
-                    this.updateLevelSelector();
-                    this.reloadAds(); // إعادة تحميل الإعلانات عند تغيير المستوى
-                }
-            }
-
-            prevLevel() {
-                if (this.currentLevel > 1) {
-                    this.currentLevel--;
                     this.reset();
                     this.updateLevelSelector();
                     this.reloadAds();
@@ -824,7 +886,6 @@
             }
         }
 
-        // تهيئة اللعبة
         document.addEventListener('DOMContentLoaded', () => {
             new PuzzleGame();
         });

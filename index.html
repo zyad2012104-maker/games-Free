@@ -1,281 +1,394 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موقع الألعاب المجانية</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>موقع الألعاب المجانية</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f3f3f3;
+            display: flex;
+            flex-direction: row;
+        }
 
-<style>
+        /* ========== إعلانات جانبية (تظهر فقط على الكمبيوتر) ========== */
+        .left-ads {
+            width: 180px;
+            background: #e5e5e5;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
 
-body{
-margin:0;
-font-family:Arial;
-background:#f3f3f3;
-display:flex;
-}
+        .ad-box {
+            width: 160px;
+            min-height: 600px;
+            background: #f0f0f0;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* عمود الاعلانات */
+        /* ========== إعلانات بين الألعاب (تظهر فقط في الموبيل) ========== */
+        .mobile-ad-between {
+            width: 100%;
+            background: #f0f0f0;
+            min-height: 120px;
+            margin: 10px 0;
+            display: none;  /* مخفية افتراضياً، تظهر فقط في الموبيل */
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
 
-.left-ads{
-width:180px;
-background:#e5e5e5;
-padding-top:20px;
-display:flex;
-flex-direction:column;
-align-items:center;
-}
+        /* المحتوى الرئيسي */
+        .main {
+            flex: 1;
+            text-align: center;
+            min-width: 0; /* لمنع تجاوز المحتوى */
+        }
 
-.ad-box{
-width:160px;
-height:600px;
-background:#ccc;
-margin-bottom:20px;
-display:flex;
-justify-content:center;
-align-items:center;
-}
+        /* إعلان أعلى */
+        .ad-top {
+            width: 100%;
+            min-height: 90px;
+            background: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
 
-/* المحتوى */
+        /* إعلان أسفل */
+        .ad-bottom {
+            width: 100%;
+            min-height: 90px;
+            background: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
 
-.main{
-flex:1;
-text-align:center;
-}
+        /* العنوان */
+        header {
+            background: #222;
+            color: white;
+            padding: 15px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
 
-/* اعلان اعلى */
+        /* شريط المعلومات (الزيارات والتاريخ) */
+        .stats-container {
+            background: #fff;
+            padding: 15px 10px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            color: #333;
+        }
+        .stat-item {
+            background: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border-right: 3px solid #ff9800;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .stat-label {
+            font-weight: bold;
+            color: #ff9800;
+            margin-left: 5px;
+        }
+        .stat-value {
+            font-weight: bold;
+            color: #222;
+        }
 
-.ad-top{
-width:100%;
-height:90px;
-background:#ddd;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:18px;
-}
+        /* شبكة الألعاب */
+        .games {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
 
-/* اعلان اسفل */
+        /* بطاقة اللعبة */
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,.15);
+            padding: 10px;
+            transition: transform 0.2s;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        .game-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: .3s;
+        }
+        .game-card img:hover {
+            opacity: 0.9;
+        }
 
-.ad-bottom{
-width:100%;
-height:90px;
-background:#ddd;
-display:flex;
-justify-content:center;
-align-items:center;
-margin-top:20px;
-}
+        /* ========== تنسيقات الموبيل ========== */
+        @media (max-width: 768px) {
+            /* تغيير اتجاه الجسم إلى عمودي */
+            body {
+                flex-direction: column;
+            }
+            
+            /* إخفاء الإعلانات الجانبية */
+            .left-ads {
+                display: none;
+            }
+            
+            /* إظهار الإعلانات بين الألعاب */
+            .mobile-ad-between {
+                display: flex;
+            }
+            
+            /* تعديل شبكة الألعاب لتصبح عمودين */
+            .games {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 12px;
+            }
+            
+            /* تصغير حجم الخط في الهيدر */
+            header h1 {
+                font-size: 20px;
+            }
+            
+            /* تحسين شريط المعلومات */
+            .stats-container {
+                font-size: 14px;
+                padding: 12px 8px;
+                gap: 10px;
+            }
+            .stat-item {
+                padding: 6px 10px;
+            }
+        }
 
-/* العنوان */
-
-header{
-background:#222;
-color:white;
-padding:20px;
-}
-
-/* الوقت */
-
-.info{
-margin:10px;
-font-size:16px;
-}
-
-/* شبكة الألعاب */
-
-.games{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-padding:30px;
-}
-
-/* بطاقة اللعبة */
-
-.game-card{
-background:white;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,.2);
-padding:10px;
-}
-
-/* صورة اللعبة */
-
-.game-card img{
-width:100%;
-border-radius:10px;
-cursor:pointer;
-transition:.3s;
-}
-
-.game-card img:hover{
-transform:scale(1.05);
-}
-
-</style>
+        /* للشاشات الصغيرة جداً */
+        @media (max-width: 480px) {
+            .games {
+                gap: 8px;
+                padding: 8px;
+            }
+            .game-card {
+                padding: 6px;
+            }
+            .stat-item {
+                width: calc(50% - 10px);
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- اعلانات يسار -->
+    <!-- ========== الإعلانات الجانبية (للكمبيوتر فقط) ========== -->
+    <div class="left-ads">
+        <div class="ad-box">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+            <!-- اعلان_جانبي_1 -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8584077826935053"
+                 data-ad-slot="2904141418"
+                 data-ad-format="rectangle"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        <div class="ad-box">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+            <!-- اعلان_جانبي_2 -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8584077826935053"
+                 data-ad-slot="2904141418"
+                 data-ad-format="rectangle"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
 
-<div class="left-ads">
+    <!-- ========== المحتوى الرئيسي ========== -->
+    <div class="main">
+        <!-- إعلان أعلى -->
+        <div class="ad-top">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+            <!-- اعلان_اعلى_الموقع -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8584077826935053"
+                 data-ad-slot="2904141418"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
 
-<div class="ad-box">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
-     crossorigin="anonymous"></script>
-<!-- اعلان_اعلى_الموقع -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8584077826935053"
-     data-ad-slot="2904141418"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+        <header>
+            <h1>🎮 موقع الألعاب المجانية</h1>
+        </header>
 
-</div>
+        <!-- إحصائيات الزوار وتاريخ الموقع -->
+        <div class="stats-container" id="statsContainer">
+            <div class="stat-item">
+                <span class="stat-label">📅 تاريخ الإنشاء:</span>
+                <span class="stat-value" id="creationDate">15 يناير 2024</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">👥 إجمالي الزيارات:</span>
+                <span class="stat-value" id="totalVisits">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">📆 زيارات الشهر:</span>
+                <span class="stat-value" id="monthVisits">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">📅 زيارات اليوم:</span>
+                <span class="stat-value" id="dayVisits">0</span>
+            </div>
+        </div>
 
-<div class="ad-box">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
-     crossorigin="anonymous"></script>
-<!-- اعلان_اعلى_الموقع -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8584077826935053"
-     data-ad-slot="2904141418"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+        <!-- الألعاب مع إعلانات بينية للموبيل -->
+        <div class="games">
+            <!-- اللعبة 1 -->
+            <div class="game-card">
+                <a href="games/xo/index.html">
+                    <img src="images/xo.jpg" alt="XO game" loading="lazy">
+                </a>
+            </div>
+            
+            <!-- إعلان موبيل بين اللعبة 1 واللعبة 2 -->
+            <div class="mobile-ad-between">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+                <!-- اعلان_بين_الالعاب_1 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="2904141418"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+            
+            <!-- اللعبة 2 -->
+            <div class="game-card">
+                <a href="games/snake/index.html">
+                    <img src="images/snake.jpg" alt="Snake game" loading="lazy">
+                </a>
+            </div>
+            
+            <!-- اللعبة 3 -->
+            <div class="game-card">
+                <a href="games/memory/index.html">
+                    <img src="images/memory.jpg" alt="Memory game" loading="lazy">
+                </a>
+            </div>
+            
+            <!-- إعلان موبيل بين اللعبة 3 واللعبة 4 -->
+            <div class="mobile-ad-between">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+                <!-- اعلان_بين_الالعاب_2 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8584077826935053"
+                     data-ad-slot="2904141418"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+            
+            <!-- اللعبة 4 -->
+            <div class="game-card">
+                <a href="games/puzzle/index.html">
+                    <img src="images/puzzle.jpg" alt="Puzzle game" loading="lazy">
+                </a>
+            </div>
+        </div>
 
-</div>
+        <!-- إعلان أسفل -->
+        <div class="ad-bottom">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
+            <!-- اعلان_اسفل_الموقع -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-8584077826935053"
+                 data-ad-slot="2904141418"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
 
-</div>
+    <script>
+        (function() {
+            // ========== إحصائيات الزيارات المتقدمة ==========
+            const VISITS_KEY = 'site_stats';
+            const now = new Date();
+            const todayStr = now.toDateString();
+            const currentMonth = now.getMonth() + '-' + now.getFullYear();
 
-<div class="main">
+            // تحميل الإحصائيات
+            let stats = JSON.parse(localStorage.getItem(VISITS_KEY)) || {
+                total: 0,
+                lastVisit: null,
+                daily: {},
+                monthly: {}
+            };
 
-<!-- اعلان اعلى -->
+            // زيادة العداد
+            stats.total += 1;
+            stats.daily[todayStr] = (stats.daily[todayStr] || 0) + 1;
+            stats.monthly[currentMonth] = (stats.monthly[currentMonth] || 0) + 1;
+            stats.lastVisit = now.toISOString();
 
-<div class="ad-top">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
-     crossorigin="anonymous"></script>
-<!-- اعلان_اعلى_الموقع -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8584077826935053"
-     data-ad-slot="2904141418"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
+            // حفظ الإحصائيات
+            localStorage.setItem(VISITS_KEY, JSON.stringify(stats));
 
-<header>
-<h1>🎮 موقع الألعاب المجانية</h1>
-</header>
+            // عرض القيم
+            document.getElementById('totalVisits').innerText = stats.total;
+            document.getElementById('dayVisits').innerText = stats.daily[todayStr] || 0;
+            document.getElementById('monthVisits').innerText = stats.monthly[currentMonth] || 0;
+            // تاريخ الإنشاء (ثابت - قم بتعديله)
+            document.getElementById('creationDate').innerText = '15 يناير 2024';
 
-<div class="info">
-
-عدد الزيارات: <span id="visits"></span> |
-<span id="date"></span> |
-<span id="clock"></span>
-
-</div>
-
-<!-- الألعاب -->
-
-<div class="games">
-
-<div class="game-card">
-<a href="games/xo/index.html">
-<img src="images/xo.jpg">
-</a>
-</div>
-
-<div class="game-card">
-<a href="games/snake/index.html">
-<img src="images/snake.jpg">
-</a>
-</div>
-
-<div class="game-card">
-<a href="games/memory/index.html">
-<img src="images/memory.jpg">
-</a>
-</div>
-
-<div class="game-card">
-<a href="games/puzzle/index.html">
-<img src="images/puzzle.jpg">
-</a>
-</div>
-
-</div>
-
-<!-- اعلان اسفل -->
-
-<div class="ad-bottom">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
-     crossorigin="anonymous"></script>
-<!-- اعلان_اعلى_الموقع -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8584077826935053"
-     data-ad-slot="2904141418"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
-
-</div>
-
-<script>
-
-/* عداد الزيارات */
-
-let visits = localStorage.getItem("visits");
-
-if(visits==null){
-visits=1;
-}else{
-visits++;
-}
-
-localStorage.setItem("visits",visits);
-document.getElementById("visits").innerText=visits;
-
-/* التاريخ */
-
-let today = new Date();
-
-document.getElementById("date").innerHTML =
-today.toLocaleDateString('ar-EG',{
-weekday:'long',
-year:'numeric',
-month:'long',
-day:'numeric'
-});
-
-/* الساعة */
-
-function updateClock(){
-
-let now=new Date();
-
-document.getElementById("clock").innerHTML=
-now.toLocaleTimeString();
-
-}
-
-setInterval(updateClock,1000);
-
-</script>
-
+            // ========== إعادة تحميل إعلانات AdSense بعد التغييرات ==========
+            // هذه الدالة تساعد في تحميل الإعلانات التي تم إضافتها ديناميكياً
+            if (typeof adsbygoogle !== 'undefined') {
+                try {
+                    for (var i = 0; i < adsbygoogle.length; i++) {
+                        adsbygoogle[i].push({});
+                    }
+                } catch (e) {
+                    console.log('AdSense error:', e);
+                }
+            }
+        })();
+    </script>
 </body>
 </html>

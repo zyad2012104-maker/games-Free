@@ -2,10 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>X-O المتطورة - لعبة إكس أو الاحترافية</title>
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- كود Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
@@ -20,7 +18,7 @@
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 10px;
+            padding: 5px;
         }
         
         .game-container {
@@ -28,24 +26,25 @@
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 15px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         
-        /* تنسيقات الإعلانات */
+        /* ===== تنسيقات الإعلانات ===== */
         .top-ad, .bottom-ad {
-            margin-bottom: 15px;
-            border-radius: 12px;
+            margin-bottom: 12px;
+            border-radius: 10px;
             overflow: hidden;
             background: #f8f9fa;
             position: relative;
+            width: 100%;
         }
         
         .ad-wrapper {
             position: relative;
             width: 100%;
-            min-height: 100px;
+            min-height: 90px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -53,98 +52,61 @@
         
         .ad-badge {
             position: absolute;
-            top: 5px;
-            right: 10px;
+            top: 3px;
+            right: 5px;
             background: #ff4444;
             color: white;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 12px;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 8px;
             z-index: 10;
             font-weight: 600;
         }
         
         .ad-close {
             position: absolute;
-            top: 5px;
-            left: 10px;
+            top: 3px;
+            left: 5px;
             background: rgba(0,0,0,0.5);
             color: white;
             border: none;
-            width: 25px;
-            height: 25px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
             z-index: 10;
         }
         
-        .ad-close:hover {
-            background: rgba(0,0,0,0.8);
-        }
-        
-        /* تنسيقات الإعلانات الجانبية */
+        /* ===== الإعلانات الجانبية - تظهر فقط في الكمبيوتر ===== */
         .left-ads-sidebar, .right-ads-sidebar {
-            width: 180px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            display: none; /* مخفية افتراضياً */
         }
         
-        .ad-vertical-card, .ad-square-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            min-height: 250px;
-        }
-        
-        .ad-badge-vertical, .ad-badge-square {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #ff4444;
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            z-index: 2;
-        }
-        
-        .ad-vertical-content, .ad-square-content {
-            width: 100%;
-            height: 100%;
-            min-height: inherit;
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* تنسيقات المحتوى الرئيسي */
+        /* ===== المحتوى الرئيسي ===== */
         .game-main-content {
             flex: 1;
             background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
         }
         
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
         }
         
         .game-title h1 {
-            font-size: 28px;
+            font-size: 20px;
             background: linear-gradient(135deg, #2b5797, #1e3f6e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -153,21 +115,23 @@
         .version-badge {
             background: #ffb900;
             color: #1e3f6e;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 10px;
             font-weight: 700;
+            margin-right: 5px;
         }
         
         .back-to-home {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 3px;
+            padding: 5px 10px;
             background: #f0f0f0;
             color: #333;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 20px;
+            font-size: 12px;
             transition: all 0.3s;
         }
         
@@ -179,60 +143,58 @@
         /* لوحة التحكم */
         .control-panel {
             display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding: 20px;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            flex-wrap: wrap;
+            border-radius: 12px;
         }
         
         .control-group {
-            flex: 1;
-            min-width: 180px;
+            width: 100%;
         }
         
         .control-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             color: #2b5797;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .custom-select select {
             width: 100%;
-            padding: 10px 15px;
+            padding: 10px;
             border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            border-radius: 8px;
             background: white;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-        }
-        
-        .custom-select select:hover {
-            border-color: #2b5797;
+            -webkit-appearance: none;
+            appearance: none;
         }
         
         /* لوحة النتائج */
         .score-panel {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 25px;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
         }
         
         .player-card {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px 30px;
-            border-radius: 15px;
+            gap: 8px;
+            padding: 10px;
+            border-radius: 12px;
             background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            flex: 1;
         }
         
         .player-card.player-x {
@@ -246,65 +208,69 @@
         }
         
         .player-icon {
-            font-size: 32px;
+            font-size: 24px;
         }
         
         .player-label {
-            font-size: 14px;
+            font-size: 11px;
             opacity: 0.9;
         }
         
         .player-score {
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 700;
         }
         
         .vs-badge {
             background: #ffb900;
             color: #1e3f6e;
-            width: 45px;
-            height: 45px;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
         }
         
         /* لوحة اللعبة */
         .game-board-area {
             background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
         }
         
         .board-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: white;
         }
         
         .turn-indicator {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
             background: rgba(255,255,255,0.2);
-            padding: 8px 16px;
-            border-radius: 25px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
         }
         
         .turn-player {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
         }
         
         .moves-indicator {
             background: rgba(255,255,255,0.2);
-            padding: 8px 16px;
-            border-radius: 25px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
         }
         
         /* شبكة اللعبة */
@@ -312,56 +278,57 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 350px;
+            min-height: 280px;
         }
         
         .board-inner {
             background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 20px;
+            padding: 10px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 350px;
         }
         
         .board-grid {
             display: grid;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255,255,255,0.2);
-            padding: 10px;
-            border-radius: 15px;
+            padding: 8px;
+            border-radius: 12px;
         }
         
         .board-grid[data-size="3"] {
-            grid-template-columns: repeat(3, 100px);
+            grid-template-columns: repeat(3, 1fr);
         }
         
         .board-grid[data-size="4"] {
-            grid-template-columns: repeat(4, 90px);
+            grid-template-columns: repeat(4, 1fr);
         }
         
         .board-grid[data-size="5"] {
-            grid-template-columns: repeat(5, 80px);
+            grid-template-columns: repeat(5, 1fr);
         }
         
         .board-grid[data-size="6"] {
-            grid-template-columns: repeat(6, 70px);
+            grid-template-columns: repeat(6, 1fr);
         }
         
         .cell {
             aspect-ratio: 1;
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: min(28px, 5vw);
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
         
-        .cell:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        .cell:active {
+            transform: scale(0.95);
         }
         
         .cell.x {
@@ -383,7 +350,7 @@
         
         /* إعلان الأدوار */
         .turn-ad-container {
-            margin-top: 20px;
+            margin-top: 15px;
             transition: all 0.3s;
         }
         
@@ -394,43 +361,46 @@
         .turn-ad {
             position: relative;
             background: white;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
         }
         
         .ad-close-small {
             position: absolute;
-            top: 5px;
-            left: 5px;
+            top: 3px;
+            left: 3px;
             background: rgba(0,0,0,0.5);
             color: white;
             border: none;
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 10px;
+            z-index: 10;
         }
         
         /* أزرار التحكم */
         .action-buttons {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
         }
         
         .btn-primary, .btn-secondary {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 12px 30px;
+            padding: 12px;
             border: none;
             border-radius: 25px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            width: 100%;
         }
         
         .btn-primary {
@@ -438,9 +408,8 @@
             color: white;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(40,167,69,0.3);
+        .btn-primary:active {
+            transform: scale(0.98);
         }
         
         .btn-secondary {
@@ -448,46 +417,122 @@
             color: white;
         }
         
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(108,117,125,0.3);
+        .btn-secondary:active {
+            transform: scale(0.98);
         }
         
         /* الإحصائيات السريعة */
         .quick-stats {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            padding: 12px;
+            justify-content: space-around;
+            padding: 10px;
             background: #f8f9fa;
-            border-radius: 25px;
+            border-radius: 20px;
+            font-size: 12px;
         }
         
         .stat-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 3px;
         }
         
         .stat-icon {
-            font-size: 16px;
+            font-size: 14px;
         }
         
         .stat-label {
             color: #666;
-            font-size: 13px;
         }
         
         .stat-value {
             font-weight: 700;
             color: #2b5797;
-            font-size: 15px;
         }
         
-        /* الحاوية الرئيسية */
-        .game-wrapper {
-            display: flex;
-            gap: 20px;
+        /* ===== تصميم لأجهزة الكمبيوتر ===== */
+        @media (min-width: 1024px) {
+            body {
+                padding: 20px;
+            }
+            
+            .game-wrapper {
+                display: flex;
+                gap: 20px;
+            }
+            
+            .left-ads-sidebar, .right-ads-sidebar {
+                display: flex; /* تظهر في الكمبيوتر */
+                width: 160px;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .ad-vertical-card, .ad-square-card {
+                background: white;
+                border-radius: 15px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                position: relative;
+                min-height: 250px;
+            }
+            
+            .ad-badge-vertical, .ad-badge-square {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                background: #ff4444;
+                color: white;
+                font-size: 10px;
+                padding: 2px 6px;
+                border-radius: 10px;
+                z-index: 2;
+            }
+            
+            .ad-vertical-content, .ad-square-content {
+                width: 100%;
+                height: 100%;
+                min-height: inherit;
+                background: #f5f5f5;
+            }
+            
+            .game-main-content {
+                padding: 25px;
+            }
+            
+            .game-title h1 {
+                font-size: 28px;
+            }
+            
+            .control-panel {
+                flex-direction: row;
+            }
+            
+            .action-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: auto;
+                padding: 12px 30px;
+            }
+            
+            .board-grid[data-size="3"] {
+                grid-template-columns: repeat(3, 100px);
+            }
+            
+            .board-grid[data-size="4"] {
+                grid-template-columns: repeat(4, 90px);
+            }
+            
+            .board-grid[data-size="5"] {
+                grid-template-columns: repeat(5, 80px);
+            }
+            
+            .board-grid[data-size="6"] {
+                grid-template-columns: repeat(6, 70px);
+            }
         }
         
         /* تنسيق AdSense */
@@ -495,70 +540,18 @@
             display: block;
             background: transparent;
         }
-        
-        /* تصميم متجاوب */
-        @media (max-width: 1200px) {
-            .game-wrapper {
-                flex-direction: column;
-            }
-            
-            .left-ads-sidebar, .right-ads-sidebar {
-                width: 100%;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .ad-vertical-card {
-                width: 160px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .control-panel {
-                flex-direction: column;
-            }
-            
-            .score-panel {
-                flex-direction: column;
-            }
-            
-            .board-grid[data-size="3"] {
-                grid-template-columns: repeat(3, 80px);
-            }
-            
-            .board-grid[data-size="4"] {
-                grid-template-columns: repeat(4, 70px);
-            }
-            
-            .board-grid[data-size="5"] {
-                grid-template-columns: repeat(5, 60px);
-            }
-            
-            .board-grid[data-size="6"] {
-                grid-template-columns: repeat(6, 50px);
-            }
-            
-            .cell {
-                font-size: 28px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="game-container">
-        <!-- إعلان أعلى الشاشة -->
+        <!-- إعلان أعلى الشاشة (يظهر في الجوال والكمبيوتر) -->
         <div class="top-ad">
             <div class="ad-wrapper">
                 <span class="ad-badge">إعلان</span>
                 <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
                 <!-- كود إعلان أعلى الموقع -->
                 <ins class="adsbygoogle"
-                     style="display:block; min-height: 100px; width: 100%;"
+                     style="display:block; min-height: 90px; width: 100%;"
                      data-ad-client="ca-pub-8584077826935053"
                      data-ad-slot="2904141418"
                      data-ad-format="auto"
@@ -570,7 +563,7 @@
         </div>
 
         <div class="game-wrapper">
-            <!-- الشريط الجانبي الأيسر مع الإعلانات -->
+            <!-- الشريط الجانبي الأيسر مع الإعلانات (يظهر فقط في الكمبيوتر) -->
             <div class="left-ads-sidebar">
                 <!-- إعلان يسار 1 -->
                 <div class="ad-vertical-card">
@@ -609,18 +602,17 @@
                 <!-- رأس اللعبة -->
                 <div class="game-header">
                     <div class="game-title">
-                        <h1>❌⭕ X-O المتطورة</h1>
-                        <span class="version-badge">الإصدار 2.0</span>
+                        <h1>❌⭕ X-O <span class="version-badge">Pro</span></h1>
                     </div>
                     <a href="../../index.html" class="back-to-home">
-                        <span>🔙</span> العودة للرئيسية
+                        <span>🔙</span> عودة
                     </a>
                 </div>
 
-                <!-- إعلان بداية اللعبة -->
-                <div class="top-ad" id="startAd" style="margin-bottom: 20px;">
+                <!-- إعلان بداية اللعبة (يظهر في الجوال والكمبيوتر) -->
+                <div class="top-ad" id="startAd" style="margin-bottom: 15px;">
                     <div class="ad-wrapper">
-                        <span class="ad-badge">إعلان بداية اللعبة</span>
+                        <span class="ad-badge">بداية</span>
                         <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
                         <ins class="adsbygoogle"
                              style="display:block; min-height: 90px; width: 100%;"
@@ -650,16 +642,16 @@
                         <label>المستوى:</label>
                         <div class="custom-select">
                             <select id="level" onchange="changeLevel()">
-                                <option value="3">المستوى 1 (3×3)</option>
-                                <option value="4">المستوى 2 (4×4)</option>
-                                <option value="5">المستوى 3 (5×5)</option>
-                                <option value="6">المستوى 4 (6×6)</option>
+                                <option value="3">مستوى 1 (3×3)</option>
+                                <option value="4">مستوى 2 (4×4)</option>
+                                <option value="5">مستوى 3 (5×5)</option>
+                                <option value="6">مستوى 4 (6×6)</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="control-group" id="difficultyGroup">
-                        <label>مستوى الذكاء:</label>
+                        <label>الذكاء:</label>
                         <div class="custom-select">
                             <select id="difficulty">
                                 <option value="easy">🌟 سهل</option>
@@ -675,7 +667,7 @@
                     <div class="player-card player-x">
                         <div class="player-icon">❌</div>
                         <div class="player-info">
-                            <span class="player-label" id="player1Label">اللاعب X</span>
+                            <span class="player-label" id="player1Label">X</span>
                             <span class="player-score" id="scoreX">0</span>
                         </div>
                     </div>
@@ -683,7 +675,7 @@
                     <div class="player-card player-o">
                         <div class="player-icon">⭕</div>
                         <div class="player-info">
-                            <span class="player-label" id="player2Label">الكمبيوتر O</span>
+                            <span class="player-label" id="player2Label">O</span>
                             <span class="player-score" id="scoreO">0</span>
                         </div>
                     </div>
@@ -692,13 +684,12 @@
                 <!-- لوحة اللعبة -->
                 <div class="game-board-area">
                     <div class="board-header">
-                        <div class="turn-indicator" id="turnIndicator">
-                            <span class="turn-text">دور اللاعب</span>
+                        <div class="turn-indicator">
+                            <span class="turn-text">دور</span>
                             <span class="turn-player" id="currentPlayerDisplay">X</span>
                         </div>
                         <div class="moves-indicator">
-                            <span class="moves-label">الحركات</span>
-                            <span class="moves-count" id="movesCounter">0/9</span>
+                            <span id="movesCounter">0/9</span>
                         </div>
                     </div>
 
@@ -708,10 +699,10 @@
                         </div>
                     </div>
 
-                    <!-- إعلان كل 3 أدوار -->
+                    <!-- إعلان كل 3 أدوار (يظهر في الجوال والكمبيوتر) -->
                     <div class="turn-ad-container hidden" id="turnAdContainer">
                         <div class="turn-ad">
-                            <span class="ad-badge">إعلان بعد <span id="turnNumber">3</span> أدوار</span>
+                            <span class="ad-badge">بعد <span id="turnNumber">3</span></span>
                             <button class="ad-close-small" onclick="closeTurnAd()">✕</button>
                             <ins class="adsbygoogle"
                                  style="display:block; min-height: 90px; width: 100%;"
@@ -740,18 +731,18 @@
                 <div class="quick-stats">
                     <div class="stat-item">
                         <span class="stat-icon">🎯</span>
-                        <span class="stat-label">إجمالي الحركات:</span>
+                        <span class="stat-label">حركات:</span>
                         <span class="stat-value" id="totalMoves">0</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-icon">📢</span>
-                        <span class="stat-label">الإعلانات:</span>
+                        <span class="stat-label">إعلانات:</span>
                         <span class="stat-value" id="adsShown">0</span>
                     </div>
                 </div>
             </div>
 
-            <!-- الشريط الجانبي الأيمن مع الإعلانات -->
+            <!-- الشريط الجانبي الأيمن مع الإعلانات (يظهر فقط في الكمبيوتر) -->
             <div class="right-ads-sidebar">
                 <!-- إعلان يمين 1 -->
                 <div class="ad-square-card">
@@ -786,13 +777,13 @@
             </div>
         </div>
 
-        <!-- إعلان أسفل الصفحة -->
-        <div class="bottom-ad" style="margin-top: 20px;">
+        <!-- إعلان أسفل الصفحة (يظهر في الجوال والكمبيوتر) -->
+        <div class="bottom-ad" style="margin-top: 15px;">
             <div class="ad-wrapper">
                 <span class="ad-badge">إعلان</span>
                 <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
                 <ins class="adsbygoogle"
-                     style="display:block; min-height: 100px; width: 100%;"
+                     style="display:block; min-height: 90px; width: 100%;"
                      data-ad-client="ca-pub-8584077826935053"
                      data-ad-slot="2904141418"
                      data-ad-format="auto"
@@ -860,9 +851,7 @@
             
             if (gameMode === 'twoPlayer') {
                 makeMove(index);
-                if (checkGameStatus()) {
-                    // استمرار اللعبة
-                }
+                checkGameStatus();
             } else {
                 if (currentPlayer === 'X') {
                     makeMove(index);
@@ -878,15 +867,6 @@
             const cell = document.querySelector(`[data-index="${index}"]`);
             cell.textContent = currentPlayer;
             cell.classList.add(currentPlayer.toLowerCase());
-            
-            if (lastMoveIndex !== -1) {
-                const lastCell = document.querySelector(`[data-index="${lastMoveIndex}"]`);
-                if (lastCell) {
-                    lastCell.classList.remove('last-move');
-                }
-            }
-            cell.classList.add('last-move');
-            lastMoveIndex = index;
             
             moves++;
             totalMoves++;
@@ -1076,12 +1056,7 @@
         }
 
         function updateDisplay() {
-            const display = document.getElementById('currentPlayerDisplay');
-            display.textContent = currentPlayer;
-            
-            if (gameMode === 'computer' && currentPlayer === 'O') {
-                display.textContent = '🤖';
-            }
+            document.getElementById('currentPlayerDisplay').textContent = currentPlayer;
         }
 
         function updateMovesCounter() {
@@ -1098,12 +1073,12 @@
 
         function updatePlayerNames() {
             if (gameMode === 'computer') {
-                document.getElementById('player1Label').textContent = 'اللاعب X';
-                document.getElementById('player2Label').textContent = 'الكمبيوتر O';
+                document.getElementById('player1Label').textContent = 'X';
+                document.getElementById('player2Label').textContent = 'كمبيوتر';
                 document.getElementById('difficultyGroup').style.display = 'block';
             } else {
-                document.getElementById('player1Label').textContent = 'اللاعب X';
-                document.getElementById('player2Label').textContent = 'اللاعب O';
+                document.getElementById('player1Label').textContent = 'X';
+                document.getElementById('player2Label').textContent = 'O';
                 document.getElementById('difficultyGroup').style.display = 'none';
             }
         }
@@ -1128,12 +1103,11 @@
             const cells = document.querySelectorAll('.cell');
             cells.forEach(cell => {
                 cell.textContent = '';
-                cell.classList.remove('x', 'o', 'win', 'last-move');
+                cell.classList.remove('x', 'o', 'win');
             });
             
             updateDisplay();
             updateMovesCounter();
-            lastMoveIndex = -1;
         }
 
         function resetGameState() {
@@ -1149,11 +1123,11 @@
         }
 
         function saveScores() {
-            localStorage.setItem('xoAdvancedScores', JSON.stringify(scores));
+            localStorage.setItem('xoScores', JSON.stringify(scores));
         }
 
         function loadScores() {
-            const saved = localStorage.getItem('xoAdvancedScores');
+            const saved = localStorage.getItem('xoScores');
             if (saved) {
                 scores = JSON.parse(saved);
                 updateScores();
@@ -1179,7 +1153,6 @@
                 adsShown++;
                 updateAdStats();
                 
-                // تهيئة الإعلان
                 try {
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 } catch (e) {}
@@ -1205,7 +1178,6 @@
                 adsShown++;
                 updateAdStats();
                 
-                // تهيئة الإعلان
                 try {
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 } catch (e) {}
@@ -1228,13 +1200,6 @@
         function setupEventListeners() {
             document.getElementById('difficulty').addEventListener('change', function() {
                 difficulty = this.value;
-            });
-            
-            // إعادة تهيئة الإعلانات عند تحميل الصفحة
-            window.addEventListener('load', function() {
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {}
             });
         }
     </script>

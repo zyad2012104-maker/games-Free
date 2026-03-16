@@ -35,7 +35,7 @@
             align-items: flex-start;
         }
 
-        /* العمود الأيسر للإعلانات */
+        /* العمود الأيسر للإعلانات - يظهر فقط على الكمبيوتر */
         .left-sidebar {
             flex: 0 0 300px;
             position: sticky;
@@ -45,13 +45,7 @@
             gap: 15px;
         }
 
-        /* العمود الأيمن للعبة */
-        .main-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        /* العمود الأيمن للإعلانات */
+        /* العمود الأيمن للإعلانات - يظهر فقط على الكمبيوتر */
         .right-sidebar {
             flex: 0 0 300px;
             position: sticky;
@@ -59,6 +53,12 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            min-width: 0;
         }
 
         /* حاويات الإعلانات */
@@ -288,63 +288,145 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* تنسيقات للأجهزة المحمولة */
-        @media (max-width: 1200px) {
+        /* ========== تنسيقات سطح المكتب ========== */
+        @media (min-width: 901px) {
             .left-sidebar, .right-sidebar {
-                flex: 0 0 250px;
+                display: flex !important;
             }
         }
 
+        /* ========== تنسيقات الموبيل ========== */
         @media (max-width: 900px) {
+            /* تغيير اتجاه التخطيط إلى عمودي */
             .layout {
                 flex-direction: column;
             }
 
+            /* إخفاء الإعلانات الجانبية تماماً على الموبيل */
             .left-sidebar, .right-sidebar {
-                flex: 1;
+                display: none !important;
+            }
+
+            /* جعل المحتوى الرئيسي يأخذ العرض كاملاً */
+            .main-content {
                 width: 100%;
-                position: static;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
             }
 
-            .ad-container {
-                flex: 1;
-                min-width: 300px;
+            /* تصغير حجم الخط للعناوين */
+            h1 {
+                font-size: 2em;
+                margin-bottom: 15px;
             }
-        }
 
-        @media (max-width: 600px) {
+            /* تقليل المسافات الداخلية */
             .game-container {
                 padding: 15px;
             }
 
-            .board {
+            /* تحسين شريط المستوى للموبيل */
+            .level-progress {
+                padding: 15px;
+            }
+
+            .level-info {
+                font-size: 1em;
+            }
+
+            .level-badge {
+                font-size: 1.1em;
+                padding: 5px 15px;
+            }
+
+            /* توزيع صناديق الإحصائيات بشكل أفضل */
+            .stats {
                 gap: 10px;
+            }
+
+            .stat-box {
+                padding: 10px;
+                min-width: 80px;
+            }
+
+            .stat-box span {
+                font-size: 1.3em;
+            }
+
+            /* تحسين شبكة البطاقات للموبيل */
+            .board {
+                gap: 8px;
+                margin: 20px 0;
             }
 
             .card {
                 font-size: 1.8em;
             }
 
-            .stat-box {
-                padding: 10px 15px;
-                font-size: 1em;
-                min-width: 100px;
-            }
-
-            .stat-box span {
-                font-size: 1.5em;
-            }
-
-            h1 {
-                font-size: 2em;
+            /* تحسين الأزرار للموبيل */
+            .controls {
+                flex-direction: column;
+                gap: 10px;
             }
 
             button {
-                padding: 12px 20px;
+                width: 100%;
+                padding: 12px;
                 font-size: 1em;
+            }
+
+            /* تحسين صندوق الرسائل */
+            .message {
+                font-size: 1.1em;
+                padding: 12px;
+                min-height: 50px;
+            }
+
+            /* تحسين الإعلانات العلوية والسفلية للموبيل */
+            .top-ad, .bottom-ad {
+                margin: 10px 0;
+            }
+
+            .ad-container {
+                border-radius: 8px;
+            }
+        }
+
+        /* تنسيقات للشاشات الصغيرة جداً */
+        @media (max-width: 400px) {
+            .game-container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .level-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .level-badge {
+                width: 100%;
+                text-align: center;
+            }
+
+            .stat-box {
+                font-size: 0.9em;
+            }
+
+            .card {
+                font-size: 1.5em;
+            }
+        }
+
+        /* تحسين شاشة اللمس */
+        @media (hover: none) {
+            .card:not(.flipped):not(.matched):hover {
+                transform: none;
+            }
+            
+            button:hover {
+                transform: none;
             }
         }
     </style>
@@ -354,7 +436,7 @@
 </head>
 <body>
     <div class="layout">
-        <!-- العمود الأيسر للإعلانات -->
+        <!-- العمود الأيسر للإعلانات - يظهر فقط على الكمبيوتر -->
         <div class="left-sidebar">
             <!-- إعلان جانبي أيسر 1 -->
             <div class="ad-container">
@@ -389,7 +471,7 @@
 
         <!-- المحتوى الرئيسي -->
         <div class="main-content">
-            <!-- إعلان علوي -->
+            <!-- إعلان علوي - يظهر على جميع الأجهزة -->
             <div class="top-ad">
                 <div class="ad-container">
                     <div class="ad-label">إعلان</div>
@@ -457,7 +539,7 @@
                 </div>
             </div>
 
-            <!-- إعلان سفلي -->
+            <!-- إعلان سفلي - يظهر على جميع الأجهزة -->
             <div class="bottom-ad">
                 <div class="ad-container">
                     <div class="ad-label">إعلان</div>
@@ -475,7 +557,7 @@
             </div>
         </div>
 
-        <!-- العمود الأيمن للإعلانات -->
+        <!-- العمود الأيمن للإعلانات - يظهر فقط على الكمبيوتر -->
         <div class="right-sidebar">
             <!-- إعلان جانبي أيمن 1 -->
             <div class="ad-container">
@@ -819,13 +901,11 @@
             }
 
             calculateTotalMoves() {
-                // يمكن إضافة منطق لحساب إجمالي الحركات عبر المستويات
-                return this.moves; // حالياً يعرض حركات المستوى الأخير فقط
+                return this.moves;
             }
 
             calculateTotalTime() {
-                // يمكن إضافة منطق لحساب إجمالي الوقت عبر المستويات
-                return this.seconds; // حالياً يعرض وقت المستوى الأخير فقط
+                return this.seconds;
             }
 
             shuffleArray(array) {
