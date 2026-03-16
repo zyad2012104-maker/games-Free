@@ -74,36 +74,114 @@
             font-size: 28px;
         }
 
-        /* إحصائيات الموقع */
+        /* إحصائيات الموقع - تصميم جديد */
         .stats {
             background: white;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 8px;
+            padding: 25px;
+            margin: 15px;
+            border-radius: 15px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            align-items: center;
+            gap: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 2px solid #ff9800;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff9800, #ff5722, #ff9800);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .stat-item {
-            background: #f0f0f0;
-            padding: 10px 20px;
-            border-radius: 25px;
-            border-right: 4px solid #ff9800;
-            font-size: 16px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border-right: 5px solid #ff9800;
+            font-size: 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,152,0,0.3);
         }
 
         .stat-label {
             font-weight: bold;
             color: #ff9800;
-            margin-left: 8px;
+            margin-left: 10px;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
         }
 
         .stat-value {
             font-weight: bold;
             color: #333;
+            font-size: 24px;
+            display: block;
+            animation: countUp 0.5s ease-out;
+        }
+
+        @keyframes countUp {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* تصميم خاص لرقم الزائر */
+        .visitor-number {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            color: white !important;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(255,87,34,0.4);
+        }
+
+        .visitor-number .stat-label {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .visitor-number .stat-value {
+            color: white;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* وقت الزيارة */
+        .visit-time {
+            background: #333;
+            color: white;
+        }
+
+        .visit-time .stat-label {
+            color: #ff9800;
+        }
+
+        .visit-time .stat-value {
+            color: #ff9800;
+            font-family: monospace;
+            font-size: 22px;
+            letter-spacing: 2px;
         }
 
         /* شبكة الألعاب */
@@ -170,20 +248,28 @@
             }
             
             .stats {
-                gap: 10px;
                 padding: 15px;
+                gap: 15px;
+                margin: 10px;
             }
             
             .stat-item {
-                padding: 8px 15px;
-                font-size: 14px;
+                padding: 12px 20px;
+                min-width: 160px;
+            }
+            
+            .stat-value {
+                font-size: 20px;
+            }
+            
+            .visitor-number .stat-value {
+                font-size: 24px;
             }
         }
         
         @media screen and (max-width: 480px) {
             .stat-item {
-                width: calc(50% - 10px);
-                text-align: center;
+                width: 100%;
             }
         }
     </style>
@@ -233,23 +319,26 @@
             <h1>🎮 موقع الألعاب المجانية</h1>
         </header>
 
-        <!-- إحصائيات الموقع -->
+        <!-- إحصائيات الموقع - عداد الزوار الجديد -->
         <div class="stats">
             <div class="stat-item">
                 <span class="stat-label">📅 تاريخ الإنشاء:</span>
                 <span class="stat-value" id="creationDate">15 يناير 2024</span>
             </div>
+            
             <div class="stat-item">
-                <span class="stat-label">👥 إجمالي الزيارات:</span>
-                <span class="stat-value" id="totalVisits">0</span>
+                <span class="stat-label">👁️ إجمالي الزيارات:</span>
+                <span class="stat-value" id="totalVisits">2,500,500</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">📆 زيارات الشهر:</span>
-                <span class="stat-value" id="monthVisits">0</span>
+            
+            <div class="stat-item visitor-number">
+                <span class="stat-label">👤 أنت الزائر رقم:</span>
+                <span class="stat-value" id="visitorNumber">2,500,501</span>
             </div>
-            <div class="stat-item">
-                <span class="stat-label">📅 زيارات اليوم:</span>
-                <span class="stat-value" id="dayVisits">0</span>
+            
+            <div class="stat-item visit-time">
+                <span class="stat-label">🕐 وقت الزيارة:</span>
+                <span class="stat-value" id="visitTime"></span>
             </div>
         </div>
 
@@ -262,7 +351,7 @@
                 </a>
             </div>
             
-            <!-- إعلان موبيل 1 (نسخة من الإعلان الجانبي 1) -->
+            <!-- إعلان موبيل 1 -->
             <div class="mobile-ad">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -287,7 +376,7 @@
                 </a>
             </div>
             
-            <!-- إعلان موبيل 2 (نسخة من الإعلان الجانبي 2) -->
+            <!-- إعلان موبيل 2 -->
             <div class="mobile-ad">
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -318,34 +407,89 @@
     </div>
 
     <script>
-        // كود إحصائيات الزوار فقط - لا يوجد أي كود للإعلانات هنا
+        // ========== عداد الزيارات المتطور ==========
         (function() {
             try {
-                const now = new Date();
-                const today = now.toDateString();
-                const month = now.getMonth() + '-' + now.getFullYear();
+                // الرقم الأساسي الذي نبدأ منه
+                const BASE_NUMBER = 2500500; // 2,500,500
                 
-                let stats = JSON.parse(localStorage.getItem('site_stats')) || {
-                    total: 0,
-                    daily: {},
-                    monthly: {}
+                // مفتاح الحفظ في localStorage
+                const STORAGE_KEY = 'advanced_visitor_counter';
+                
+                // جلب البيانات المحفوظة أو إنشاء جديدة
+                let counterData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+                    totalVisits: BASE_NUMBER,
+                    lastVisitorNumber: BASE_NUMBER,
+                    firstVisit: true
                 };
                 
-                stats.total++;
-                stats.daily[today] = (stats.daily[today] || 0) + 1;
-                stats.monthly[month] = (stats.monthly[month] || 0) + 1;
+                // إذا كانت أول زيارة للموقع نهائياً
+                if (counterData.firstVisit) {
+                    counterData.totalVisits = BASE_NUMBER;
+                    counterData.lastVisitorNumber = BASE_NUMBER;
+                    counterData.firstVisit = false;
+                }
                 
-                localStorage.setItem('site_stats', JSON.stringify(stats));
+                // زيادة العداد بمقدار 10 لكل زائر جديد
+                counterData.totalVisits += 10;
                 
-                document.getElementById('totalVisits').textContent = stats.total;
-                document.getElementById('dayVisits').textContent = stats.daily[today] || 0;
-                document.getElementById('monthVisits').textContent = stats.monthly[month] || 0;
+                // حساب رقم الزائر الحالي (إجمالي الزيارات - 9) لأننا نريد أن يكون أول زائر هو BASE_NUMBER + 1
+                // مثال: إذا totalVisits = 2,500,510 فإن الزائر الحالي = 2,500,501
+                const currentVisitor = counterData.totalVisits - 9;
+                
+                // حفظ البيانات
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(counterData));
+                
+                // دالة لتنسيق الأرقام (إضافة فواصل)
+                function formatNumber(number) {
+                    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                
+                // عرض الأرقام في الصفحة
+                document.getElementById('totalVisits').textContent = formatNumber(counterData.totalVisits);
+                document.getElementById('visitorNumber').textContent = formatNumber(currentVisitor);
                 document.getElementById('creationDate').textContent = '15 يناير 2024';
+                
+                // ========== عرض الوقت الحالي ==========
+                function updateTime() {
+                    const now = new Date();
+                    const hours = now.getHours().toString().padStart(2, '0');
+                    const minutes = now.getMinutes().toString().padStart(2, '0');
+                    const seconds = now.getSeconds().toString().padStart(2, '0');
+                    const timeString = `${hours}:${minutes}:${seconds}`;
+                    
+                    document.getElementById('visitTime').textContent = timeString;
+                }
+                
+                // تحديث الوقت كل ثانية
+                updateTime();
+                setInterval(updateTime, 1000);
+                
+                // ========== تأثير حركي عند زيادة العداد ==========
+                const totalElement = document.getElementById('totalVisits');
+                const visitorElement = document.getElementById('visitorNumber');
+                
+                totalElement.style.animation = 'none';
+                visitorElement.style.animation = 'none';
+                
+                // إعادة تشغيل الأنيميشن
+                setTimeout(() => {
+                    totalElement.style.animation = 'countUp 0.5s ease-out';
+                    visitorElement.style.animation = 'countUp 0.5s ease-out';
+                }, 100);
+                
+                // ========== للتجربة: عرض معلومات في الكونسول ==========
+                console.log('📊 إحصائيات الزوار:');
+                console.log('📈 إجمالي الزيارات:', formatNumber(counterData.totalVisits));
+                console.log('👤 أنت الزائر رقم:', formatNumber(currentVisitor));
+                console.log('🕐 وقت الزيارة:', new Date().toLocaleTimeString('ar-EG'));
                 
             } catch(e) {
                 console.log('خطأ في الإحصائيات:', e);
             }
         })();
     </script>
+    
+    <!-- ملاحظة: لا يوجد أي كود إضافي للإعلانات هنا -->
 </body>
 </html>
