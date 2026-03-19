@@ -1,1 +1,37 @@
-google.com, pub-8584077826935053, DIRECT, f08c47fec0942fa0
+<!--ad-separator-->
+<!-- الإعلان الأول (أعلى الصفحة) -->
+<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
+
+<!--ad-separator-->
+<!-- الإعلان الثاني (وسط الصفحة) -->
+<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
+
+<!--ad-separator-->
+<!-- الإعلان الثالث (أسفل الصفحة) -->
+<script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
+
+<!--ad-separator-->
+<!-- الإعلان الجانبي الأيسر -->
+<script>
+  atOptions = {
+    'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
+
+<!--ad-separator-->
+<!-- الإعلان الجانبي الأيمن -->
+<script>
+  atOptions = {
+    'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
