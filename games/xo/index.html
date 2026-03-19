@@ -24,90 +24,101 @@
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 5px;
+            padding: 10px;
         }
         
-        .game-container {
+        /* الحاوية الرئيسية للصفحة */
+        .page-wrapper {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         
-        /* ===== تنسيقات الإعلانات ===== */
-        .ad-container {
-            margin: 15px 0;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #f8f9fa;
-            position: relative;
-            width: 100%;
+        /* حاوية الإعلانات الجانبية واللعبة */
+        .main-row {
             display: flex;
+            gap: 20px;
+            align-items: flex-start;
             justify-content: center;
-            align-items: center;
+        }
+        
+        /* ===== الإعلانات الجانبية ===== */
+        .side-ad {
+            width: 160px;
+            flex-shrink: 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            display: none; /* مخفي في الجوال */
+        }
+        
+        .side-ad.left {
+            order: 1;
+        }
+        
+        .side-ad.right {
+            order: 3;
         }
         
         .ad-badge {
             position: absolute;
-            top: 3px;
+            top: 5px;
             right: 5px;
             background: #ff4444;
             color: white;
-            font-size: 9px;
+            font-size: 10px;
             padding: 2px 6px;
             border-radius: 8px;
             z-index: 10;
             font-weight: 600;
         }
         
-        /* ===== الإعلانات الجانبية - تظهر فقط في الكمبيوتر ===== */
-        .left-ads-sidebar, .right-ads-sidebar {
-            display: none;
-        }
-        
-        .ad-vertical-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
+        .ad-content {
             width: 100%;
-            margin-bottom: 20px;
-        }
-        
-        .ad-vertical-content, .ad-square-content {
-            width: 100%;
+            min-height: 600px;
             background: #f5f5f5;
-            min-height: 250px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
+        }
+        
+        /* منع الإعلان من التمدد خارج الإطار */
+        .ad-content iframe,
+        .ad-content ins,
+        .ad-content div {
+            max-width: 160px !important;
+            width: 160px !important;
+            margin: 0 auto !important;
         }
         
         /* ===== المحتوى الرئيسي ===== */
         .game-main-content {
             flex: 1;
             background: white;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            width: 100%;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            order: 2;
+            min-width: 0; /* لمنع تجاوز المحتوى */
+            max-width: 800px;
         }
         
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 2px solid #f0f0f0;
         }
         
         .game-title h1 {
-            font-size: 20px;
+            font-size: 24px;
             background: linear-gradient(135deg, #2b5797, #1e3f6e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -116,23 +127,23 @@
         .version-badge {
             background: #ffb900;
             color: #1e3f6e;
-            padding: 2px 8px;
-            border-radius: 15px;
-            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 700;
-            margin-right: 5px;
+            margin-right: 8px;
         }
         
         .back-to-home {
             display: flex;
             align-items: center;
-            gap: 3px;
-            padding: 5px 10px;
+            gap: 5px;
+            padding: 8px 15px;
             background: #f0f0f0;
             color: #333;
             text-decoration: none;
-            border-radius: 20px;
-            font-size: 12px;
+            border-radius: 25px;
+            font-size: 14px;
             transition: all 0.3s;
         }
         
@@ -144,31 +155,32 @@
         /* لوحة التحكم */
         .control-panel {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
-            padding: 15px;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px;
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 12px;
+            border-radius: 15px;
+            flex-wrap: wrap;
         }
         
         .control-group {
-            width: 100%;
+            flex: 1;
+            min-width: 180px;
         }
         
         .control-group label {
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
             color: #2b5797;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
         }
         
         .custom-select select {
             width: 100%;
-            padding: 10px;
+            padding: 10px 15px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border-radius: 10px;
             background: white;
             font-size: 14px;
             font-weight: 600;
@@ -181,19 +193,19 @@
         .score-panel {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 15px;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
         }
         
         .player-card {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px;
-            border-radius: 12px;
+            gap: 15px;
+            padding: 15px 30px;
+            border-radius: 15px;
             background: white;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             flex: 1;
         }
         
@@ -208,127 +220,122 @@
         }
         
         .player-icon {
-            font-size: 24px;
+            font-size: 32px;
         }
         
         .player-label {
-            font-size: 11px;
+            font-size: 14px;
             opacity: 0.9;
         }
         
         .player-score {
-            font-size: 20px;
+            font-size: 28px;
             font-weight: 700;
         }
         
         .vs-badge {
             background: #ffb900;
             color: #1e3f6e;
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
             flex-shrink: 0;
         }
         
         /* لوحة اللعبة */
         .game-board-area {
             background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 15px;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
         }
         
         .board-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: white;
         }
         
         .turn-indicator {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
             background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: 25px;
         }
         
         .turn-player {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 700;
         }
         
         .moves-indicator {
             background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: 25px;
         }
         
-        /* شبكة اللعبة */
         .board-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 280px;
+            min-height: 350px;
         }
         
         .board-inner {
             background: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 350px;
+            padding: 15px;
+            border-radius: 20px;
         }
         
         .board-grid {
             display: grid;
-            gap: 8px;
+            gap: 10px;
             background: rgba(255,255,255,0.2);
-            padding: 8px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 15px;
         }
         
         .board-grid[data-size="3"] {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 100px);
         }
         
         .board-grid[data-size="4"] {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 90px);
         }
         
         .board-grid[data-size="5"] {
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(5, 80px);
         }
         
         .board-grid[data-size="6"] {
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(6, 70px);
         }
         
         .cell {
             aspect-ratio: 1;
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: min(28px, 5vw);
+            font-size: 36px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         }
         
-        .cell:active {
-            transform: scale(0.95);
+        .cell:hover {
+            transform: scale(1.05);
         }
         
         .cell.x {
@@ -351,24 +358,22 @@
         /* أزرار التحكم */
         .action-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 15px;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
         }
         
         .btn-primary, .btn-secondary {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
-            padding: 12px;
+            padding: 12px 30px;
             border: none;
             border-radius: 25px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            width: 100%;
         }
         
         .btn-primary {
@@ -376,8 +381,9 @@
             color: white;
         }
         
-        .btn-primary:active {
-            transform: scale(0.98);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40,167,69,0.3);
         }
         
         .btn-secondary {
@@ -385,37 +391,40 @@
             color: white;
         }
         
-        .btn-secondary:active {
-            transform: scale(0.98);
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108,117,125,0.3);
         }
         
         /* الإحصائيات السريعة */
         .quick-stats {
             display: flex;
-            justify-content: space-around;
-            padding: 10px;
+            gap: 20px;
+            justify-content: center;
+            padding: 12px;
             background: #f8f9fa;
-            border-radius: 20px;
-            font-size: 12px;
+            border-radius: 25px;
         }
         
         .stat-item {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 5px;
         }
         
         .stat-icon {
-            font-size: 14px;
+            font-size: 16px;
         }
         
         .stat-label {
             color: #666;
+            font-size: 13px;
         }
         
         .stat-value {
             font-weight: 700;
             color: #2b5797;
+            font-size: 15px;
         }
         
         /* ===== تصميم لأجهزة الكمبيوتر ===== */
@@ -424,25 +433,16 @@
                 padding: 20px;
             }
             
-            .game-wrapper {
-                display: flex;
-                gap: 20px;
-            }
-            
-            .left-ads-sidebar, .right-ads-sidebar {
-                display: flex;
-                width: 180px;
-                flex-direction: column;
-                gap: 20px;
+            .side-ad {
+                display: block;
             }
             
             .game-main-content {
-                padding: 25px;
-                max-width: 800px;
+                padding: 30px;
             }
             
             .game-title h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
             
             .control-panel {
@@ -451,39 +451,77 @@
             
             .action-buttons {
                 flex-direction: row;
-                justify-content: center;
+            }
+        }
+        
+        /* تنسيق الإعلان السفلي */
+        .bottom-ad {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .bottom-ad-badge {
+            background: #ff4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        /* تنسيق الجوال */
+        @media (max-width: 1023px) {
+            .main-row {
+                flex-direction: column;
             }
             
-            .btn-primary, .btn-secondary {
-                width: auto;
-                padding: 12px 30px;
+            .game-main-content {
+                width: 100%;
             }
             
             .board-grid[data-size="3"] {
-                grid-template-columns: repeat(3, 100px);
+                grid-template-columns: repeat(3, 80px);
             }
             
             .board-grid[data-size="4"] {
-                grid-template-columns: repeat(4, 90px);
+                grid-template-columns: repeat(4, 70px);
             }
             
             .board-grid[data-size="5"] {
-                grid-template-columns: repeat(5, 80px);
+                grid-template-columns: repeat(5, 60px);
             }
             
             .board-grid[data-size="6"] {
-                grid-template-columns: repeat(6, 70px);
+                grid-template-columns: repeat(6, 50px);
+            }
+            
+            .cell {
+                font-size: 28px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <!-- ===== إعلان 160×600 - جانبي يسار (يظهر في الكمبيوتر فقط) ===== -->
-        <div class="left-ads-sidebar">
-            <div class="ad-vertical-card">
+    <div class="page-wrapper">
+        <!-- الصف الرئيسي للإعلانات الجانبية واللعبة -->
+        <div class="main-row">
+            <!-- ===== إعلان 160×600 - يسار ===== -->
+            <div class="side-ad left">
                 <span class="ad-badge">إعلان 160×600</span>
-                <div class="ad-vertical-content">
+                <div class="ad-content">
                     <script>
                       atOptions = {
                         'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
@@ -496,10 +534,8 @@
                     <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
                 </div>
             </div>
-        </div>
 
-        <!-- محتوى اللعبة الرئيسي -->
-        <div class="game-wrapper">
+            <!-- محتوى اللعبة الرئيسي في المنتصف -->
             <div class="game-main-content">
                 <!-- رأس اللعبة -->
                 <div class="game-header">
@@ -605,23 +641,19 @@
                 </div>
             </div>
 
-            <!-- ===== الإعلانات الجانبية اليمنى (تظهر في الكمبيوتر فقط) ===== -->
-            <div class="right-ads-sidebar">
-                <div class="ad-vertical-card">
-                    <span class="ad-badge">إعلان</span>
-                    <div class="ad-square-content">
-                        <!-- إعلان 2 - جانبي -->
-                        <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
-                    </div>
+            <!-- ===== إعلان 160×600 - يمين ===== -->
+            <div class="side-ad right">
+                <span class="ad-badge">إعلان</span>
+                <div class="ad-content">
+                    <!-- إعلان 2 - جانبي -->
+                    <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- ===== إعلان سفلي (يظهر في الجوال والكمبيوتر) ===== -->
-    <div style="max-width: 1400px; margin: 10px auto; text-align: center;">
-        <div style="background: rgba(255,255,255,0.95); border-radius: 10px; padding: 10px;">
-            <span style="background: #ff4444; color: white; font-size: 9px; padding: 2px 6px; border-radius: 8px; margin-bottom: 5px; display: inline-block;">إعلان سفلي</span>
+        <!-- ===== إعلان سفلي ===== -->
+        <div class="bottom-ad">
+            <span class="bottom-ad-badge">إعلان سفلي</span>
             <!-- إعلان 3 - سفلي -->
             <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
         </div>
