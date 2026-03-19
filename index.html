@@ -219,6 +219,7 @@
             transition: all 0.3s;
             text-align: center;
             padding: 15px;
+            position: relative;
         }
 
         .game-card:hover {
@@ -267,6 +268,7 @@
             font-size: 14px;
             font-weight: bold;
             transition: all 0.3s;
+            margin: 5px;
         }
 
         .play-btn:hover {
@@ -274,22 +276,25 @@
             transform: scale(1.05);
         }
 
-        .external-link {
-            display: inline-block;
-            padding: 8px 25px;
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background: #4CAF50;
             color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
             font-weight: bold;
-            margin-top: 10px;
-            transition: all 0.3s;
+            z-index: 10;
         }
 
-        .external-link:hover {
-            background: #45a049;
-            transform: scale(1.05);
+        .badge.internal {
+            background: #ff9800;
+        }
+
+        .badge.external {
+            background: #4CAF50;
         }
 
         /* قسم المقالات */
@@ -435,10 +440,10 @@
                 <a href="index.html" class="logo">🎮 ألعاب عربي</a>
                 <div class="nav-links">
                     <a href="index.html" class="active">الرئيسية</a>
-                    <a href="games.html">الألعاب</a>
-                    <a href="about.html">من نحن</a>
-                    <a href="contact.html">اتصل بنا</a>
-                    <a href="privacy.html">الخصوصية</a>
+                    <a href="#games">الألعاب</a>
+                    <a href="#about">من نحن</a>
+                    <a href="#contact">اتصل بنا</a>
+                    <a href="#privacy">الخصوصية</a>
                 </div>
             </nav>
         </div>
@@ -473,15 +478,16 @@
         <div class="hero">
             <h1>🎯 أفضل الألعاب المجانية على الإنترنت</h1>
             <p>اكتشف مجموعة رائعة من الألعاب الممتعة والتحديات الذهنية. العب مباشرة بدون تحميل واستمتع بأوقات ممتعة!</p>
-            <a href="games.html" class="btn">استعرض جميع الألعاب</a>
-            <a href="about.html" class="btn" style="background: white; color: #333;">تعرف علينا</a>
+            <a href="#games" class="btn">استعرض جميع الألعاب</a>
+            <a href="#about" class="btn" style="background: white; color: #333;">تعرف علينا</a>
         </div>
 
-        <!-- قسم ألعاب مميزة -->
-        <h2 class="section-title">🎲 ألعاب مميزة لهذا الأسبوع</h2>
+        <!-- قسم ألعاب مميزة (مختلط داخلي + خارجي) -->
+        <h2 class="section-title" id="games">🎲 أشهر الألعاب</h2>
         <div class="games-grid">
-            <!-- لعبة XO من الرابط الداخلي -->
+            <!-- لعبة XO (داخلية) -->
             <div class="game-card">
+                <span class="badge internal">داخلية</span>
                 <a href="games/xo/index.html">
                     <img src="images/xo.jpg" alt="لعبة XO" onerror="this.src='https://via.placeholder.com/300x150/ff9800/ffffff?text=XO+Game'">
                 </a>
@@ -492,8 +498,9 @@
                 </div>
             </div>
 
-            <!-- لعبة الثعبان من الرابط الداخلي -->
+            <!-- لعبة الثعبان (داخلية) -->
             <div class="game-card">
+                <span class="badge internal">داخلية</span>
                 <a href="games/snake/index.html">
                     <img src="images/snake.jpg" alt="لعبة الثعبان" onerror="this.src='https://via.placeholder.com/300x150/4CAF50/ffffff?text=Snake+Game'">
                 </a>
@@ -504,27 +511,29 @@
                 </div>
             </div>
 
-            <!-- لعبة الذاكرة من رابط خارجي (مثال) -->
+            <!-- لعبة الذاكرة (داخلية) - افترض أن لديك مجلد memory -->
             <div class="game-card">
-                <a href="#" onclick="window.open('https://www.crazygames.com/game/memory-game', '_blank'); return false;">
+                <span class="badge internal">داخلية</span>
+                <a href="games/memory/index.html">
                     <img src="images/memory.jpg" alt="لعبة الذاكرة" onerror="this.src='https://via.placeholder.com/300x150/2196F3/ffffff?text=Memory+Game'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">لعبة الذاكرة</h3>
-                    <p class="game-description">اختبر ذاكرتك (رابط خارجي)</p>
-                    <a href="#" onclick="window.open('https://www.crazygames.com/game/memory-game', '_blank'); return false;" class="external-link">🔗 العب على موقع خارجي</a>
+                    <p class="game-description">اختبر ذاكرتك وقوة ملاحظتك</p>
+                    <a href="games/memory/index.html" class="play-btn">العب الآن</a>
                 </div>
             </div>
 
-            <!-- لعبة الألغاز من رابط خارجي (مثال) -->
+            <!-- لعبة الألغاز (داخلية) - افترض أن لديك مجلد puzzle -->
             <div class="game-card">
-                <a href="#" onclick="window.open('https://www.crazygames.com/game/puzzle', '_blank'); return false;">
+                <span class="badge internal">داخلية</span>
+                <a href="games/puzzle/index.html">
                     <img src="images/puzzle.jpg" alt="لعبة الألغاز" onerror="this.src='https://via.placeholder.com/300x150/9C27B0/ffffff?text=Puzzle+Game'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">لعبة الألغاز</h3>
-                    <p class="game-description">حل الألغاز الشيقة (رابط خارجي)</p>
-                    <a href="#" onclick="window.open('https://www.crazygames.com/game/puzzle', '_blank'); return false;" class="external-link">🔗 العب على موقع خارجي</a>
+                    <p class="game-description">حل الألغاز الشيقة والممتعة</p>
+                    <a href="games/puzzle/index.html" class="play-btn">العب الآن</a>
                 </div>
             </div>
         </div>
@@ -532,54 +541,58 @@
         <!-- ===== الإعلان الثاني (وسط الصفحة) ===== -->
         <div class="ad-container" id="middle-ad"></div>
 
-        <!-- قسم ألعاب إضافية بروابط خارجية -->
+        <!-- قسم ألعاب إضافية (خارجية) -->
         <h2 class="section-title">🌐 ألعاب من مواقع خارجية</h2>
         <div class="games-grid">
-            <!-- لعبة 1 من رابط خارجي -->
+            <!-- لعبة 2048 (خارجية) -->
             <div class="game-card">
+                <span class="badge external">خارجية</span>
                 <a href="#" onclick="window.open('https://www.crazygames.com/game/2048', '_blank'); return false;">
                     <img src="images/2048.jpg" alt="لعبة 2048" onerror="this.src='https://via.placeholder.com/300x150/FF5722/ffffff?text=2048'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">2048</h3>
-                    <p class="game-description">لعبة الأرقام الشهيرة</p>
-                    <a href="#" onclick="window.open('https://www.crazygames.com/game/2048', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                    <p class="game-description">لعبة الأرقام والتحدي الذهني</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/2048', '_blank'); return false;" class="play-btn">العب على موقع خارجي</a>
                 </div>
             </div>
 
-            <!-- لعبة 2 من رابط خارجي -->
+            <!-- لعبة Temple Run 2 (خارجية) -->
             <div class="game-card">
+                <span class="badge external">خارجية</span>
                 <a href="#" onclick="window.open('https://www.crazygames.com/game/temple-run-2', '_blank'); return false;">
-                    <img src="images/temple.jpg" alt="Temple Run" onerror="this.src='https://via.placeholder.com/300x150/795548/ffffff?text=Temple+Run'">
+                    <img src="images/temple.jpg" alt="Temple Run 2" onerror="this.src='https://via.placeholder.com/300x150/795548/ffffff?text=Temple+Run+2'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">Temple Run 2</h3>
-                    <p class="game-description">لعبة الجري والمغامرة</p>
-                    <a href="#" onclick="window.open('https://www.crazygames.com/game/temple-run-2', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                    <p class="game-description">لعبة الجري والمغامرة والإثارة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/temple-run-2', '_blank'); return false;" class="play-btn">العب على موقع خارجي</a>
                 </div>
             </div>
 
-            <!-- لعبة 3 من رابط خارجي -->
+            <!-- لعبة Subway Surfers (خارجية) -->
             <div class="game-card">
+                <span class="badge external">خارجية</span>
                 <a href="#" onclick="window.open('https://www.crazygames.com/game/subway-surfers', '_blank'); return false;">
                     <img src="images/subway.jpg" alt="Subway Surfers" onerror="this.src='https://via.placeholder.com/300x150/607D8B/ffffff?text=Subway+Surfers'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">Subway Surfers</h3>
-                    <p class="game-description">اهرب من المفتش</p>
-                    <a href="#" onclick="window.open('https://www.crazygames.com/game/subway-surfers', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                    <p class="game-description">اهرب من المفتش واستمتع بالمغامرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/subway-surfers', '_blank'); return false;" class="play-btn">العب على موقع خارجي</a>
                 </div>
             </div>
 
-            <!-- لعبة 4 من رابط خارجي -->
+            <!-- لعبة Minecraft Classic (خارجية) -->
             <div class="game-card">
+                <span class="badge external">خارجية</span>
                 <a href="#" onclick="window.open('https://www.crazygames.com/game/minecraft-classic', '_blank'); return false;">
                     <img src="images/minecraft.jpg" alt="Minecraft Classic" onerror="this.src='https://via.placeholder.com/300x150/8BC34A/ffffff?text=Minecraft'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">Minecraft Classic</h3>
-                    <p class="game-description">لعبة البناء الشهيرة</p>
-                    <a href="#" onclick="window.open('https://www.crazygames.com/game/minecraft-classic', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                    <p class="game-description">لعبة البناء والإبداع الشهيرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/minecraft-classic', '_blank'); return false;" class="play-btn">العب على موقع خارجي</a>
                 </div>
             </div>
         </div>
@@ -596,7 +609,7 @@
                 <div class="article-content">
                     <span class="article-category">نصائح</span>
                     <h3 class="article-title">كيف تطور مهاراتك في ألعاب الذكاء؟</h3>
-                    <p class="article-excerpt">تعرف على أفضل الاستراتيجيات لتحسين أدائك...</p>
+                    <p class="article-excerpt">تعرف على أفضل الاستراتيجيات لتحسين أدائك في الألعاب الذهنية وتنمية القدرات العقلية</p>
                     <a href="#" class="read-more">اقرأ المزيد</a>
                 </div>
             </div>
@@ -607,7 +620,7 @@
                 <div class="article-content">
                     <span class="article-category">صحة</span>
                     <h3 class="article-title">فوائد ألعاب الذاكرة للدماغ</h3>
-                    <p class="article-excerpt">اكتشف كيف تساعد ألعاب الذاكرة في تحسين وظائف الدماغ...</p>
+                    <p class="article-excerpt">اكتشف كيف تساعد ألعاب الذاكرة في تحسين وظائف الدماغ وتقوية الذاكرة</p>
                     <a href="#" class="read-more">اقرأ المزيد</a>
                 </div>
             </div>
@@ -618,7 +631,7 @@
                 <div class="article-content">
                     <span class="article-category">مراجعة</span>
                     <h3 class="article-title">أفضل 10 ألعاب مجانية في 2024</h3>
-                    <p class="article-excerpt">قائمة بأفضل الألعاب المجانية...</p>
+                    <p class="article-excerpt">قائمة بأفضل الألعاب المجانية على الإنترنت لهذا العام مع شرح مفصل</p>
                     <a href="#" class="read-more">اقرأ المزيد</a>
                 </div>
             </div>
@@ -630,14 +643,14 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>عن ألعاب عربي</h3>
-                    <p style="color: #ccc;">موقع متخصص في تقديم أفضل الألعاب المجانية على الإنترنت.</p>
+                    <p style="color: #ccc;">موقع متخصص في تقديم أفضل الألعاب المجانية على الإنترنت، مع مزيج من الألعاب الداخلية والخارجية.</p>
                 </div>
                 <div class="footer-section">
                     <h3>روابط سريعة</h3>
-                    <a href="games.html">جميع الألعاب</a>
-                    <a href="about.html">من نحن</a>
-                    <a href="contact.html">اتصل بنا</a>
-                    <a href="privacy.html">سياسة الخصوصية</a>
+                    <a href="#games">جميع الألعاب</a>
+                    <a href="#about">من نحن</a>
+                    <a href="#contact">اتصل بنا</a>
+                    <a href="#privacy">سياسة الخصوصية</a>
                 </div>
                 <div class="footer-section">
                     <h3>تواصل معنا</h3>
