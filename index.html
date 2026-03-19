@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>ألعاب عربي - العب ألعابك المفضلة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ألعاب عربي - أفضل الألعاب المجانية</title>
     
     <style>
         * {
@@ -13,582 +13,1262 @@
         }
         
         body {
-            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background: #f0f2f5;
+            font-family: 'Tajawal', Arial, sans-serif;
+            background: #f5f7fa;
             color: #333;
+            line-height: 1.6;
         }
 
-        /* الهيدر المبسط للجوال */
+        /* الهيدر */
         header {
             background: linear-gradient(135deg, #1e2b3a, #2c3e50);
             color: white;
-            padding: 12px 0;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 12px;
+            padding: 0 20px;
         }
 
-        /* شريط التنقل للجوال */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 28px;
             font-weight: bold;
             color: #ff9800;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .logo span {
-            font-size: 16px;
-            color: white;
         }
 
         .nav-links {
             display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            padding: 5px 0;
-            max-width: 70%;
-        }
-
-        .nav-links::-webkit-scrollbar {
-            display: none;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s;
         }
 
+        .nav-links a:hover,
         .nav-links a.active {
             background: #ff9800;
             color: #1e2b3a;
-            font-weight: bold;
         }
 
-        /* شريط البحث (شكل فقط) */
-        .search-bar {
-            background: white;
-            margin: 15px 0;
-            padding: 8px 15px;
-            border-radius: 30px;
+        /* قسم المستخدم */
+        .user-section {
             display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .user-btn:hover {
+            background: #ff5722;
+            transform: scale(1.05);
+        }
+
+        .user-info {
+            display: none;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 25px;
         }
 
-        .search-bar input {
-            border: none;
-            outline: none;
-            flex: 1;
-            font-size: 16px;
-            font-family: inherit;
+        .user-info.active {
+            display: flex;
         }
 
-        .search-bar input::placeholder {
-            color: #999;
-        }
-
-        .search-icon {
+        .user-name {
             color: #ff9800;
-            font-size: 20px;
-        }
-
-        /* أقسام الألعاب */
-        .section-title {
-            font-size: 20px;
             font-weight: bold;
-            margin: 20px 0 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .section-title span {
+        .logout-btn {
+            background: none;
+            border: 1px solid #ff9800;
             color: #ff9800;
-        }
-
-        .section-title small {
-            font-size: 14px;
-            color: #666;
-            font-weight: normal;
-            margin-right: auto;
-        }
-
-        /* شبكة الألعاب - نفس شكل Crazy Games */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 10px 0;
-        }
-
-        /* للشاشات الأكبر */
-        @media (min-width: 600px) {
-            .games-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (min-width: 900px) {
-            .games-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-        }
-
-        /* بطاقة اللعبة - تصميم الجوال */
-        .game-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.2s;
+            padding: 3px 10px;
+            border-radius: 15px;
             cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            font-size: 12px;
+            transition: all 0.3s;
         }
 
-        .game-card:active {
-            transform: scale(0.97);
+        .logout-btn:hover {
+            background: #ff9800;
+            color: white;
         }
 
-        .game-image {
-            aspect-ratio: 1/1;
-            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
-            display: flex;
-            align-items: center;
+        /* نافذة تسجيل الدخول */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
             justify-content: center;
-            font-size: 40px;
-            color: #ff9800;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
             position: relative;
         }
 
-        .game-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* أيقونة البلاي الصغيرة */
-        .play-badge {
+        .close-modal {
             position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            backdrop-filter: blur(2px);
-            border: 2px solid rgba(255,255,255,0.3);
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
         }
 
-        .game-info {
-            padding: 8px;
+        .modal h2 {
+            color: #1e2b3a;
+            margin-bottom: 20px;
             text-align: center;
         }
 
-        .game-name {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 2px;
-            color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        .game-category {
-            font-size: 10px;
-            color: #ff9800;
-            background: #fff3e0;
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-weight: 500;
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
         }
 
-        /* قسم التصنيفات السريعة */
-        .categories-scroll {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px 0;
-            margin: 5px 0 15px;
-            -webkit-overflow-scrolling: touch;
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
         }
 
-        .categories-scroll::-webkit-scrollbar {
-            display: none;
+        .form-group input:focus {
+            border-color: #ff9800;
+            outline: none;
         }
 
-        .category-chip {
-            background: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #555;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            white-space: nowrap;
-            border: 1px solid #eee;
-        }
-
-        .category-chip.active {
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
             background: #ff9800;
             color: white;
-            border-color: #ff9800;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        /* إعلانات مبسطة للجوال */
-        .ad-container {
-            background: #f9f9f9;
-            border-radius: 12px;
+        .submit-btn:hover {
+            background: #ff5722;
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+        }
+
+        .switch-form span {
+            color: #ff9800;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* إحصائيات */
+        .stats-bar {
+            background: white;
+            padding: 20px;
             margin: 20px 0;
-            padding: 12px;
-            border: 1px dashed #ff9800;
+            border-radius: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 2px solid #ff9800;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-radius: 30px;
+            min-width: 150px;
+        }
+
+        .stat-item.special {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* التصنيفات */
+        .categories-bar {
+            background: white;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .category-btn {
+            padding: 8px 20px;
+            border: 2px solid #ff9800;
+            background: white;
+            color: #ff9800;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #ff9800;
+            color: white;
+        }
+
+        /* حاويات الإعلانات */
+        .ad-container {
+            width: 100%;
+            margin: 20px 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 80px;
-            font-size: 14px;
+            background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+            border-radius: 10px;
+            padding: 15px;
+            border: 2px dashed #ff9800;
+            min-height: 100px;
+        }
+
+        .ad-side-left {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 170px;
+            z-index: 999;
+            background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+            border: 2px dashed #ff9800;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .ad-side-right {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 170px;
+            z-index: 999;
+            background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+            border: 2px dashed #ff9800;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        /* قسم الترحيب */
+        .hero {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 60px 20px;
+            border-radius: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff9800;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* عنوان القسم */
+        .section-title {
+            font-size: 32px;
+            color: #333;
+            margin: 40px 0 20px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #ff9800;
+            margin: 10px auto;
+        }
+
+        /* زر المفضلة */
+        .favorite-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ccc;
+            transition: all 0.3s;
+        }
+
+        .favorite-btn.active {
+            color: #ff9800;
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.2);
+        }
+
+        /* قسم الألعاب */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255,152,0,0.3);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .game-card img:hover {
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            padding: 15px 0 5px;
+        }
+
+        .game-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .game-description {
             color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            height: 40px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            padding: 8px 25px;
+            background: #ff9800;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background: #ff5722;
+            transform: scale(1.05);
+        }
+
+        .external-link {
+            display: inline-block;
+            padding: 8px 25px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .external-link:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        /* قسم المفضلة */
+        .favorites-section {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            display: none;
+        }
+
+        .favorites-section.active {
+            display: block;
+        }
+
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* قسم المقالات */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image {
+            height: 200px;
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-category {
+            color: #ff9800;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .article-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .article-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         /* الفوتر */
         footer {
-            background: white;
-            padding: 25px 0 15px;
-            margin-top: 30px;
-            border-top: 1px solid #eee;
+            background: #1e2b3a;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
         }
 
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #ff9800;
             margin-bottom: 20px;
         }
 
-        .footer-links a {
-            color: #666;
+        .footer-section a {
+            color: #ccc;
             text-decoration: none;
-            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
         }
 
         .copyright {
             text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
             color: #999;
-            font-size: 12px;
         }
 
-        /* شريط سفلي للجوال */
-        .bottom-nav {
-            display: none;
-        }
-
-        @media (max-width: 600px) {
-            .bottom-nav {
-                display: flex;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: white;
-                padding: 8px 0;
-                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-                justify-content: space-around;
-                z-index: 1000;
+        /* تنسيقات الموبيل */
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            .bottom-nav-item {
-                display: flex;
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .stats-bar {
                 flex-direction: column;
                 align-items: center;
-                text-decoration: none;
-                color: #999;
-                font-size: 12px;
             }
-
-            .bottom-nav-item.active {
-                color: #ff9800;
+            
+            .ad-side-left, .ad-side-right {
+                display: none;
             }
-
-            .bottom-nav-item span {
-                font-size: 20px;
-                margin-bottom: 2px;
-            }
-
-            footer {
-                margin-bottom: 60px;
+            
+            .user-section {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
             }
         }
 
-        /* إحصائيات مبسطة */
-        .stats-mini {
-            background: white;
-            border-radius: 30px;
-            padding: 10px 15px;
-            margin: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: #666;
-            border: 1px solid #eee;
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .category-btn {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ===== الإعلان الجانبي الأيسر (160x600) ===== -->
+    <div class="ad-side-left">
+        <div id="sidebar-left-ad">
+            <script>
+                atOptions = {
+                    'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+                    'format' : 'iframe',
+                    'height' : 600,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- ===== الإعلان الجانبي الأيمن (160x600) ===== -->
+    <div class="ad-side-right">
+        <div id="sidebar-right-ad">
+            <script>
+                atOptions = {
+                    'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+                    'format' : 'iframe',
+                    'height' : 600,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- ===== نافذة تسجيل الدخول ===== -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">تسجيل الدخول</h2>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">تسجيل الدخول</button>
+            </form>
+
+            <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>الاسم</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">إنشاء حساب</button>
+            </form>
+
+            <div class="switch-form">
+                <span id="switchText" onclick="toggleForms()">إنشاء حساب جديد</span>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo">
-                    <span>🎮</span> ألعاب عربي
-                </a>
+                <a href="index.html" class="logo">🎮 ألعاب عربي</a>
                 <div class="nav-links">
                     <a href="index.html" class="active">الرئيسية</a>
                     <a href="games.html">الألعاب</a>
-                    <a href="categories.html">تصنيفات</a>
-                    <a href="favorites.html">المفضلة</a>
+                    <a href="about.html">من نحن</a>
+                    <a href="contact.html">اتصل بنا</a>
+                    <a href="privacy.html">الخصوصية</a>
+                </div>
+                <div class="user-section">
+                    <button class="user-btn" onclick="openModal()">
+                        <span>👤</span> تسجيل الدخول
+                    </button>
+                    <div class="user-info" id="userInfo">
+                        <span>مرحباً، <span class="user-name" id="userName"></span></span>
+                        <button class="logout-btn" onclick="logout()">تسجيل خروج</button>
+                    </div>
                 </div>
             </nav>
         </div>
     </header>
 
     <div class="container">
-        <!-- إحصائيات مبسطة -->
-        <div class="stats-mini">
-            <span>👥 2.5M+ زائر</span>
-            <span>⏰ <span id="visitTime">00:00</span></span>
-            <span>🎮 50+ لعبة</span>
+        
+        <!-- إحصائيات الزوار -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-label">📅 تاريخ الإنشاء</div>
+                <div class="stat-number" id="creationDate">15 يناير 2024</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">👥 إجمالي الزوار</div>
+                <div class="stat-number" id="totalVisits">2,500,500</div>
+            </div>
+            <div class="stat-item special">
+                <div class="stat-label">👤 أنت الزائر رقم</div>
+                <div class="stat-number" id="visitorNumber">2,500,501</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">⏰ الوقت الآن</div>
+                <div class="stat-number" id="visitTime">00:00:00</div>
+            </div>
         </div>
 
-        <!-- شريط بحث (شكلي) -->
-        <div class="search-bar">
-            <span class="search-icon">🔍</span>
-            <input type="text" placeholder="ابحث عن لعبة..." readonly>
+        <!-- التصنيفات -->
+        <div class="categories-bar">
+            <button class="category-btn active" onclick="filterGames('all')">الكل</button>
+            <button class="category-btn" onclick="filterGames('strategy')">استراتيجية</button>
+            <button class="category-btn" onclick="filterGames('action')">أكشن</button>
+            <button class="category-btn" onclick="filterGames('puzzle')">ألغاز</button>
+            <button class="category-btn" onclick="filterGames('memory')">ذاكرة</button>
+            <button class="category-btn" onclick="filterGames('favorites')">⭐ المفضلة</button>
         </div>
 
-        <!-- تصنيفات سريعة -->
-        <div class="categories-scroll">
-            <span class="category-chip active">الكل</span>
-            <span class="category-chip">ألغاز</span>
-            <span class="category-chip">مهارة</span>
-            <span class="category-chip">سباق</span>
-            <span class="category-chip">مغامرات</span>
-            <span class="category-chip">رياضة</span>
-            <span class="category-chip">ذكاء</span>
+        <!-- ===== الإعلان الأول (أعلى الصفحة) ===== -->
+        <div class="ad-container" id="top-ad">
+            <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
         </div>
 
-        <!-- قسم: ألعاب داخلية -->
-        <div class="section-title">
-            <span>🎮</span> ألعاب محلية
-            <small>شغلها فوراً</small>
+        <!-- قسم المفضلة -->
+        <div class="favorites-section" id="favoritesSection">
+            <h2 class="section-title">⭐ ألعابك المفضلة</h2>
+            <div class="favorites-grid" id="favoritesGrid"></div>
         </div>
-        <div class="games-grid">
+
+        <!-- قسم الترحيب -->
+        <div class="hero">
+            <h1>🎯 أفضل الألعاب المجانية على الإنترنت</h1>
+            <p>اكتشف مجموعة رائعة من الألعاب الممتعة والتحديات الذهنية. العب مباشرة بدون تحميل واستمتع بأوقات ممتعة!</p>
+            <a href="games.html" class="btn">استعرض جميع الألعاب</a>
+            <a href="about.html" class="btn" style="background: white; color: #333;">تعرف علينا</a>
+        </div>
+
+        <!-- قسم ألعاب مميزة -->
+        <h2 class="section-title">🎲 ألعاب مميزة لهذا الأسبوع</h2>
+        <div class="games-grid" id="gamesGrid">
             <!-- لعبة XO -->
-            <a href="games/xo/index.html" class="game-card">
-                <div class="game-image">
-                    <span>❌⭕</span>
-                    <div class="play-badge">▶</div>
-                </div>
+            <div class="game-card" data-category="strategy" data-id="xo">
+                <button class="favorite-btn" onclick="toggleFavorite('xo', this)">☆</button>
+                <a href="games/xo/index.html">
+                    <img src="images/xo.jpg" alt="لعبة XO" onerror="this.src='https://via.placeholder.com/300x150/ff9800/ffffff?text=XO+Game'">
+                </a>
                 <div class="game-info">
-                    <div class="game-name">XO</div>
-                    <span class="game-category">ذكاء</span>
+                    <h3 class="game-name">لعبة XO <span class="game-category">(استراتيجية)</span></h3>
+                    <p class="game-description">اللعبة الكلاسيكية الشهيرة</p>
+                    <a href="games/xo/index.html" class="play-btn">العب الآن</a>
                 </div>
-            </a>
+            </div>
 
             <!-- لعبة الثعبان -->
-            <a href="games/snake/index.html" class="game-card">
-                <div class="game-image">
-                    <span>🐍</span>
-                    <div class="play-badge">▶</div>
-                </div>
+            <div class="game-card" data-category="action" data-id="snake">
+                <button class="favorite-btn" onclick="toggleFavorite('snake', this)">☆</button>
+                <a href="games/snake/index.html">
+                    <img src="images/snake.jpg" alt="لعبة الثعبان" onerror="this.src='https://via.placeholder.com/300x150/4CAF50/ffffff?text=Snake+Game'">
+                </a>
                 <div class="game-info">
-                    <div class="game-name">الثعبان</div>
-                    <span class="game-category">كلاسيكية</span>
+                    <h3 class="game-name">لعبة الثعبان <span class="game-category">(أكشن)</span></h3>
+                    <p class="game-description">كلاسيكية الثعبان الجائع</p>
+                    <a href="games/snake/index.html" class="play-btn">العب الآن</a>
                 </div>
-            </a>
+            </div>
+
+            <!-- لعبة الذاكرة -->
+            <div class="game-card" data-category="memory" data-id="memory">
+                <button class="favorite-btn" onclick="toggleFavorite('memory', this)">☆</button>
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/memory-game', '_blank'); return false;">
+                    <img src="images/memory.jpg" alt="لعبة الذاكرة" onerror="this.src='https://via.placeholder.com/300x150/2196F3/ffffff?text=Memory+Game'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">لعبة الذاكرة <span class="game-category">(ذاكرة)</span></h3>
+                    <p class="game-description">اختبر ذاكرتك (رابط خارجي)</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/memory-game', '_blank'); return false;" class="external-link">🔗 العب على موقع خارجي</a>
+                </div>
+            </div>
+
+            <!-- لعبة الألغاز -->
+            <div class="game-card" data-category="puzzle" data-id="puzzle">
+                <button class="favorite-btn" onclick="toggleFavorite('puzzle', this)">☆</button>
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/puzzle', '_blank'); return false;">
+                    <img src="images/puzzle.jpg" alt="لعبة الألغاز" onerror="this.src='https://via.placeholder.com/300x150/9C27B0/ffffff?text=Puzzle+Game'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">لعبة الألغاز <span class="game-category">(ألغاز)</span></h3>
+                    <p class="game-description">حل الألغاز الشيقة (رابط خارجي)</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/puzzle', '_blank'); return false;" class="external-link">🔗 العب على موقع خارجي</a>
+                </div>
+            </div>
+
+            <!-- لعبة 2048 -->
+            <div class="game-card" data-category="puzzle" data-id="2048">
+                <button class="favorite-btn" onclick="toggleFavorite('2048', this)">☆</button>
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/2048', '_blank'); return false;">
+                    <img src="images/2048.jpg" alt="لعبة 2048" onerror="this.src='https://via.placeholder.com/300x150/FF5722/ffffff?text=2048'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">2048 <span class="game-category">(ألغاز)</span></h3>
+                    <p class="game-description">لعبة الأرقام الشهيرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/2048', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
+
+            <!-- لعبة Temple Run -->
+            <div class="game-card" data-category="action" data-id="temple">
+                <button class="favorite-btn" onclick="toggleFavorite('temple', this)">☆</button>
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/temple-run-2', '_blank'); return false;">
+                    <img src="images/temple.jpg" alt="Temple Run" onerror="this.src='https://via.placeholder.com/300x150/795548/ffffff?text=Temple+Run'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">Temple Run 2 <span class="game-category">(أكشن)</span></h3>
+                    <p class="game-description">لعبة الجري والمغامرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/temple-run-2', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
+
+            <!-- لعبة Subway Surfers -->
+            <div class="game-card" data-category="action" data-id="subway">
+                <button class="favorite-btn" onclick="toggleFavorite('subway', this)">☆</button>
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/subway-surfers', '_blank'); return false;">
+                    <img src="images/subway.jpg" alt="Subway Surfers" onerror="this.src='https://via.placeholder.com/300x150/607D8B/ffffff?text=Subway+Surfers'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">Subway Surfers <span class="game-category">(أكشن)</span></h3>
+                    <p class="game-description">اهرب من المفتش</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/subway-surfers', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
+
+            <!-- لعبة Minecraft -->
+            <div class="game-card" data-category="strategy" data-id="minecraft">
+                <button class="favorite-btn" onclick="toggleFavorite('minecraft', this)">☆</button>
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/minecraft-classic', '_blank'); return false;">
+                    <img src="images/minecraft.jpg" alt="Minecraft Classic" onerror="this.src='https://via.placeholder.com/300x150/8BC34A/ffffff?text=Minecraft'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">Minecraft Classic <span class="game-category">(استراتيجية)</span></h3>
+                    <p class="game-description">لعبة البناء الشهيرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/minecraft-classic', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
         </div>
 
-        <!-- إعلان -->
-        <div class="ad-container" id="ad1">
-            إعلان
+        <!-- ===== الإعلان الثاني (وسط الصفحة) ===== -->
+        <div class="ad-container" id="middle-ad">
+            <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
         </div>
 
-        <!-- قسم: أشهر الألعاب (من Crazy Games) -->
-        <div class="section-title">
-            <span>🔥</span> الأكثر لعباً
-            <small>من Crazy Games</small>
-        </div>
-        <div class="games-grid" id="crazyGamesGrid">
-            <!-- سيتم إضافة الألعاب عبر JavaScript -->
+        <!-- قسم أحدث المقالات -->
+        <h2 class="section-title">📝 أحدث المقالات</h2>
+        <div class="articles-grid">
+            <!-- مقال 1 -->
+            <div class="article-card">
+                <div class="article-image">🎮</div>
+                <div class="article-content">
+                    <span class="article-category">نصائح</span>
+                    <h3 class="article-title">كيف تطور مهاراتك في ألعاب الذكاء؟</h3>
+                    <p class="article-excerpt">تعرف على أفضل الاستراتيجيات لتحسين أدائك...</p>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </div>
+            </div>
+
+            <!-- مقال 2 -->
+            <div class="article-card">
+                <div class="article-image">🧠</div>
+                <div class="article-content">
+                    <span class="article-category">صحة</span>
+                    <h3 class="article-title">فوائد ألعاب الذاكرة للدماغ</h3>
+                    <p class="article-excerpt">اكتشف كيف تساعد ألعاب الذاكرة في تحسين وظائف الدماغ...</p>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </div>
+            </div>
+
+            <!-- مقال 3 -->
+            <div class="article-card">
+                <div class="article-image">🎯</div>
+                <div class="article-content">
+                    <span class="article-category">مراجعة</span>
+                    <h3 class="article-title">أفضل 10 ألعاب مجانية في 2024</h3>
+                    <p class="article-excerpt">قائمة بأفضل الألعاب المجانية...</p>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </div>
+            </div>
         </div>
 
-        <!-- إعلان -->
-        <div class="ad-container" id="ad2">
-            إعلان
+        <!-- ===== الإعلان الثالث (أسفل الصفحة) ===== -->
+        <div class="ad-container" id="bottom-ad">
+            <script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
         </div>
-
-        <!-- قسم: العب عبر الإنترنت -->
-        <div class="section-title">
-            <span>🌐</span> ألعاب خارجية
-            <small>افتح في الموقع</small>
-        </div>
-        <div class="games-grid" id="externalGamesGrid"></div>
-
-        <!-- قسم: ألعاب ذكاء -->
-        <div class="section-title">
-            <span>🧠</span> ألعاب ذكاء
-        </div>
-        <div class="games-grid" id="puzzleGamesGrid"></div>
-    </div>
-
-    <!-- شريط سفلي للجوال -->
-    <div class="bottom-nav">
-        <a href="index.html" class="bottom-nav-item active">
-            <span>🏠</span>
-            الرئيسية
-        </a>
-        <a href="#" class="bottom-nav-item">
-            <span>🔍</span>
-            بحث
-        </a>
-        <a href="#" class="bottom-nav-item">
-            <span>🎮</span>
-            ألعابي
-        </a>
-        <a href="#" class="bottom-nav-item">
-            <span>👤</span>
-            حسابي
-        </a>
     </div>
 
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="about.html">عن الموقع</a>
-                <a href="contact.html">اتصل بنا</a>
-                <a href="privacy.html">الخصوصية</a>
-                <a href="terms.html">الشروط</a>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>عن ألعاب عربي</h3>
+                    <p style="color: #ccc;">موقع متخصص في تقديم أفضل الألعاب المجانية على الإنترنت.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <a href="games.html">جميع الألعاب</a>
+                    <a href="about.html">من نحن</a>
+                    <a href="contact.html">اتصل بنا</a>
+                    <a href="privacy.html">سياسة الخصوصية</a>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <a href="#">فيسبوك</a>
+                    <a href="#">تويتر</a>
+                    <a href="#">انستغرام</a>
+                </div>
             </div>
             <div class="copyright">
-                © 2024 ألعاب عربي - جميع الألعاب من Crazy Games
+                © 2024 ألعاب عربي - جميع الحقوق محفوظة
             </div>
         </div>
     </footer>
 
     <script>
-        // قائمة الألعاب من Crazy Games (نفس اللي في الصورة)
-        const crazyGames = [
-            { name: "Paper.io 2", url: "https://www.crazygames.com/game/paper-io-2", icon: "📄", category: "استراتيجية" },
-            { name: "Master of Numb...", url: "https://www.crazygames.com/game/master-of-numbers", icon: "🔢", category: "ألغاز" },
-            { name: "Single Line: Dra...", url: "https://www.crazygames.com/game/single-line-drawing", icon: "✏️", category: "مهارة" },
-            { name: "Thief Puzzle", url: "https://www.crazygames.com/game/thief-puzzle", icon: "🕵️", category: "ألغاز" },
-            { name: "Flow 2048 3D", url: "https://www.crazygames.com/game/flow-2048-3d", icon: "🎲", category: "أرقام" },
-            { name: "Count Masters", url: "https://www.crazygames.com/game/count-masters", icon: "👥", category: "استراتيجية" },
-            { name: "Man Runner 2048", url: "https://www.crazygames.com/game/man-runner-2048", icon: "🏃", category: "أرقام" },
-            { name: "Catch Tiles: Pia...", url: "https://www.crazygames.com/game/catch-tiles-piano", icon: "🎹", category: "موسيقى" },
-            { name: "Block Blaster", url: "https://www.crazygames.com/game/block-blaster", icon: "🧱", category: "ألغاز" },
-            { name: "Ragdoll Archers", url: "https://www.crazygames.com/game/ragdoll-archers", icon: "🏹", category: "قتال" },
-            { name: "Color Match", url: "https://www.crazygames.com/game/color-match", icon: "🎨", category: "سرعة" },
-            { name: "Bridge Race", url: "https://www.crazygames.com/game/bridge-race", icon: "🌉", category: "سباق" },
-            { name: "SCREW OUT BOLT & NUTS", url: "https://www.crazygames.com/game/screw-out-bolt-nuts", icon: "🔧", category: "ميكانيكا" }
-        ];
+        // ===== نظام المستخدمين =====
+        let currentUser = null;
 
-        // قائمة ألعاب إضافية
-        const externalGames = [
-            { name: "2048", url: "https://play2048.co/", icon: "🎯", category: "أرقام" },
-            { name: "Subway Surfers", url: "https://www.crazygames.com/game/subway-surfers", icon: "🚇", category: "جري" },
-            { name: "Temple Run 2", url: "https://www.crazygames.com/game/temple-run-2", icon: "🏃", category: "مغامرات" },
-            { name: "Minecraft Classic", url: "https://www.crazygames.com/game/minecraft-classic", icon: "⛏️", category: "بناء" },
-            { name: "Among Us", url: "https://www.crazygames.com/game/among-us-online", icon: "👾", category: "اجتماعية" },
-            { name: "Cut the Rope", url: "https://www.crazygames.com/game/cut-the-rope", icon: "🪢", category: "ألغاز" }
-        ];
-
-        // ألعاب ذكاء
-        const puzzleGames = [
-            { name: "Sudoku", url: "https://www.crazygames.com/game/sudoku", icon: "🧩", category: "أرقام" },
-            { name: "Chess", url: "https://www.crazygames.com/game/chess", icon: "♟️", category: "استراتيجية" },
-            { name: "Memory", url: "https://www.crazygames.com/game/memory-game", icon: "🧠", category: "ذاكرة" },
-            { name: "Mahjong", url: "https://www.crazygames.com/game/mahjong", icon: "🀄", category: "ألغاز" },
-            { name: "Solitaire", url: "https://www.crazygames.com/game/solitaire", icon: "🃏", category: "ورق" },
-            { name: "Crossword", url: "https://www.crazygames.com/game/crossword", icon: "📝", category: "كلمات" }
-        ];
-
-        // دالة إنشاء بطاقة لعبة
-        function createGameCard(game) {
-            return `
-                <a href="${game.url}" class="game-card" target="_blank" rel="noopener noreferrer" onclick="if(!confirm('سيتم فتح اللعبة من موقع خارجي. هل تريد المتابعة؟')) return false;">
-                    <div class="game-image">
-                        <span>${game.icon}</span>
-                        <div class="play-badge">▶</div>
-                    </div>
-                    <div class="game-info">
-                        <div class="game-name">${game.name}</div>
-                        <span class="game-category">${game.category}</span>
-                    </div>
-                </a>
-            `;
+        function openModal() {
+            document.getElementById('authModal').classList.add('active');
         }
 
-        // تحميل الألعاب عند فتح الصفحة
-        window.onload = function() {
-            // تحميل ألعاب Crazy Games
-            const crazyGrid = document.getElementById('crazyGamesGrid');
-            crazyGames.slice(0, 12).forEach(game => {
-                crazyGrid.innerHTML += createGameCard(game);
-            });
+        function closeModal() {
+            document.getElementById('authModal').classList.remove('active');
+        }
 
-            // تحميل الألعاب الخارجية
-            const externalGrid = document.getElementById('externalGamesGrid');
-            externalGames.forEach(game => {
-                externalGrid.innerHTML += createGameCard(game);
-            });
+        function toggleForms() {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const modalTitle = document.getElementById('modalTitle');
+            const switchText = document.getElementById('switchText');
 
-            // تحميل ألعاب الذكاء
-            const puzzleGrid = document.getElementById('puzzleGamesGrid');
-            puzzleGames.forEach(game => {
-                puzzleGrid.innerHTML += createGameCard(game);
-            });
-
-            // تحديث الوقت
-            function updateClock() {
-                const now = new Date();
-                document.getElementById('visitTime').textContent = 
-                    now.getHours().toString().padStart(2, '0') + ':' +
-                    now.getMinutes().toString().padStart(2, '0');
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                modalTitle.textContent = 'تسجيل الدخول';
+                switchText.textContent = 'إنشاء حساب جديد';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                modalTitle.textContent = 'إنشاء حساب جديد';
+                switchText.textContent = 'تسجيل الدخول';
             }
-            updateClock();
-            setInterval(updateClock, 1000);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // التحقق من وجود المستخدم
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            
+            if (users[email] && users[email].password === password) {
+                currentUser = {
+                    email: email,
+                    name: users[email].name
+                };
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateUserUI();
+                closeModal();
+                loadFavorites();
+            } else {
+                alert('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            // حفظ المستخدم الجديد
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            
+            if (users[email]) {
+                alert('هذا البريد الإلكتروني مسجل بالفعل');
+                return;
+            }
+
+            users[email] = {
+                name: name,
+                password: password,
+                favorites: []
+            };
+
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            currentUser = {
+                email: email,
+                name: name
+            };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            updateUserUI();
+            closeModal();
+            loadFavorites();
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateUserUI();
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.textContent = '☆';
+                btn.classList.remove('active');
+            });
+            document.getElementById('favoritesSection').classList.remove('active');
+        }
+
+        function updateUserUI() {
+            const userBtn = document.querySelector('.user-btn');
+            const userInfo = document.getElementById('userInfo');
+            const userName = document.getElementById('userName');
+
+            if (currentUser) {
+                userBtn.style.display = 'none';
+                userInfo.classList.add('active');
+                userName.textContent = currentUser.name;
+            } else {
+                userBtn.style.display = 'flex';
+                userInfo.classList.remove('active');
+            }
+        }
+
+        // ===== نظام المفضلة =====
+        function toggleFavorite(gameId, btn) {
+            if (!currentUser) {
+                alert('يرجى تسجيل الدخول أولاً لإضافة الألعاب إلى المفضلة');
+                openModal();
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const user = users[currentUser.email];
+            
+            if (!user.favorites) {
+                user.favorites = [];
+            }
+
+            const index = user.favorites.indexOf(gameId);
+            
+            if (index === -1) {
+                user.favorites.push(gameId);
+                btn.textContent = '★';
+                btn.classList.add('active');
+            } else {
+                user.favorites.splice(index, 1);
+                btn.textContent = '☆';
+                btn.classList.remove('active');
+            }
+
+            users[currentUser.email] = user;
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            if (document.querySelector('.category-btn.active').textContent.includes('المفضلة')) {
+                showFavorites();
+            }
+        }
+
+        function loadFavorites() {
+            if (!currentUser) return;
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const user = users[currentUser.email];
+            
+            if (!user.favorites) {
+                user.favorites = [];
+            }
+
+            document.querySelectorAll('.game-card').forEach(card => {
+                const gameId = card.dataset.id;
+                const btn = card.querySelector('.favorite-btn');
+                
+                if (user.favorites.includes(gameId)) {
+                    btn.textContent = '★';
+                    btn.classList.add('active');
+                } else {
+                    btn.textContent = '☆';
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function showFavorites() {
+            if (!currentUser) {
+                alert('يرجى تسجيل الدخول أولاً');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const user = users[currentUser.email];
+            const favoritesGrid = document.getElementById('favoritesGrid');
+            
+            favoritesGrid.innerHTML = '';
+            
+            document.querySelectorAll('.game-card').forEach(card => {
+                const gameId = card.dataset.id;
+                
+                if (user.favorites && user.favorites.includes(gameId)) {
+                    const clone = card.cloneNode(true);
+                    favoritesGrid.appendChild(clone);
+                }
+            });
+
+            document.getElementById('favoritesSection').classList.add('active');
+        }
+
+        // ===== نظام التصنيفات =====
+        function filterGames(category) {
+            // تحديث الأزرار
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // إخفاء/إظهار الألعاب حسب التصنيف
+            if (category === 'all') {
+                document.querySelectorAll('.game-card').forEach(card => {
+                    card.style.display = 'block';
+                });
+                document.getElementById('favoritesSection').classList.remove('active');
+            } else if (category === 'favorites') {
+                showFavorites();
+            } else {
+                document.querySelectorAll('.game-card').forEach(card => {
+                    if (card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                document.getElementById('favoritesSection').classList.remove('active');
+            }
+        }
+
+        // ===== عداد الزوار =====
+        (function() {
+            try {
+                const BASE_NUMBER = 2500500;
+                const STORAGE_KEY = 'visitor_counter';
+                
+                let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+                    total: BASE_NUMBER,
+                    first: true
+                };
+                
+                if (data.first) {
+                    data.total = BASE_NUMBER;
+                    data.first = false;
+                }
+                
+                data.total += 10;
+                const current = data.total - 9;
+                
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                
+                function formatNumber(num) {
+                    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                
+                document.getElementById('totalVisits').textContent = formatNumber(data.total);
+                document.getElementById('visitorNumber').textContent = formatNumber(current);
+                document.getElementById('creationDate').textContent = '15 يناير 2024';
+                
+                function updateClock() {
+                    const now = new Date();
+                    document.getElementById('visitTime').textContent = 
+                        now.getHours().toString().padStart(2, '0') + ':' +
+                        now.getMinutes().toString().padStart(2, '0') + ':' +
+                        now.getSeconds().toString().padStart(2, '0');
+                }
+                
+                updateClock();
+                setInterval(updateClock, 1000);
+            } catch(e) {}
+        })();
+
+        // تحميل بيانات المستخدم عند بدء التشغيل
+        window.onload = function() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUserUI();
+                loadFavorites();
+            }
         };
     </script>
 </body>
