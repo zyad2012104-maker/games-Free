@@ -226,6 +226,15 @@ border-radius: 15px;
 box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
 } 
 
+/* حاوية الإعلانات الجانبية */
+.ad-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    min-height: 620px;
+    overflow: hidden;
+}
+
 /* ========== تنسيقات الموبيل ========== */ 
 @media (max-width: 900px) { 
 /* تصغير حجم الخط للعناوين */ 
@@ -295,6 +304,11 @@ font-size: 1.1em;
 padding: 12px; 
 min-height: 50px; 
 } 
+
+/* تحسين الإعلانات للموبيل */
+.ad-container {
+    min-height: auto;
+}
 } 
 
 /* تنسيقات للشاشات الصغيرة جداً */ 
@@ -339,7 +353,9 @@ transform: none;
 </style> 
 
 <!-- Font Awesome للأيقونات --> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- تحميل canvas-confetti من CDN موثوق -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </head> 
 
 <body> 
@@ -394,14 +410,79 @@ transform: none;
 <i class="fas fa-arrow-up"></i> ابدأ بالمستوى الأول! 
 </div> 
 </div> 
-</div> 
+</div>
 
-<!-- ===== كود الإعلانات - تم إضافته هنا دون التأثير على اللعبة ===== --> 
-<script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script> 
-<!-- ===== نهاية كود الإعلانات ===== --> 
+<!-- ============================================= -->
+/*              حاويات الإعلانات                     */
+/* ============================================= */
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script> 
-<script> 
+<!-- الإعلان الأول - في حاوية منفصلة -->
+<div class="ad-container" id="ad-container-1"></div>
+
+<!-- الإعلان الثاني - في حاوية منفصلة -->
+<div class="ad-container" id="ad-container-2"></div>
+
+<!-- الإعلان الثالث - في حاوية منفصلة -->
+<div class="ad-container" id="ad-container-3"></div>
+
+<!-- ============================================= */
+/*              نهاية حاويات الإعلانات                */
+/* ============================================= -->
+
+<script>
+// تكوين الإعلانات - يجب تعريفه قبل تحميل أي سكريبت إعلانات
+window.atOptions = {
+    'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+};
+
+// دالة لتحميل الإعلانات بشكل آمن
+function loadAdScripts() {
+    // مصفوفة تحتوي على روابط الإعلانات
+    const adScripts = [
+        'https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js',
+        'https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js',
+        'https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js'
+    ];
+
+    // تحميل كل إعلان في حاوية مختلفة مع معالجة الأخطاء
+    adScripts.forEach((src, index) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        
+        // معالجة نجاح التحميل
+        script.onload = () => {
+            console.log(`تم تحميل الإعلان ${index + 1} بنجاح`);
+        };
+        
+        // معالجة خطأ التحميل
+        script.onerror = () => {
+            console.error(`فشل تحميل الإعلان ${index + 1}`);
+            // محاولة إعادة التحميل بعد ثانيتين
+            setTimeout(() => {
+                const retryScript = document.createElement('script');
+                retryScript.src = src;
+                retryScript.async = true;
+                document.body.appendChild(retryScript);
+            }, 2000);
+        };
+        
+        document.body.appendChild(script);
+    });
+}
+
+// تحميل الإعلانات بعد تحميل الصفحة بالكامل
+window.addEventListener('load', function() {
+    // تأخير تحميل الإعلانات لمدة ثانية واحدة لضمان تحميل اللعبة أولاً
+    setTimeout(loadAdScripts, 1000);
+});
+</script>
+
+<script>
 class MemoryGame { 
 constructor() { 
 this.board = document.getElementById('board'); 
@@ -484,7 +565,7 @@ this.icons = [
 'fa-code', 'fa-gamepad', 'fa-headphones', 'fa-motorcycle', 'fa-umbrella', 
 'fa-volcano', 'fa-wifi', 'fa-trophy', 'fa-medal', 'fa-shield', 'fa-hat-wizard', 
 'fa-dragon', 'fa-frog', 'fa-hippo', 'fa-kiwi-bird', 'fa-otter', 'fa-paw', 
-'fa-spider', 'fa-dove', 'fa-crow', 'fa-cat-space', 'fa-dog-leashed', 'fa-fish-fins' 
+'fa-spider', 'fa-dove', 'fa-crow' 
 ]; 
 
 this.init(); 
@@ -761,10 +842,15 @@ this.messageElement.innerHTML = text;
 } 
 } 
 
-// بدء اللعبة 
-document.addEventListener('DOMContentLoaded', () => { 
-new MemoryGame(); 
-}); 
+// بدء اللعبة - نضمن تحميل DOM أولاً
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new MemoryGame();
+    });
+} else {
+    // DOM جاهز بالفعل
+    new MemoryGame();
+}
 </script> 
 </body> 
 </html>
