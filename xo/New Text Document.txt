@@ -1,0 +1,1352 @@
+games-xo
+
+index.html
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-O المتطورة - لعبة احترافية</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- إعلان أعلى الشاشة -->
+    <div class="top-ad">
+        <div class="ad-wrapper">
+            <span class="ad-badge">إعلان</span>
+            <div class="ad-content">
+                <img src="https://via.placeholder.com/728x90/2b5797/ffffff?text=🎮+العب+الآن+واحصل+على+مكافآت+يومية" alt="Advertisement">
+                <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-wrapper">
+        <!-- الشريط الجانبي الأيسر مع الإعلانات -->
+        <div class="left-ads-sidebar">
+            <div class="ad-vertical-card">
+                <span class="ad-badge-vertical">إعلان</span>
+                <div class="ad-vertical-content">
+                    <img src="https://via.placeholder.com/160x600/ffb900/000000?text=عرض+خاص" alt="Vertical Ad">
+                </div>
+            </div>
+            <div class="ad-vertical-card">
+                <span class="ad-badge-vertical">إعلان</span>
+                <div class="ad-vertical-content">
+                    <img src="https://via.placeholder.com/160x600/d83b01/ffffff?text=تطبيق+الجوال" alt="Vertical Ad">
+                </div>
+            </div>
+            <div class="ad-vertical-card">
+                <span class="ad-badge-vertical">إعلان</span>
+                <div class="ad-vertical-content">
+                    <img src="https://via.placeholder.com/160x600/28a745/ffffff?text=اشتراك+مميز" alt="Vertical Ad">
+                </div>
+            </div>
+        </div>
+
+        <!-- محتوى اللعبة الرئيسي -->
+        <div class="game-main-content">
+            <!-- رأس اللعبة -->
+            <div class="game-header">
+                <div class="game-title">
+                    <h1>❌⭕ X-O المتطورة</h1>
+                    <span class="version-badge">الإصدار 2.0</span>
+                </div>
+                <a href="../../index.html" class="back-to-home">
+                    <span>🔙</span> العودة للرئيسية
+                </a>
+            </div>
+
+            <!-- إعلان بداية اللعبة -->
+            <div class="start-ad" id="startAd">
+                <div class="ad-horizontal">
+                    <span class="ad-badge">إعلان بداية اللعبة</span>
+                    <div class="ad-content">
+                        <img src="https://via.placeholder.com/728x90/1e3f6e/ffffff?text=🎯+ابدأ+اللعب+الآن+وحصل+على+عملات+مجانية" alt="Start Ad">
+                        <button class="ad-close" onclick="closeStartAd()">✕</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة التحكم -->
+            <div class="control-panel">
+                <div class="control-group">
+                    <label>نوع اللعب:</label>
+                    <div class="custom-select">
+                        <select id="gameMode" onchange="changeGameMode()">
+                            <option value="computer">🤖 ضد الكمبيوتر</option>
+                            <option value="twoPlayer">👥 لاعبين</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>المستوى:</label>
+                    <div class="custom-select">
+                        <select id="level" onchange="changeLevel()">
+                            <option value="3">المستوى 1 (3×3)</option>
+                            <option value="4">المستوى 2 (4×4)</option>
+                            <option value="5">المستوى 3 (5×5)</option>
+                            <option value="6">المستوى 4 (6×6)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group" id="difficultyGroup">
+                    <label>مستوى الذكاء:</label>
+                    <div class="custom-select">
+                        <select id="difficulty">
+                            <option value="easy">🌟 سهل</option>
+                            <option value="medium">⚡ متوسط</option>
+                            <option value="hard">🔥 صعب</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة النتائج -->
+            <div class="score-panel">
+                <div class="player-card player-x">
+                    <div class="player-icon">❌</div>
+                    <div class="player-info">
+                        <span class="player-label" id="player1Label">اللاعب X</span>
+                        <span class="player-score" id="scoreX">0</span>
+                    </div>
+                </div>
+                <div class="vs-badge">VS</div>
+                <div class="player-card player-o">
+                    <div class="player-icon">⭕</div>
+                    <div class="player-info">
+                        <span class="player-label" id="player2Label">الكمبيوتر O</span>
+                        <span class="player-score" id="scoreO">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة اللعبة -->
+            <div class="game-board-area">
+                <div class="board-header">
+                    <div class="turn-indicator" id="turnIndicator">
+                        <span class="turn-text">دور اللاعب</span>
+                        <span class="turn-player" id="currentPlayerDisplay">X</span>
+                    </div>
+                    <div class="moves-indicator">
+                        <span class="moves-label">الحركات</span>
+                        <span class="moves-count" id="movesCounter">0/9</span>
+                    </div>
+                </div>
+
+                <div class="board-container">
+                    <div class="board-inner">
+                        <div class="board-grid" id="board" data-size="3"></div>
+                    </div>
+                </div>
+
+                <!-- إعلان كل 3 أدوار -->
+                <div class="turn-ad-container" id="turnAdContainer">
+                    <div class="turn-ad">
+                        <span class="ad-badge">إعلان بعد <span id="turnNumber">3</span> أدوار</span>
+                        <div class="ad-content">
+                            <img src="https://via.placeholder.com/468x60/ffb900/000000?text=⭐+عرض+خاص+للمثابرين" alt="Turn Ad">
+                            <button class="ad-close-small" onclick="closeTurnAd()">✕</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار التحكم -->
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="resetGame()">
+                    <span>🔄</span> لعبة جديدة
+                </button>
+                <button class="btn-secondary" onclick="resetScores()">
+                    <span>📊</span> تصفير النقاط
+                </button>
+            </div>
+
+            <!-- إحصائيات سريعة -->
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <span class="stat-icon">🎯</span>
+                    <span class="stat-label">إجمالي الحركات:</span>
+                    <span class="stat-value" id="totalMoves">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">📢</span>
+                    <span class="stat-label">الإعلانات:</span>
+                    <span class="stat-value" id="adsShown">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريط الجانبي الأيمن مع الإعلانات -->
+        <div class="right-ads-sidebar">
+            <div class="ad-square-card">
+                <span class="ad-badge-square">إعلان</span>
+                <div class="ad-square-content">
+                    <img src="https://via.placeholder.com/250x250/2b5797/ffffff?text=عرض+محدود" alt="Square Ad">
+                </div>
+            </div>
+            <div class="ad-square-card">
+                <span class="ad-badge-square">إعلان</span>
+                <div class="ad-square-content">
+                    <img src="https://via.placeholder.com/250x250/d83b01/ffffff?text=العاب+جديدة" alt="Square Ad">
+                </div>
+            </div>
+            <div class="ad-square-card">
+                <span class="ad-badge-square">إعلان</span>
+                <div class="ad-square-content">
+                    <img src="https://via.placeholder.com/250x250/28a745/ffffff?text=خصم+50%" alt="Square Ad">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إعلان أسفل الصفحة -->
+    <div class="bottom-ad">
+        <div class="ad-wrapper">
+            <span class="ad-badge">إعلان</span>
+            <div class="ad-content">
+                <img src="https://via.placeholder.com/728x90/1e3f6e/ffffff?text=🎯+شكراً+للعب+معنا+-+اكتشف+المزيد+من+الألعاب" alt="Bottom Ad">
+                <button class="ad-close" onclick="this.parentElement.parentElement.style.display='none'">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+style.css
+
+/* استيراد الخطوط */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* الحاوية الرئيسية */
+.game-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+/* ========== الإعلانات الجانبية ========== */
+.left-ads-sidebar,
+.right-ads-sidebar {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* الإعلانات العمودية */
+.ad-vertical-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.ad-vertical-card:hover {
+    transform: translateY(-5px);
+}
+
+.ad-badge-vertical {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+}
+
+.ad-vertical-content {
+    width: 100%;
+    height: 600px;
+    background: #f5f5f5;
+}
+
+.ad-vertical-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* الإعلانات المربعة */
+.ad-square-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.ad-square-card:hover {
+    transform: translateY(-5px);
+}
+
+.ad-badge-square {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+}
+
+.ad-square-content {
+    width: 100%;
+    height: 250px;
+    background: #f5f5f5;
+}
+
+.ad-square-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========== المحتوى الرئيسي ========== */
+.game-main-content {
+    flex: 1;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* رأس اللعبة */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(43,87,151,0.1);
+}
+
+.game-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.game-title h1 {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #2b5797, #1e3f6e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.version-badge {
+    background: #ffb900;
+    color: #1e3f6e;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.back-to-home {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s;
+}
+
+.back-to-home:hover {
+    background: #2b5797;
+    color: white;
+    transform: translateX(-5px);
+}
+
+/* الإعلانات الأفقية */
+.ad-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.ad-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: #ff4444;
+    color: white;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 15px;
+    z-index: 2;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(255,68,68,0.3);
+}
+
+.ad-content {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.ad-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ad-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.ad-close:hover {
+    background: rgba(0,0,0,0.9);
+    transform: scale(1.1);
+}
+
+.start-ad {
+    margin-bottom: 25px;
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* لوحة التحكم */
+.control-panel {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 20px;
+    flex-wrap: wrap;
+}
+
+.control-group {
+    flex: 1;
+    min-width: 180px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2b5797;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.custom-select {
+    position: relative;
+}
+
+.custom-select select {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: white;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    appearance: none;
+    transition: all 0.3s;
+}
+
+.custom-select::after {
+    content: '▼';
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #2b5797;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.custom-select select:hover {
+    border-color: #2b5797;
+    box-shadow: 0 0 0 3px rgba(43,87,151,0.1);
+}
+
+.custom-select select:focus {
+    outline: none;
+    border-color: #2b5797;
+}
+
+/* لوحة النتائج */
+.score-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.player-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 40px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+}
+
+.player-card.player-x {
+    background: linear-gradient(135deg, #2b5797, #1e3f6e);
+    color: white;
+}
+
+.player-card.player-o {
+    background: linear-gradient(135deg, #d83b01, #a52a00);
+    color: white;
+}
+
+.player-icon {
+    font-size: 40px;
+}
+
+.player-info {
+    text-align: center;
+}
+
+.player-label {
+    display: block;
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.player-score {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.vs-badge {
+    background: #ffb900;
+    color: #1e3f6e;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 18px;
+    box-shadow: 0 5px 15px rgba(255,185,0,0.3);
+}
+
+/* لوحة اللعبة */
+.game-board-area {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 30px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.turn-indicator {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.turn-text {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.turn-player {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.moves-indicator {
+    background: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.moves-label {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.moves-count {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.board-inner {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.board-grid {
+    display: grid;
+    gap: 10px;
+    background: rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.board-grid[data-size="3"] {
+    grid-template-columns: repeat(3, 100px);
+}
+
+.board-grid[data-size="4"] {
+    grid-template-columns: repeat(4, 90px);
+}
+
+.board-grid[data-size="5"] {
+    grid-template-columns: repeat(5, 80px);
+}
+
+.board-grid[data-size="6"] {
+    grid-template-columns: repeat(6, 70px);
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.cell.x {
+    color: #2b5797;
+    background: linear-gradient(135deg, #e3eaf6, #c5d0e6);
+}
+
+.cell.o {
+    color: #d83b01;
+    background: linear-gradient(135deg, #ffe6e0, #ffcdc2);
+}
+
+.cell.win {
+    animation: winPulse 1s infinite;
+    box-shadow: 0 0 30px #ffb900;
+}
+
+@keyframes winPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px #ffb900;
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 50px #ffb900;
+    }
+}
+
+/* إعلان الأدوار */
+.turn-ad-container {
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+
+.turn-ad-container.hidden {
+    display: none;
+}
+
+.turn-ad {
+    position: relative;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.ad-close-small {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* أزرار التحكم */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(40,167,69,0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d, #545b62);
+    color: white;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(108,117,125,0.4);
+}
+
+/* الإحصائيات السريعة */
+.quick-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 50px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-icon {
+    font-size: 18px;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 14px;
+}
+
+.stat-value {
+    font-weight: 700;
+    color: #2b5797;
+    font-size: 16px;
+}
+
+/* الإعلان السفلي */
+.bottom-ad {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* تصميم متجاوب */
+@media (max-width: 1200px) {
+    .game-wrapper {
+        flex-direction: column;
+    }
+    
+    .left-ads-sidebar,
+    .right-ads-sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .ad-vertical-card {
+        width: 160px;
+    }
+    
+    .ad-vertical-content {
+        height: 400px;
+    }
+    
+    .board-grid[data-size="6"] {
+        grid-template-columns: repeat(6, 60px);
+    }
+}
+
+@media (max-width: 768px) {
+    .control-panel {
+        flex-direction: column;
+    }
+    
+    .score-panel {
+        flex-direction: column;
+    }
+    
+    .player-card {
+        width: 100%;
+    }
+    
+    .board-grid[data-size="3"] {
+        grid-template-columns: repeat(3, 80px);
+    }
+    
+    .board-grid[data-size="4"] {
+        grid-template-columns: repeat(4, 70px);
+    }
+    
+    .board-grid[data-size="5"] {
+        grid-template-columns: repeat(5, 60px);
+    }
+    
+    .board-grid[data-size="6"] {
+        grid-template-columns: repeat(6, 50px);
+    }
+    
+    .cell {
+        font-size: 30px;
+    }
+}
+
+
+script.js
+
+// متغيرات اللعبة
+let board = [];
+let boardSize = 3;
+let currentPlayer = 'X';
+let gameActive = true;
+let gameMode = 'computer';
+let difficulty = 'easy';
+let scores = { X: 0, O: 0 };
+let moves = 0;
+let totalMoves = 0;
+let adsShown = 0;
+let lastMoveIndex = -1;
+let turnCount = 0;
+
+// تهيئة اللعبة
+document.addEventListener('DOMContentLoaded', () => {
+    initGame();
+    loadScores();
+    setupEventListeners();
+    showStartAd();
+});
+
+function initGame() {
+    boardSize = parseInt(document.getElementById('level').value);
+    createBoard();
+    resetGameState();
+    updatePlayerNames();
+    updateMovesCounter();
+}
+
+function createBoard() {
+    const boardElement = document.getElementById('board');
+    boardElement.innerHTML = '';
+    board = Array(boardSize * boardSize).fill('');
+    
+    boardElement.setAttribute('data-size', boardSize);
+    
+    for (let i = 0; i < boardSize * boardSize; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.index = i;
+        cell.addEventListener('click', handleCellClick);
+        boardElement.appendChild(cell);
+    }
+}
+
+function handleCellClick(e) {
+    if (!gameActive) return;
+    
+    const index = parseInt(e.target.dataset.index);
+    
+    if (board[index] !== '') return;
+    
+    if (gameMode === 'twoPlayer') {
+        // لعب لاعبين
+        makeMove(index);
+        if (checkGameStatus()) {
+            // استمرار اللعبة
+        }
+    } else {
+        // لعب ضد الكمبيوتر
+        if (currentPlayer === 'X') {
+            makeMove(index);
+            if (checkGameStatus()) {
+                // إذا استمرت اللعبة، دور الكمبيوتر
+                setTimeout(() => makeComputerMove(), 500);
+            }
+        }
+    }
+}
+
+function makeMove(index) {
+    board[index] = currentPlayer;
+    const cell = document.querySelector(`[data-index="${index}"]`);
+    cell.textContent = currentPlayer;
+    cell.classList.add(currentPlayer.toLowerCase());
+    
+    // إزالة تظليل آخر حركة
+    if (lastMoveIndex !== -1) {
+        const lastCell = document.querySelector(`[data-index="${lastMoveIndex}"]`);
+        if (lastCell) {
+            lastCell.classList.remove('last-move');
+        }
+    }
+    cell.classList.add('last-move');
+    lastMoveIndex = index;
+    
+    moves++;
+    totalMoves++;
+    updateMovesCounter();
+    
+    // إظهار إعلان كل 3 أدوار
+    turnCount++;
+    if (turnCount % 3 === 0 && gameActive) {
+        showTurnAd(turnCount);
+    }
+}
+
+function makeComputerMove() {
+    if (!gameActive || currentPlayer !== 'O') return;
+    
+    let move;
+    switch(difficulty) {
+        case 'easy':
+            move = getRandomMove();
+            break;
+        case 'medium':
+            move = getMediumMove();
+            break;
+        case 'hard':
+            move = getHardMove();
+            break;
+    }
+    
+    if (move !== undefined) {
+        makeMove(move);
+        checkGameStatus();
+    }
+}
+
+function getRandomMove() {
+    const emptyCells = board.reduce((acc, cell, index) => {
+        if (cell === '') acc.push(index);
+        return acc;
+    }, []);
+    
+    if (emptyCells.length > 0) {
+        return emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    }
+    return undefined;
+}
+
+function getMediumMove() {
+    // محاولة الفوز
+    const winMove = findWinningMove('O');
+    if (winMove !== undefined) return winMove;
+    
+    // منع فوز الخصم
+    const blockMove = findWinningMove('X');
+    if (blockMove !== undefined) return blockMove;
+    
+    // حركة عشوائية
+    return getRandomMove();
+}
+
+function getHardMove() {
+    // استراتيجية متقدمة للمستوى الصعب
+    const winMove = findWinningMove('O');
+    if (winMove !== undefined) return winMove;
+    
+    const blockMove = findWinningMove('X');
+    if (blockMove !== undefined) return blockMove;
+    
+    // استراتيجية المركز
+    const center = Math.floor(boardSize * boardSize / 2);
+    if (board[center] === '') return center;
+    
+    // الزوايا
+    const corners = [0, boardSize - 1, boardSize * (boardSize - 1), boardSize * boardSize - 1];
+    const availableCorners = corners.filter(i => board[i] === '');
+    if (availableCorners.length > 0) {
+        return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+    }
+    
+    return getRandomMove();
+}
+
+function findWinningMove(player) {
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] === '') {
+            board[i] = player;
+            if (checkWinner() === player) {
+                board[i] = '';
+                return i;
+            }
+            board[i] = '';
+        }
+    }
+    return undefined;
+}
+
+function checkGameStatus() {
+    const winner = checkWinner();
+    
+    if (winner) {
+        gameActive = false;
+        scores[winner]++;
+        updateScores();
+        highlightWinningCells(winner);
+        showStatus(winner);
+        return false;
+    } else if (isBoardFull()) {
+        gameActive = false;
+        showStatus('draw');
+        return false;
+    } else {
+        switchPlayer();
+        return true;
+    }
+}
+
+function checkWinner() {
+    const size = boardSize;
+    
+    // التحقق من الأفقية
+    for (let row = 0; row < size; row++) {
+        const first = board[row * size];
+        if (first === '') continue;
+        let win = true;
+        for (let col = 1; col < size; col++) {
+            if (board[row * size + col] !== first) {
+                win = false;
+                break;
+            }
+        }
+        if (win) return first;
+    }
+    
+    // التحقق من العمودية
+    for (let col = 0; col < size; col++) {
+        const first = board[col];
+        if (first === '') continue;
+        let win = true;
+        for (let row = 1; row < size; row++) {
+            if (board[row * size + col] !== first) {
+                win = false;
+                break;
+            }
+        }
+        if (win) return first;
+    }
+    
+    // التحقق من القطر الرئيسي
+    let first = board[0];
+    if (first !== '') {
+        let win = true;
+        for (let i = 1; i < size; i++) {
+            if (board[i * size + i] !== first) {
+                win = false;
+                break;
+            }
+        }
+        if (win) return first;
+    }
+    
+    // التحقق من القطر الثانوي
+    first = board[size - 1];
+    if (first !== '') {
+        let win = true;
+        for (let i = 1; i < size; i++) {
+            if (board[i * size + (size - 1 - i)] !== first) {
+                win = false;
+                break;
+            }
+        }
+        if (win) return first;
+    }
+    
+    return null;
+}
+
+function highlightWinningCells(winner) {
+    const size = boardSize;
+    const cells = document.querySelectorAll('.cell');
+    
+    // إزالة التظليل السابق
+    cells.forEach(cell => cell.classList.remove('win'));
+    
+    // تظليل الخلايا الفائزة
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] === winner) {
+            cells[i].classList.add('win');
+        }
+    }
+}
+
+function isBoardFull() {
+    return board.every(cell => cell !== '');
+}
+
+function switchPlayer() {
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    updateDisplay();
+}
+
+function updateDisplay() {
+    const display = document.getElementById('currentPlayerDisplay');
+    display.textContent = currentPlayer;
+    
+    if (gameMode === 'computer' && currentPlayer === 'O') {
+        display.textContent = '🤖';
+    }
+}
+
+function updateMovesCounter() {
+    const maxMoves = boardSize * boardSize;
+    document.getElementById('movesCounter').textContent = `${moves}/${maxMoves}`;
+    document.getElementById('totalMoves').textContent = totalMoves;
+}
+
+function updateScores() {
+    document.getElementById('scoreX').textContent = scores.X;
+    document.getElementById('scoreO').textContent = scores.O;
+    saveScores();
+}
+
+function updatePlayerNames() {
+    if (gameMode === 'computer') {
+        document.getElementById('player1Label').textContent = 'اللاعب X';
+        document.getElementById('player2Label').textContent = 'الكمبيوتر O';
+        document.getElementById('difficultyGroup').style.display = 'block';
+    } else {
+        document.getElementById('player1Label').textContent = 'اللاعب X';
+        document.getElementById('player2Label').textContent = 'اللاعب O';
+        document.getElementById('difficultyGroup').style.display = 'none';
+    }
+}
+
+function showStatus(result) {
+    const display = document.getElementById('currentPlayerDisplay');
+    if (result === 'X') {
+        display.textContent = '❌ فاز!';
+    } else if (result === 'O') {
+        display.textContent = '⭕ فاز!';
+    } else if (result === 'draw') {
+        display.textContent = 'تعادل!';
+    }
+}
+
+function resetGame() {
+    board = Array(boardSize * boardSize).fill('');
+    currentPlayer = 'X';
+    gameActive = true;
+    moves = 0;
+    
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => {
+        cell.textContent = '';
+        cell.classList.remove('x', 'o', 'win', 'last-move');
+    });
+    
+    updateDisplay();
+    updateMovesCounter();
+    lastMoveIndex = -1;
+}
+
+function resetGameState() {
+    resetGame();
+}
+
+function resetScores() {
+    if (confirm('هل أنت متأكد من تصفير النقاط؟')) {
+        scores = { X: 0, O: 0 };
+        updateScores();
+        resetGame();
+    }
+}
+
+function saveScores() {
+    localStorage.setItem('xoAdvancedScores', JSON.stringify(scores));
+}
+
+function loadScores() {
+    const saved = localStorage.getItem('xoAdvancedScores');
+    if (saved) {
+        scores = JSON.parse(saved);
+        updateScores();
+    }
+}
+
+function changeGameMode() {
+    gameMode = document.getElementById('gameMode').value;
+    updatePlayerNames();
+    resetGame();
+}
+
+function changeLevel() {
+    initGame();
+    resetGame();
+}
+
+// نظام الإعلانات
+function showStartAd() {
+    const startAd = document.getElementById('startAd');
+    if (startAd) {
+        startAd.style.display = 'block';
+        adsShown++;
+        updateAdStats();
+    }
+}
+
+function closeStartAd() {
+    document.getElementById('startAd').style.display = 'none';
+}
+
+function showTurnAd(turnNumber) {
+    const turnAdContainer = document.getElementById('turnAdContainer');
+    document.getElementById('turnNumber').textContent = turnNumber;
+    turnAdContainer.classList.remove('hidden');
+    adsShown++;
+    updateAdStats();
+    
+    // إخفاء الإعلان بعد 4 ثواني
+    setTimeout(() => {
+        closeTurnAd();
+    }, 4000);
+}
+
+function closeTurnAd() {
+    document.getElementById('turnAdContainer').classList.add('hidden');
+}
+
+function updateAdStats() {
+    document.getElementById('adsShown').textContent = adsShown;
+}
+
+// تغيير الصعوبة
+document.getElementById('difficulty').addEventListener('change', function() {
+    difficulty = this.value;
+});
+
+// إغلاق الإعلانات
+document.querySelectorAll('.ad-close, .ad-close-small').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const ad = this.closest('[id*="Ad"], [class*="ad"]');
+        if (ad) {
+            ad.style.display = 'none';
+        }
+    });
+});
+
+

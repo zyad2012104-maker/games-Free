@@ -1,0 +1,48 @@
+/* تنسيقات متوافقة مع إعلانات AdSense */
+.adsbygoogle {
+    background: transparent;
+    min-height: 90px;
+}
+
+.ad-wrapper .adsbygoogle,
+.ad-content .adsbygoogle,
+.ad-vertical-content .adsbygoogle,
+.ad-square-content .adsbygoogle {
+    width: 100%;
+    height: auto;
+    min-height: inherit;
+}
+
+/* تنسيقات للإعلانات العمودية */
+.ad-vertical-content .adsbygoogle {
+    min-height: 600px;
+}
+
+/* تنسيقات للإعلانات المربعة */
+.ad-square-content .adsbygoogle {
+    min-height: 250px;
+}
+
+/* تحميل الإعلانات بشكل صحيح */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
+
+/* ضمان ظهور الإعلانات في الخلفية المناسبة */
+.ad-content {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* تحسين مظهر الإعلانات */
+.ad-wrapper, .ad-horizontal {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
