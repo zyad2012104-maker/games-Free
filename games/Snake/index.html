@@ -3,892 +3,680 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>لعبة الثعبان - Snake Game</title>
+    <title>لعبة Puzzle الاحترافية - 50 مستوى</title>
     
-    <!-- ========== كود AdSense الرئيسي (مرة واحدة فقط) ========== -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
-    
-    <!-- ========== إعلانات AMP التلقائية ========== -->
-    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+    <!-- ⭐⭐⭐ كود الإعلانات الجديد - فقط هذا الكود ⭐⭐⭐ -->
+    <script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 10px;
         }
-        
-        /* تخطيط الصفحة */
-        .page-wrapper {
+
+        .main-container {
             display: flex;
-            max-width: 1400px;
             width: 100%;
-            gap: 15px;
+            max-width: 1200px;
+            gap: 20px;
         }
-        
-        /* الإعلان الجانبي الأيسر - يظهر فقط في الكمبيوتر */
-        .sidebar-ad {
-            width: 160px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            height: fit-content;
-        }
-        
-        .ad-label {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 11px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .ad-space {
-            width: 100%;
-            min-height: 600px;
-            background: transparent;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        
+
         /* المحتوى الرئيسي */
-        .main-content {
+        .game-wrapper {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            min-width: 300px;
+            margin: 0 auto;
         }
-        
-        /* الإعلان العلوي والسفلي */
-        .top-ad, .bottom-ad {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .horizontal-ad {
-            width: 100%;
-            min-height: 90px;
-            background: transparent;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        
-        /* حاوية اللعبة */
+
         .game-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
-        
-        .header {
+
+        .game-header {
             text-align: center;
-            color: white;
             margin-bottom: 15px;
         }
-        
-        .header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            color: #00fff9;
+
+        .game-header h1 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        
+
+        .game-header h3 {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .level-info {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .level-info .level-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
         .stats {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .stat-box {
-            background: rgba(0, 255, 255, 0.1);
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #00fff9;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-        }
-        
-        .canvas-container {
-            display: flex;
-            justify-content: center;
-            margin: 15px 0;
-            position: relative;
-        }
-        
-        canvas {
-            border: 3px solid rgba(0, 255, 255, 0.3);
+            justify-content: space-around;
+            margin: 10px 0;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 15px;
-            background: #0a0a0f;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-            aspect-ratio: 1/1;
-            cursor: pointer;
-            touch-action: none;
+            color: white;
+            gap: 5px;
         }
-        
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75em;
+            opacity: 0.9;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            gap: 4px;
+            margin: 10px 0;
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 15px;
+            aspect-ratio: 1;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .puzzle-piece {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.8em, 3.5vw, 1.3em);
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .puzzle-piece.empty {
+            background: #ddd;
+            cursor: default;
+        }
+
+        .puzzle-piece.movable {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
         .controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 8px;
             margin: 15px 0;
             flex-wrap: wrap;
         }
-        
-        button {
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #00fff9;
-            padding: 12px 25px;
-            font-size: 1em;
-            font-weight: bold;
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
             border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-            min-width: 120px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex: 1 1 auto;
+            min-width: 70px;
         }
-        
-        button:hover, button:active {
-            background: rgba(0, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
-        }
-        
-        /* أزرار التحكم للموبايل */
-        .mobile-controls {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 280px;
-            margin: 20px auto 0;
-            padding: 15px;
-            background: rgba(0, 255, 255, 0.05);
-            border-radius: 30px;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-        
-        .mobile-btn {
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #00fff9;
-            padding: 20px;
-            font-size: 2em;
-            border-radius: 25px;
-            cursor: pointer;
-            text-align: center;
-            user-select: none;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-            transition: all 0.1s ease;
-        }
-        
-        .mobile-btn:active {
-            background: rgba(0, 255, 255, 0.3);
-            transform: scale(0.95);
-        }
-        
-        /* نافذة انتهاء اللعبة */
-        .game-over {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(10, 10, 20, 0.95);
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            display: none;
-            z-index: 1000;
-            border: 2px solid #00fff9;
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            min-width: 300px;
         }
-        
-        .game-over h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #ff3366;
-            text-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
         }
-        
-        .game-over p {
-            font-size: 1.3em;
-            margin-bottom: 30px;
-            color: #00fff9;
+
+        .btn-success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
         }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            z-index: 999;
-            backdrop-filter: blur(5px);
-        }
-        
-        .instructions {
-            color: rgba(255, 255, 255, 0.5);
+
+        .message {
             text-align: center;
-            margin-top: 15px;
-            font-size: 0.9em;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            display: none;
         }
-        
-        .adsbygoogle {
+
+        .message.success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            transition: width 0.3s ease;
+        }
+
+        .level-selector {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+            max-height: 80px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .level-btn {
+            width: 35px;
+            height: 35px;
+            border: 2px solid #667eea;
             background: transparent;
+            color: #667eea;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
         }
-        
-        /* ========== تحسينات للموبايل ========== */
-        @media (max-width: 900px) {
-            .page-wrapper {
+
+        .level-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .level-btn.completed {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+            border-color: transparent;
+        }
+
+        /* تنسيقات الموبيل */
+        @media (max-width: 768px) {
+            .main-container {
                 flex-direction: column;
             }
             
-            .sidebar-ad {
-                display: none;
-            }
-            
-            .main-content {
-                width: 100%;
-            }
-            
-            canvas {
-                max-width: 100%;
-                height: auto;
-            }
-            
-            .mobile-controls {
-                max-width: 100%;
-                padding: 10px;
-            }
-            
-            .mobile-btn {
-                padding: 18px;
-                font-size: 1.8em;
-            }
-            
-            .stats {
-                gap: 10px;
-            }
-            
-            .stat-box {
-                padding: 8px 15px;
-                font-size: 1em;
-                min-width: 100px;
-            }
-            
-            .controls button {
-                padding: 12px 20px;
-                min-width: 120px;
-                font-size: 1em;
-            }
-            
-            .top-ad, .bottom-ad {
-                padding: 8px;
-            }
-            
-            .horizontal-ad {
-                min-height: 80px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                padding: 5px;
-            }
-            
             .game-container {
-                padding: 15px;
+                padding: 12px;
             }
             
-            .header h1 {
+            .game-header h1 {
                 font-size: 1.5em;
             }
             
-            .stats {
-                gap: 8px;
-            }
-            
-            .stat-box {
-                padding: 6px 12px;
-                font-size: 0.9em;
-                min-width: 80px;
-            }
-            
-            .controls {
-                gap: 10px;
-            }
-            
-            .controls button {
-                padding: 10px 15px;
-                min-width: 100px;
-                font-size: 0.9em;
-            }
-            
-            .mobile-controls {
-                gap: 8px;
-                padding: 8px;
-            }
-            
-            .mobile-btn {
-                padding: 15px;
-                font-size: 1.5em;
-            }
-            
-            .game-over {
-                padding: 20px;
-                min-width: 250px;
-                width: 90%;
-            }
-            
-            .game-over h2 {
-                font-size: 2em;
-            }
-            
-            .game-over p {
-                font-size: 1.2em;
-            }
-            
-            .instructions {
+            .btn {
+                padding: 8px 10px;
                 font-size: 0.8em;
             }
             
-            .top-ad, .bottom-ad {
-                padding: 5px;
-            }
-            
-            .horizontal-ad {
-                min-height: 70px;
-            }
-        }
-        
-        @media (min-width: 901px) and (max-width: 1200px) {
-            .sidebar-ad {
-                width: 140px;
-            }
-            
-            .ad-space {
-                min-height: 500px;
-            }
-            
-            canvas {
-                max-width: 450px;
+            .level-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 11px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ========== إعلانات AMP التلقائية بعد وسم <body> مباشرة ========== -->
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-8584077826935053"></amp-auto-ads>
-    
-    <div class="page-wrapper">
-        <!-- ========== الإعلان الجانبي الأيسر (يظهر فقط في الكمبيوتر) ========== -->
-        <div class="sidebar-ad">
-            <div class="ad-label">إعلان</div>
-            <div class="ad-space" id="sidebar-ad">
-                <!-- إعلان جانبي 160x600 - صور متجاوبة -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="9040442410"
-                     data-ad-format="autorelaxed"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-        
-        <!-- المحتوى الرئيسي -->
-        <div class="main-content">
-            <!-- ========== الإعلان العلوي ========== -->
-            <div class="top-ad">
-                <div class="ad-label">إعلان</div>
-                <div class="horizontal-ad" id="top-ad">
-                    <!-- إعلان علوي 728x90 - صور متجاوبة -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8584077826935053"
-                         data-ad-slot="2904141418"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-            
-            <!-- حاوية اللعبة -->
+    <div class="main-container">
+        <div class="game-wrapper">
             <div class="game-container">
-                <div class="header">
-                    <h1>🐍 SNAKE GAME</h1>
-                    <div class="stats">
-                        <div class="stat-box">⭐ <span id="score">0</span></div>
-                        <div class="stat-box">🏆 <span id="highScore">0</span></div>
+                <div class="game-header">
+                    <h1>لعبة Puzzle</h1>
+                    <h3>50 مستوى من التحدي</h3>
+                </div>
+
+                <div class="level-info">
+                    <span>المستوى</span>
+                    <span class="level-number" id="currentLevel">1</span>
+                    <span>/ 50</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 2%"></div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="moves">0</span>
+                        <span class="stat-label">الحركات</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="time">00:00</span>
+                        <span class="stat-label">الوقت</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="bestMoves">0</span>
+                        <span class="stat-label">أفضل حركات</span>
                     </div>
                 </div>
-                
-                <div class="canvas-container">
-                    <canvas id="gameCanvas" width="500" height="500"></canvas>
+
+                <div class="puzzle-grid" id="puzzleGrid"></div>
+
+                <div class="message" id="message">
+                    🎉 تهانينا! 🎉
                 </div>
-                
+
+                <div class="level-selector" id="levelSelector"></div>
+
                 <div class="controls">
-                    <button onclick="resetGame()" id="newGameBtn">🔄 جديد</button>
-                    <button onclick="togglePause()" id="pauseBtn">⏸️ إيقاف</button>
+                    <button class="btn btn-primary" id="shuffleBtn">🔀 خلط</button>
+                    <button class="btn btn-secondary" id="resetBtn">🔄 إعادة</button>
+                    <button class="btn btn-primary" id="hintBtn">💡 تلميح</button>
+                    <button class="btn btn-success" id="nextLevelBtn">⏭ التالي</button>
                 </div>
-                
-                <!-- أزرار التحكم للموبايل -->
-                <div class="mobile-controls">
-                    <div></div>
-                    <div class="mobile-btn" onclick="changeDirection('up')">⬆️</div>
-                    <div></div>
-                    <div class="mobile-btn" onclick="changeDirection('left')">⬅️</div>
-                    <div class="mobile-btn" onclick="changeDirection('down')">⬇️</div>
-                    <div class="mobile-btn" onclick="changeDirection('right')">➡️</div>
-                </div>
-            </div>
-            
-            <!-- ========== الإعلان السفلي ========== -->
-            <div class="bottom-ad">
-                <div class="ad-label">إعلان</div>
-                <div class="horizontal-ad" id="bottom-ad">
-                    <!-- إعلان سفلي 728x90 - صور متجاوبة -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8584077826935053"
-                         data-ad-slot="3136510471"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-            
-            <div class="instructions">
-                🎮 استخدم الأسهم للتحريك | 👆 اضغط على الشاشة للتحكم | ⏸️ مسافة للإيقاف
             </div>
         </div>
-    </div>
-    
-    <!-- ========== إعلان عند تشغيل اللعبة (يظهر داخل اللعبة) ========== -->
-    <div style="display: none;" id="game-start-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-format="autorelaxed"
-             data-ad-client="ca-pub-8584077826935053"
-             data-ad-slot="9165764600"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-    
-    <!-- ========== إعلان داخل اللعبة ========== -->
-    <div style="display: none;" id="in-game-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-format="autorelaxed"
-             data-ad-client="ca-pub-8584077826935053"
-             data-ad-slot="5166809841"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-    
-    <div class="overlay" id="overlay"></div>
-    <div class="game-over" id="gameOver">
-        <h2>🎮 Game Over</h2>
-        <p>نقاطك: <span id="finalScore">0</span></p>
-        <button onclick="resetGame()">🔄 لعب مرة أخرى</button>
     </div>
 
     <script>
-        // ========== إعدادات اللعبة ==========
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const scoreElement = document.getElementById('score');
-        const highScoreElement = document.getElementById('highScore');
-        const gameOverDiv = document.getElementById('gameOver');
-        const overlay = document.getElementById('overlay');
-        const finalScoreElement = document.getElementById('finalScore');
-        const pauseBtn = document.getElementById('pauseBtn');
-
-        // ثوابت اللعبة
-        const GRID_SIZE = 20;
-        const TILE_COUNT = canvas.width / GRID_SIZE;
-        const INITIAL_SPEED = 150;
-        
-        // متغيرات اللعبة
-        let snake = [];
-        let direction = {x: 1, y: 0};
-        let nextDirection = {x: 1, y: 0};
-        let food = {};
-        let score = 0;
-        let highScore = localStorage.getItem('snakeHighScore') || 0;
-        let gameRunning = true;
-        let gamePaused = false;
-        let gameOverFlag = false;
-        let speed = INITIAL_SPEED;
-        let lastUpdate = 0;
-        let gameLoopRunning = false;
-        
-        highScoreElement.textContent = highScore;
-
-        // بدء اللعبة
-        initGame();
-
-        function initGame() {
-            snake = [
-                {x: 10, y: 10},
-                {x: 9, y: 10},
-                {x: 8, y: 10},
-                {x: 7, y: 10}
-            ];
-            direction = {x: 1, y: 0};
-            nextDirection = {x: 1, y: 0};
-            score = 0;
-            gameRunning = true;
-            gamePaused = false;
-            gameOverFlag = false;
-            speed = INITIAL_SPEED;
-            scoreElement.textContent = score;
-            pauseBtn.textContent = '⏸️ إيقاف';
-            
-            generateFood();
-            draw();
-            
-            if (!gameLoopRunning) {
-                gameLoopRunning = true;
-                requestAnimationFrame(gameLoop);
-            }
-            
-            // عرض إعلان بدء اللعبة
-            showGameStartAd();
-        }
-
-        function generateFood() {
-            let maxAttempts = 1000;
-            let attempts = 0;
-            
-            do {
-                food = {
-                    x: Math.floor(Math.random() * TILE_COUNT),
-                    y: Math.floor(Math.random() * TILE_COUNT)
-                };
-                attempts++;
-            } while (snake.some(segment => segment.x === food.x && segment.y === food.y) && attempts < maxAttempts);
-            
-            if (attempts >= maxAttempts) {
-                gameOver();
-            }
-        }
-
-        function draw() {
-            ctx.fillStyle = '#0a0a0f';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.strokeStyle = 'rgba(0, 255, 255, 0.05)';
-            ctx.lineWidth = 0.5;
-            for (let i = 0; i <= TILE_COUNT; i++) {
-                ctx.beginPath();
-                ctx.moveTo(i * GRID_SIZE, 0);
-                ctx.lineTo(i * GRID_SIZE, canvas.height);
-                ctx.stroke();
+        class PuzzleGame {
+            constructor() {
+                this.currentLevel = 1;
+                this.maxLevel = 50;
+                this.completedLevels = this.loadCompletedLevels();
+                this.bestMoves = this.loadBestMoves();
+                this.gameStarted = false;
                 
-                ctx.beginPath();
-                ctx.moveTo(0, i * GRID_SIZE);
-                ctx.lineTo(canvas.width, i * GRID_SIZE);
-                ctx.stroke();
-            }
-            
-            snake.forEach((segment, index) => {
-                const x = segment.x * GRID_SIZE;
-                const y = segment.y * GRID_SIZE;
+                this.size = this.getSizeForLevel(this.currentLevel);
+                this.board = [];
+                this.emptyPos = { row: this.size - 1, col: this.size - 1 };
+                this.moves = 0;
+                this.timer = null;
+                this.seconds = 0;
+                this.solved = false;
                 
-                if (index === 0) {
-                    ctx.fillStyle = '#00fff9';
-                    ctx.shadowColor = '#00fff9';
-                    ctx.shadowBlur = 15;
-                    ctx.fillRect(x + 2, y + 2, GRID_SIZE - 4, GRID_SIZE - 4);
-                    
-                    ctx.fillStyle = '#ffffff';
-                    ctx.shadowBlur = 5;
-                    
-                    if (direction.x === 1) {
-                        ctx.fillRect(x + 14, y + 5, 3, 3);
-                        ctx.fillRect(x + 14, y + 12, 3, 3);
-                    } else if (direction.x === -1) {
-                        ctx.fillRect(x + 3, y + 5, 3, 3);
-                        ctx.fillRect(x + 3, y + 12, 3, 3);
-                    } else if (direction.y === -1) {
-                        ctx.fillRect(x + 5, y + 3, 3, 3);
-                        ctx.fillRect(x + 12, y + 3, 3, 3);
-                    } else if (direction.y === 1) {
-                        ctx.fillRect(x + 5, y + 14, 3, 3);
-                        ctx.fillRect(x + 12, y + 14, 3, 3);
+                this.init();
+                this.setupEventListeners();
+                this.updateLevelSelector();
+            }
+
+            getSizeForLevel(level) {
+                if (level <= 10) return 3;
+                if (level <= 25) return 4;
+                if (level <= 40) return 5;
+                return 6;
+            }
+
+            loadCompletedLevels() {
+                const saved = localStorage.getItem('puzzle_completed_levels_50');
+                return saved ? JSON.parse(saved) : [];
+            }
+
+            loadBestMoves() {
+                const saved = localStorage.getItem('puzzle_best_moves_50');
+                return saved ? JSON.parse(saved) : {};
+            }
+
+            saveProgress() {
+                localStorage.setItem('puzzle_completed_levels_50', JSON.stringify(this.completedLevels));
+                localStorage.setItem('puzzle_best_moves_50', JSON.stringify(this.bestMoves));
+            }
+
+            init() {
+                this.size = this.getSizeForLevel(this.currentLevel);
+                this.createBoard();
+                this.renderBoard();
+                this.startTimer();
+                this.updateLevelDisplay();
+                
+                const best = this.bestMoves[this.currentLevel] || 0;
+                document.getElementById('bestMoves').textContent = best;
+            }
+
+            createBoard() {
+                this.board = [];
+                let counter = 1;
+                for (let i = 0; i < this.size; i++) {
+                    const row = [];
+                    for (let j = 0; j < this.size; j++) {
+                        if (i === this.size - 1 && j === this.size - 1) {
+                            row.push(null);
+                        } else {
+                            row.push(counter++);
+                        }
                     }
-                } else {
-                    const brightness = 100 - (index * 2);
-                    ctx.fillStyle = `rgb(0, ${brightness}, ${brightness})`;
-                    ctx.shadowColor = '#00fff9';
-                    ctx.shadowBlur = 10;
-                    ctx.fillRect(x + 3, y + 3, GRID_SIZE - 6, GRID_SIZE - 6);
+                    this.board.push(row);
                 }
-            });
-            
-            ctx.fillStyle = '#ff3366';
-            ctx.shadowColor = '#ff3366';
-            ctx.shadowBlur = 20;
-            ctx.beginPath();
-            ctx.arc(
-                food.x * GRID_SIZE + GRID_SIZE/2,
-                food.y * GRID_SIZE + GRID_SIZE/2,
-                GRID_SIZE/2 - 3,
-                0,
-                Math.PI * 2
-            );
-            ctx.fill();
-            
-            ctx.fillStyle = '#ffffff';
-            ctx.shadowBlur = 10;
-            ctx.beginPath();
-            ctx.arc(
-                food.x * GRID_SIZE + GRID_SIZE/2 - 3,
-                food.y * GRID_SIZE + GRID_SIZE/2 - 3,
-                3,
-                0,
-                Math.PI * 2
-            );
-            ctx.fill();
-            
-            ctx.shadowBlur = 0;
-        }
+                this.emptyPos = { row: this.size - 1, col: this.size - 1 };
+            }
 
-        function update() {
-            if (!gameRunning || gamePaused || gameOverFlag) return;
-            
-            direction = {...nextDirection};
-            
-            const head = {
-                x: snake[0].x + direction.x,
-                y: snake[0].y + direction.y
-            };
-            
-            if (head.x < 0 || head.x >= TILE_COUNT || head.y < 0 || head.y >= TILE_COUNT) {
-                gameOver();
-                return;
-            }
-            
-            if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-                gameOver();
-                return;
-            }
-            
-            snake.unshift(head);
-            
-            if (head.x === food.x && head.y === food.y) {
-                score += 10;
-                scoreElement.textContent = score;
+            renderBoard() {
+                const grid = document.getElementById('puzzleGrid');
+                grid.style.gridTemplateColumns = `repeat(${this.size}, 1fr)`;
                 
-                if (score > highScore) {
-                    highScore = score;
-                    highScoreElement.textContent = highScore;
-                    localStorage.setItem('snakeHighScore', highScore);
+                let html = '';
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        const value = this.board[i][j];
+                        const isEmpty = value === null;
+                        const isMovable = this.isMovable(i, j);
+                        
+                        html += `
+                            <div class="puzzle-piece ${isEmpty ? 'empty' : ''} ${isMovable && !this.solved ? 'movable' : ''}" 
+                                 data-row="${i}" 
+                                 data-col="${j}"
+                                 ${!isEmpty ? `style="background: linear-gradient(135deg, hsl(${value * 30}, 70%, 50%), hsl(${value * 30 + 40}, 70%, 50%))"` : ''}>
+                                ${isEmpty ? '' : value}
+                            </div>
+                        `;
+                    }
                 }
                 
-                generateFood();
+                grid.innerHTML = html;
                 
-                if (score % 30 === 0) {
-                    speed = Math.max(70, speed - 5);
+                document.querySelectorAll('.puzzle-piece').forEach(piece => {
+                    piece.addEventListener('click', () => this.handlePieceClick(piece));
+                });
+            }
+
+            isMovable(row, col) {
+                return (Math.abs(row - this.emptyPos.row) + Math.abs(col - this.emptyPos.col)) === 1;
+            }
+
+            handlePieceClick(piece) {
+                if (this.solved) return;
+                
+                const row = parseInt(piece.dataset.row);
+                const col = parseInt(piece.dataset.col);
+                
+                if (this.isMovable(row, col)) {
+                    this.movePiece(row, col);
+                }
+            }
+
+            movePiece(row, col) {
+                this.board[this.emptyPos.row][this.emptyPos.col] = this.board[row][col];
+                this.board[row][col] = null;
+                this.emptyPos = { row, col };
+                
+                this.moves++;
+                document.getElementById('moves').textContent = this.moves;
+                
+                this.renderBoard();
+                
+                if (this.checkWin()) {
+                    this.gameWon();
+                }
+            }
+
+            checkWin() {
+                let counter = 1;
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        if (i === this.size - 1 && j === this.size - 1) {
+                            if (this.board[i][j] !== null) return false;
+                        } else {
+                            if (this.board[i][j] !== counter++) return false;
+                        }
+                    }
+                }
+                return true;
+            }
+
+            gameWon() {
+                this.solved = true;
+                this.stopTimer();
+                
+                if (!this.completedLevels.includes(this.currentLevel)) {
+                    this.completedLevels.push(this.currentLevel);
                 }
                 
-                // عرض إعلان داخل اللعبة عند كل 50 نقطة
-                if (score % 50 === 0) {
-                    showInGameAd();
+                if (!this.bestMoves[this.currentLevel] || this.moves < this.bestMoves[this.currentLevel]) {
+                    this.bestMoves[this.currentLevel] = this.moves;
+                    document.getElementById('bestMoves').textContent = this.moves;
                 }
-            } else {
-                snake.pop();
+                
+                this.saveProgress();
+                
+                const message = document.getElementById('message');
+                message.classList.add('success');
+                message.innerHTML = `
+                    🎉 تهانينا! أكملت المستوى ${this.currentLevel}! 🎉<br>
+                    الحركات: ${this.moves} | الوقت: ${this.formatTime(this.seconds)}
+                `;
+                
+                this.updateLevelSelector();
+                this.updateLevelDisplay();
+                
+                if (this.currentLevel < this.maxLevel) {
+                    setTimeout(() => {
+                        this.nextLevel();
+                    }, 3000);
+                }
+            }
+
+            nextLevel() {
+                if (this.currentLevel < this.maxLevel) {
+                    this.currentLevel++;
+                    this.reset();
+                    this.updateLevelSelector();
+                }
+            }
+
+            goToLevel(level) {
+                if (level >= 1 && level <= this.maxLevel) {
+                    this.currentLevel = level;
+                    this.reset();
+                    this.updateLevelSelector();
+                }
+            }
+
+            shuffle() {
+                this.solved = false;
+                document.getElementById('message').classList.remove('success');
+                
+                for (let i = 0; i < 100; i++) {
+                    const possibleMoves = this.getPossibleMoves();
+                    const randomMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+                    this.board[this.emptyPos.row][this.emptyPos.col] = this.board[randomMove.row][randomMove.col];
+                    this.board[randomMove.row][randomMove.col] = null;
+                    this.emptyPos = randomMove;
+                }
+                
+                this.moves = 0;
+                document.getElementById('moves').textContent = this.moves;
+                this.renderBoard();
+            }
+
+            getPossibleMoves() {
+                const moves = [];
+                const directions = [
+                    { row: -1, col: 0 },
+                    { row: 1, col: 0 },
+                    { row: 0, col: -1 },
+                    { row: 0, col: 1 }
+                ];
+                
+                for (const dir of directions) {
+                    const newRow = this.emptyPos.row + dir.row;
+                    const newCol = this.emptyPos.col + dir.col;
+                    
+                    if (newRow >= 0 && newRow < this.size && newCol >= 0 && newCol < this.size) {
+                        moves.push({ row: newRow, col: newCol });
+                    }
+                }
+                
+                return moves;
+            }
+
+            reset() {
+                this.solved = false;
+                document.getElementById('message').classList.remove('success');
+                this.init();
+                this.moves = 0;
+                document.getElementById('moves').textContent = this.moves;
+                
+                this.seconds = 0;
+                document.getElementById('time').textContent = '00:00';
+                this.startTimer();
+            }
+
+            hint() {
+                if (this.solved) return;
+                
+                let counter = 1;
+                for (let i = 0; i < this.size; i++) {
+                    for (let j = 0; j < this.size; j++) {
+                        if (i === this.size - 1 && j === this.size - 1) continue;
+                        
+                        if (this.board[i][j] !== counter) {
+                            for (let x = 0; x < this.size; x++) {
+                                for (let y = 0; y < this.size; y++) {
+                                    if (this.board[x][y] === counter) {
+                                        alert(`💡 تلميح: القطعة ${counter} يجب أن تكون في موقعها الصحيح`);
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        counter++;
+                    }
+                }
+            }
+
+            startTimer() {
+                if (this.timer) clearInterval(this.timer);
+                
+                this.timer = setInterval(() => {
+                    if (!this.solved) {
+                        this.seconds++;
+                        document.getElementById('time').textContent = this.formatTime(this.seconds);
+                    }
+                }, 1000);
+            }
+
+            stopTimer() {
+                if (this.timer) {
+                    clearInterval(this.timer);
+                    this.timer = null;
+                }
+            }
+
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            updateLevelDisplay() {
+                document.getElementById('currentLevel').textContent = this.currentLevel;
+                const progress = (this.completedLevels.length / this.maxLevel) * 100;
+                document.getElementById('progressFill').style.width = `${progress}%`;
+            }
+
+            updateLevelSelector() {
+                const selector = document.getElementById('levelSelector');
+                let html = '';
+                
+                for (let i = 1; i <= this.maxLevel; i++) {
+                    let classes = 'level-btn';
+                    if (i === this.currentLevel) classes += ' active';
+                    if (this.completedLevels.includes(i)) classes += ' completed';
+                    
+                    html += `<button class="${classes}" data-level="${i}">${i}</button>`;
+                }
+                
+                selector.innerHTML = html;
+                
+                selector.querySelectorAll('.level-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const level = parseInt(btn.dataset.level);
+                        this.goToLevel(level);
+                    });
+                });
+            }
+
+            setupEventListeners() {
+                document.getElementById('shuffleBtn').addEventListener('click', () => this.shuffle());
+                document.getElementById('resetBtn').addEventListener('click', () => this.reset());
+                document.getElementById('hintBtn').addEventListener('click', () => this.hint());
+                document.getElementById('nextLevelBtn').addEventListener('click', () => this.nextLevel());
             }
         }
 
-        function gameLoop(currentTime) {
-            if (!gameRunning) return;
-            
-            if (currentTime - lastUpdate >= speed && !gamePaused && !gameOverFlag) {
-                update();
-                draw();
-                lastUpdate = currentTime;
-            }
-            
-            requestAnimationFrame(gameLoop);
-        }
-
-        function gameOver() {
-            gameOverFlag = true;
-            gameRunning = false;
-            finalScoreElement.textContent = score;
-            gameOverDiv.style.display = 'block';
-            overlay.style.display = 'block';
-        }
-
-        function resetGame() {
-            gameOverDiv.style.display = 'none';
-            overlay.style.display = 'none';
-            initGame();
-        }
-
-        function togglePause() {
-            if (gameOverFlag) return;
-            
-            gamePaused = !gamePaused;
-            pauseBtn.textContent = gamePaused ? '▶️ متابعة' : '⏸️ إيقاف';
-        }
-
-        function changeDirection(newDirection) {
-            if (!gameRunning || gamePaused || gameOverFlag) return;
-            
-            const directions = {
-                'up': {x: 0, y: -1},
-                'down': {x: 0, y: 1},
-                'left': {x: -1, y: 0},
-                'right': {x: 1, y: 0}
-            };
-            
-            const newDir = directions[newDirection];
-            
-            if ((direction.x === 0 && newDir.x === 0) || (direction.y === 0 && newDir.y === 0)) {
-                return;
-            }
-            
-            if ((direction.x === -newDir.x && direction.y === -newDir.y) ||
-                (direction.y === -newDir.y && direction.x === -newDir.x)) {
-                return;
-            }
-            
-            nextDirection = newDir;
-        }
-
-        // ========== وظائف عرض الإعلانات ==========
-        function showGameStartAd() {
-            console.log('عرض إعلان بدء اللعبة');
-            // يمكن إضافة منطق عرض الإعلان هنا
-        }
-        
-        function showInGameAd() {
-            console.log('عرض إعلان داخل اللعبة');
-            // يمكن إضافة منطق عرض الإعلان هنا
-        }
-
-        // ========== التحكم بلوحة المفاتيح ==========
-        document.addEventListener('keydown', (e) => {
-            if (!gameRunning || gamePaused || gameOverFlag) return;
-            
-            const keyDirections = {
-                'ArrowUp': {x: 0, y: -1},
-                'ArrowDown': {x: 0, y: 1},
-                'ArrowLeft': {x: -1, y: 0},
-                'ArrowRight': {x: 1, y: 0}
-            };
-            
-            if (keyDirections[e.key]) {
-                e.preventDefault();
-                changeDirection(
-                    e.key.replace('Arrow', '').toLowerCase()
-                );
-            } else if (e.key === ' ') {
-                e.preventDefault();
-                togglePause();
-            } else if (e.key === 'r' || e.key === 'R') {
-                resetGame();
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            new PuzzleGame();
         });
-
-        // ========== التحكم باللمس ==========
-        let touchStartX = 0;
-        let touchStartY = 0;
-        
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-        }, {passive: false});
-        
-        canvas.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            if (!touchStartX || !touchStartY) return;
-            
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            
-            const diffX = touchEndX - touchStartX;
-            const diffY = touchEndY - touchStartY;
-            
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                if (diffX > 20) {
-                    changeDirection('right');
-                } else if (diffX < -20) {
-                    changeDirection('left');
-                }
-            } else {
-                if (diffY > 20) {
-                    changeDirection('down');
-                } else if (diffY < -20) {
-                    changeDirection('up');
-                }
-            }
-            
-            touchStartX = 0;
-            touchStartY = 0;
-        }, {passive: false});
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key.startsWith('Arrow') || e.key === ' ') {
-                e.preventDefault();
-            }
-        }, false);
-
-        resetGame();
     </script>
 </body>
 </html>

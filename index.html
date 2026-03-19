@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ألعاب عربي - أفضل الألعاب المجانية</title>
     
-    <!-- AdSense Code (يبقى موجود) -->
+    <!-- AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053" crossorigin="anonymous"></script>
     
     <style>
@@ -188,7 +188,7 @@
             transform: scale(1.05);
         }
 
-        /* قسم المقالات */
+        /* عنوان القسم */
         .section-title {
             font-size: 32px;
             color: #333;
@@ -206,6 +206,77 @@
             margin: 10px auto;
         }
 
+        /* ===== قسم الألعاب - مثل الكود السابق بالضبط ===== */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255,152,0,0.3);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .game-card img:hover {
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            padding: 15px 0 5px;
+        }
+
+        .game-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .game-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            height: 40px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            padding: 8px 25px;
+            background: #ff9800;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .play-btn:hover {
+            background: #ff5722;
+        }
+
+        /* قسم المقالات */
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -255,76 +326,54 @@
         .article-excerpt {
             color: #666;
             margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         .read-more {
             color: #ff9800;
             text-decoration: none;
             font-weight: bold;
-        }
-
-        /* قسم الألعاب */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .game-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            text-align: center;
-            padding: 15px;
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(255,152,0,0.3);
-        }
-
-        .game-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .game-card img:hover {
-            transform: scale(1.05);
-        }
-
-        .game-info {
-            padding: 15px 0 5px;
-        }
-
-        .game-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .game-description {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-            height: 40px;
-        }
-
-        .play-btn {
             display: inline-block;
-            padding: 8px 20px;
-            background: #ff9800;
-            color: white;
-            text-decoration: none;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* قسم المميزات */
+        .features-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 60px 20px;
             border-radius: 20px;
-            font-size: 14px;
+            margin: 40px 0;
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            opacity: 0.9;
+            line-height: 1.6;
         }
 
         /* الفوتر */
@@ -421,7 +470,7 @@
 
     <div class="container">
         
-        <!-- إحصائيات -->
+        <!-- إحصائيات الزوار -->
         <div class="stats-bar">
             <div class="stat-item">
                 <div class="stat-label">📅 تاريخ الإنشاء</div>
@@ -441,63 +490,67 @@
             </div>
         </div>
 
-        <!-- ===== الإعلان الجديد في الأعلى ===== -->
+        <!-- الإعلان الجديد في الأعلى -->
         <div class="ad-top-new">
             <script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
         </div>
-
-        <!-- إعلان AdSense أعلى (اختياري - ممكن تحذفه) -->
-        <!-- <div class="ad-banner">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-8584077826935053"
-                 data-ad-slot="2904141418"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div> -->
 
         <!-- قسم الترحيب -->
         <div class="hero">
             <h1>🎯 أفضل الألعاب المجانية على الإنترنت</h1>
             <p>اكتشف مجموعة رائعة من الألعاب الممتعة والتحديات الذهنية. العب مباشرة بدون تحميل واستمتع بأوقات ممتعة!</p>
-            <a href="games.html" class="btn">استعرض الألعاب</a>
+            <a href="games.html" class="btn">استعرض جميع الألعاب</a>
             <a href="about.html" class="btn" style="background: white; color: #333;">تعرف علينا</a>
         </div>
 
-        <!-- قسم: أحدث المقالات -->
-        <h2 class="section-title">📝 أحدث المقالات</h2>
-        <div class="articles-grid">
-            <!-- مقال 1 -->
-            <div class="article-card">
-                <div class="article-image">🎮</div>
-                <div class="article-content">
-                    <span class="article-category">نصائح وإرشادات</span>
-                    <h3 class="article-title">كيف تطور مهاراتك في ألعاب الذكاء؟</h3>
-                    <p class="article-excerpt">تعرف على أفضل الاستراتيجيات لتحسين أدائك في ألعاب الذكاء مثل XO والشطرنج...</p>
-                    <a href="#" class="read-more">اقرأ المزيد →</a>
+        <!-- ===== قسم ألعاب مميزة مع الصور ===== -->
+        <h2 class="section-title">🎲 ألعاب مميزة لهذا الأسبوع</h2>
+        <div class="games-grid">
+            <!-- لعبة XO -->
+            <div class="game-card">
+                <a href="games/xo/index.html">
+                    <img src="images/xo.jpg" alt="لعبة XO">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">لعبة XO</h3>
+                    <p class="game-description">اللعبة الكلاسيكية الشهيرة - العب مع الكمبيوتر</p>
+                    <a href="games/xo/index.html" class="play-btn">العب الآن</a>
                 </div>
             </div>
 
-            <!-- مقال 2 -->
-            <div class="article-card">
-                <div class="article-image">🧠</div>
-                <div class="article-content">
-                    <span class="article-category">صحة الدماغ</span>
-                    <h3 class="article-title">فوائد ألعاب الذاكرة للدماغ</h3>
-                    <p class="article-excerpt">اكتشف كيف تساعد ألعاب الذاكرة في تحسين وظائف الدماغ وتقوية الذاكرة...</p>
-                    <a href="#" class="read-more">اقرأ المزيد →</a>
+            <!-- لعبة الثعبان -->
+            <div class="game-card">
+                <a href="games/snake/index.html">
+                    <img src="images/snake.jpg" alt="لعبة الثعبان">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">لعبة الثعبان</h3>
+                    <p class="game-description">كلاسيكية الثعبان الجائع - كبر حجم الثعبان</p>
+                    <a href="games/snake/index.html" class="play-btn">العب الآن</a>
                 </div>
             </div>
 
-            <!-- مقال 3 -->
-            <div class="article-card">
-                <div class="article-image">🎯</div>
-                <div class="article-content">
-                    <span class="article-category">مراجعة</span>
-                    <h3 class="article-title">أفضل 10 ألعاب مجانية في 2024</h3>
-                    <p class="article-excerpt">قائمة بأفضل الألعاب المجانية التي يمكنك لعبها مباشرة في المتصفح...</p>
-                    <a href="#" class="read-more">اقرأ المزيد →</a>
+            <!-- لعبة الذاكرة -->
+            <div class="game-card">
+                <a href="games/memory/index.html">
+                    <img src="images/memory.jpg" alt="لعبة الذاكرة">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">لعبة الذاكرة</h3>
+                    <p class="game-description">اختبر ذاكرتك بمطابقة البطاقات المتشابهة</p>
+                    <a href="games/memory/index.html" class="play-btn">العب الآن</a>
+                </div>
+            </div>
+
+            <!-- لعبة الألغاز -->
+            <div class="game-card">
+                <a href="games/puzzle/index.html">
+                    <img src="images/puzzle.jpg" alt="لعبة الألغاز">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">لعبة الألغاز</h3>
+                    <p class="game-description">حل الألغاز الشيقة واختبر ذكاءك</p>
+                    <a href="games/puzzle/index.html" class="play-btn">العب الآن</a>
                 </div>
             </div>
         </div>
@@ -513,95 +566,69 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <!-- قسم الألعاب المميزة -->
-        <h2 class="section-title">🎲 ألعاب مميزة لهذا الأسبوع</h2>
-        <div class="games-grid">
-            <!-- لعبة XO -->
-            <div class="game-card">
-                <a href="games/xo/index.html">
-                    <img src="images/xo.jpg" alt="لعبة XO">
-                </a>
-                <div class="game-info">
-                    <h3 class="game-name">لعبة XO</h3>
-                    <p class="game-description">اللعبة الكلاسيكية الشهيرة</p>
-                    <a href="games/xo/index.html" class="play-btn">العب الآن</a>
+        <!-- قسم أحدث المقالات -->
+        <h2 class="section-title">📝 أحدث المقالات</h2>
+        <div class="articles-grid">
+            <!-- مقال 1 -->
+            <div class="article-card">
+                <div class="article-image">🎮</div>
+                <div class="article-content">
+                    <span class="article-category">نصائح وإرشادات</span>
+                    <h3 class="article-title">كيف تطور مهاراتك في ألعاب الذكاء؟</h3>
+                    <p class="article-excerpt">تعرف على أفضل الاستراتيجيات لتحسين أدائك في ألعاب الذكاء...</p>
+                    <a href="#" class="read-more">اقرأ المزيد ←</a>
                 </div>
             </div>
 
-            <!-- لعبة الثعبان -->
-            <div class="game-card">
-                <a href="games/snake/index.html">
-                    <img src="images/snake.jpg" alt="لعبة الثعبان">
-                </a>
-                <div class="game-info">
-                    <h3 class="game-name">لعبة الثعبان</h3>
-                    <p class="game-description">كلاسيكية الثعبان الجائع</p>
-                    <a href="games/snake/index.html" class="play-btn">العب الآن</a>
+            <!-- مقال 2 -->
+            <div class="article-card">
+                <div class="article-image">🧠</div>
+                <div class="article-content">
+                    <span class="article-category">صحة الدماغ</span>
+                    <h3 class="article-title">فوائد ألعاب الذاكرة للدماغ</h3>
+                    <p class="article-excerpt">اكتشف كيف تساعد ألعاب الذاكرة في تحسين وظائف الدماغ...</p>
+                    <a href="#" class="read-more">اقرأ المزيد ←</a>
                 </div>
             </div>
 
-            <!-- لعبة الذاكرة -->
-            <div class="game-card">
-                <a href="games/memory/index.html">
-                    <img src="images/memory.jpg" alt="لعبة الذاكرة">
-                </a>
-                <div class="game-info">
-                    <h3 class="game-name">لعبة الذاكرة</h3>
-                    <p class="game-description">اختبر ذاكرتك</p>
-                    <a href="games/memory/index.html" class="play-btn">العب الآن</a>
-                </div>
-            </div>
-
-            <!-- لعبة الألغاز -->
-            <div class="game-card">
-                <a href="games/puzzle/index.html">
-                    <img src="images/puzzle.jpg" alt="لعبة الألغاز">
-                </a>
-                <div class="game-info">
-                    <h3 class="game-name">لعبة الألغاز</h3>
-                    <p class="game-description">حل الألغاز الشيقة</p>
-                    <a href="games/puzzle/index.html" class="play-btn">العب الآن</a>
+            <!-- مقال 3 -->
+            <div class="article-card">
+                <div class="article-image">🎯</div>
+                <div class="article-content">
+                    <span class="article-category">مراجعة</span>
+                    <h3 class="article-title">أفضل 10 ألعاب مجانية في 2024</h3>
+                    <p class="article-excerpt">قائمة بأفضل الألعاب المجانية التي يمكنك لعبها مباشرة...</p>
+                    <a href="#" class="read-more">اقرأ المزيد ←</a>
                 </div>
             </div>
         </div>
 
-        <!-- قسم: لماذا تختار ألعابنا؟ -->
-        <div style="background: #f0f7ff; padding: 40px; border-radius: 20px; margin: 40px 0;">
-            <h2 style="color: #333; margin-bottom: 30px; text-align: center;">لماذا تختار ألعاب عربي؟</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
-                <div style="text-align: center;">
-                    <div style="font-size: 40px; margin-bottom: 15px;">🎮</div>
-                    <h3 style="margin-bottom: 10px;">ألعاب مجانية</h3>
-                    <p style="color: #666;">جميع الألعاب مجانية تماماً ولا تحتاج إلى دفع أي رسوم.</p>
+        <!-- قسم المميزات -->
+        <div class="features-section">
+            <h2 style="text-align: center; font-size: 32px; margin-bottom: 20px;">لماذا تختار ألعاب عربي؟</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎮</div>
+                    <h3>ألعاب مجانية</h3>
+                    <p>جميع الألعاب مجانية تماماً ولا تحتاج إلى دفع أي رسوم.</p>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 40px; margin-bottom: 15px;">⚡</div>
-                    <h3 style="margin-bottom: 10px;">بدون تحميل</h3>
-                    <p style="color: #666;">العب مباشرة في المتصفح بدون الحاجة لتثبيت أي برامج.</p>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>بدون تحميل</h3>
+                    <p>العب مباشرة في المتصفح بدون الحاجة لتثبيت أي برامج.</p>
                 </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 40px; margin-bottom: 15px;">🌐</div>
-                    <h3 style="margin-bottom: 10px;">متوافقة مع الجوال</h3>
-                    <p style="color: #666;">جميع الألعاب تعمل على جميع الأجهزة والهواتف الذكية.</p>
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h3>متوافقة مع الجوال</h3>
+                    <p>جميع الألعاب تعمل على جميع الأجهزة والهواتف الذكية.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===== الإعلان الجديد في الأسفل ===== -->
+        <!-- الإعلان الجديد في الأسفل -->
         <div class="ad-bottom-new">
             <script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
         </div>
-
-        <!-- إعلان AdSense أسفل -->
-        <!-- <div class="ad-banner">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-8584077826935053"
-                 data-ad-slot="3136510471"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div> -->
     </div>
 
     <footer>
@@ -609,7 +636,7 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>عن ألعاب عربي</h3>
-                    <p style="color: #ccc; line-height: 1.8;">موقع متخصص في تقديم أفضل الألعاب المجانية على الإنترنت. نوفر ألعاباً ممتعة وتعليمية لجميع الأعمار.</p>
+                    <p style="color: #ccc;">موقع متخصص في تقديم أفضل الألعاب المجانية على الإنترنت.</p>
                 </div>
                 <div class="footer-section">
                     <h3>روابط سريعة</h3>
@@ -617,14 +644,12 @@
                     <a href="about.html">من نحن</a>
                     <a href="contact.html">اتصل بنا</a>
                     <a href="privacy.html">سياسة الخصوصية</a>
-                    <a href="terms.html">شروط الاستخدام</a>
                 </div>
                 <div class="footer-section">
                     <h3>تواصل معنا</h3>
                     <a href="#">فيسبوك</a>
                     <a href="#">تويتر</a>
                     <a href="#">انستغرام</a>
-                    <a href="#">بريد إلكتروني</a>
                 </div>
             </div>
             <div class="copyright">
@@ -634,7 +659,7 @@
     </footer>
 
     <script>
-        // عداد الزيارات المتطور
+        // عداد الزيارات
         (function() {
             try {
                 const BASE_NUMBER = 2500500;

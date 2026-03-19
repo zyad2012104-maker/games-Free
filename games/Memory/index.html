@@ -1,947 +1,770 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>لعبة الذاكرة - مستويات تصاعدية</title>
-    
-    <!-- ========== أكواد AdSense الصحيحة (مرة واحدة فقط) ========== -->
-    
-    <!-- 1️⃣ كود AdSense الأساسي (مرة واحدة في الرأس) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8584077826935053"
-     crossorigin="anonymous"></script>
-    
-    <!-- 2️⃣ كود AMP Auto Ads للإعلانات التلقائية -->
-    <script async custom-element="amp-auto-ads"
-        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-    </script>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-
-        /* تخطيط الصفحة مع الإعلانات */
-        .layout {
-            display: flex;
-            width: 100%;
-            max-width: 1400px;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        /* العمود الأيسر للإعلانات - يظهر فقط على الكمبيوتر */
-        .left-sidebar {
-            flex: 0 0 300px;
-            position: sticky;
-            top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        /* العمود الأيمن للإعلانات - يظهر فقط على الكمبيوتر */
-        .right-sidebar {
-            flex: 0 0 300px;
-            position: sticky;
-            top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        /* المحتوى الرئيسي */
-        .main-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        /* حاويات الإعلانات */
-        .ad-container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-        }
-
-        .ad-label {
-            text-align: center;
-            font-size: 12px;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 0;
-        }
-
-        /* إعلان علوي */
-        .top-ad {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        /* إعلان سفلي */
-        .bottom-ad {
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        /* إعلان داخل اللعبة */
-        .in-game-ad {
-            margin: 20px 0;
-            padding: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-        }
-
-        /* حاوية اللعبة */
-        .game-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
-            width: 100%;
-        }
-
-        /* تنسيقات اللعبة */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            color: #4a2b7c;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* شريط التقدم والمستوى */
-        .level-progress {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .level-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        .level-badge {
-            background: white;
-            color: #4a2b7c;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.3em;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: white;
-            border-radius: 10px;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-
-        .next-level-info {
-            font-size: 1.1em;
-            margin-top: 10px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            font-size: 1.2em;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            min-width: 150px;
-            flex: 1;
-        }
-
-        .stat-box span {
-            display: block;
-            font-size: 2em;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
-        .board {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .card {
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5em;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            transform-style: preserve-3d;
-            position: relative;
-        }
-
-        .card.flipped {
-            background: white;
-            color: #4a2b7c;
-            transform: rotateY(180deg);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .card.matched {
-            background: #4CAF50;
-            color: white;
-            cursor: default;
-            animation: pulse 0.5s ease;
-            transform: rotateY(180deg);
-        }
-
-        .card.matched i {
-            color: white;
-        }
-
-        .card:not(.flipped):not(.matched):hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) rotateY(180deg); }
-            50% { transform: scale(1.1) rotateY(180deg); }
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border: none;
-            border-radius: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .message {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #4a2b7c;
-            min-height: 60px;
-            padding: 15px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* ========== تنسيقات سطح المكتب ========== */
-        @media (min-width: 901px) {
-            .left-sidebar, .right-sidebar {
-                display: flex !important;
-            }
-        }
-
-        /* ========== تنسيقات الموبيل ========== */
-        @media (max-width: 900px) {
-            .layout {
-                flex-direction: column;
-            }
-
-            .left-sidebar, .right-sidebar {
-                display: none !important;
-            }
-
-            .main-content {
-                width: 100%;
-            }
-
-            h1 {
-                font-size: 2em;
-                margin-bottom: 15px;
-            }
-
-            .game-container {
-                padding: 15px;
-            }
-
-            .level-progress {
-                padding: 15px;
-            }
-
-            .level-info {
-                font-size: 1em;
-            }
-
-            .level-badge {
-                font-size: 1.1em;
-                padding: 5px 15px;
-            }
-
-            .stats {
-                gap: 10px;
-            }
-
-            .stat-box {
-                padding: 10px;
-                min-width: 80px;
-            }
-
-            .stat-box span {
-                font-size: 1.3em;
-            }
-
-            .board {
-                gap: 8px;
-                margin: 20px 0;
-            }
-
-            .card {
-                font-size: 1.8em;
-            }
-
-            .controls {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            button {
-                width: 100%;
-                padding: 12px;
-                font-size: 1em;
-            }
-
-            .message {
-                font-size: 1.1em;
-                padding: 12px;
-                min-height: 50px;
-            }
-
-            .top-ad, .bottom-ad {
-                margin: 10px 0;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .game-container {
-                padding: 10px;
-            }
-
-            h1 {
-                font-size: 1.5em;
-            }
-
-            .level-info {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .level-badge {
-                width: 100%;
-                text-align: center;
-            }
-
-            .stat-box {
-                font-size: 0.9em;
-            }
-
-            .card {
-                font-size: 1.5em;
-            }
-        }
-
-        @media (hover: none) {
-            .card:not(.flipped):not(.matched):hover {
-                transform: none;
-            }
-            
-            button:hover {
-                transform: none;
-            }
-        }
-    </style>
-    
-    <!-- Font Awesome للأيقونات -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <!-- ========== AMP Auto Ads (مباشرة بعد body) ========== -->
-    <amp-auto-ads type="adsense"
-            data-ad-client="ca-pub-8584077826935053">
-    </amp-auto-ads>
-
-    <div class="layout">
-        <!-- العمود الأيسر للإعلانات - للكمبيوتر فقط -->
-        <div class="left-sidebar">
-            <div class="ad-container">
-                <div class="ad-label">إعلان</div>
-                <!-- إعلان جانبي أيسر 1 - صور جانبية -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-format="autorelaxed"
-                     data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="9040442410"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-            
-            <div class="ad-container">
-                <div class="ad-label">إعلان</div>
-                <!-- إعلان جانبي أيسر 2 - صور جانبية -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="8096225516"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-
-        <!-- المحتوى الرئيسي -->
-        <div class="main-content">
-            <!-- إعلان علوي - يظهر للجميع -->
-            <div class="top-ad">
-                <div class="ad-container">
-                    <div class="ad-label">إعلان</div>
-                    <!-- اعلان_اعلى_الموقع -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8584077826935053"
-                         data-ad-slot="2904141418"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-
-            <!-- حاوية اللعبة -->
-            <div class="game-container">
-                <div class="header">
-                    <h1>🎮 لعبة الذاكرة - مستويات تصاعدية</h1>
-                    
-                    <!-- شريط التقدم والمستوى -->
-                    <div class="level-progress">
-                        <div class="level-info">
-                            <span>المستوى <span id="currentLevel">1</span>/<span id="maxLevel">10</span></span>
-                            <span class="level-badge" id="levelName">سهل</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                        </div>
-                        <div class="next-level-info">
-                            <span id="nextLevelInfo">الفوز للتقدم للمستوى التالي</span>
-                        </div>
-                    </div>
-
-                    <div class="stats">
-                        <div class="stat-box">
-                            <i class="fas fa-clock"></i>
-                            <span id="timer">00:00</span>
-                        </div>
-                        <div class="stat-box">
-                            <i class="fas fa-move"></i>
-                            <span id="moves">0</span>
-                        </div>
-                        <div class="stat-box">
-                            <i class="fas fa-check"></i>
-                            <span id="matched">0/8</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- إعلان داخل اللعبة (بين الإحصائيات والبطاقات) -->
-                <div class="in-game-ad">
-                    <div class="ad-container">
-                        <div class="ad-label">إعلان</div>
-                        <!-- اعلان داخل العبه -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-format="autorelaxed"
-                             data-ad-client="ca-pub-8584077826935053"
-                             data-ad-slot="5166809841"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-
-                <div class="board" id="board"></div>
-
-                <!-- إعلان عند تشغيل اللعبة (بعد البطاقات) -->
-                <div class="in-game-ad">
-                    <div class="ad-container">
-                        <div class="ad-label">إعلان</div>
-                        <!-- اعلان عند تشغيل العبه -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-format="autorelaxed"
-                             data-ad-client="ca-pub-8584077826935053"
-                             data-ad-slot="9165764600"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <button id="newGameBtn">
-                        <i class="fas fa-redo-alt"></i> بدء من جديد
-                    </button>
-                    <button id="restartLevelBtn">
-                        <i class="fas fa-sync-alt"></i> إعادة المستوى
-                    </button>
-                </div>
-
-                <div class="message" id="message">
-                    <i class="fas fa-arrow-up"></i> ابدأ بالمستوى الأول!
-                </div>
-            </div>
-
-            <!-- إعلان سفلي - يظهر للجميع -->
-            <div class="bottom-ad">
-                <div class="ad-container">
-                    <div class="ad-label">إعلان</div>
-                    <!-- اعلان اسفل الموقع -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-8584077826935053"
-                         data-ad-slot="3136510471"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
-        </div>
-
-        <!-- العمود الأيمن للإعلانات - للكمبيوتر فقط -->
-        <div class="right-sidebar">
-            <div class="ad-container">
-                <div class="ad-label">إعلان</div>
-                <!-- إعلان جانبي أيمن 1 - صور جانبية (نفس كود الأيسر) -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-format="autorelaxed"
-                     data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="9040442410"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-            
-            <div class="ad-container">
-                <div class="ad-label">إعلان</div>
-                <!-- إعلان جانبي أيمن 2 - صور جانبية -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-8584077826935053"
-                     data-ad-slot="8096225516"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        class MemoryGame {
-            constructor() {
-                this.board = document.getElementById('board');
-                this.timerElement = document.getElementById('timer');
-                this.movesElement = document.getElementById('moves');
-                this.matchedElement = document.getElementById('matched');
-                this.messageElement = document.getElementById('message');
-                this.newGameBtn = document.getElementById('newGameBtn');
-                this.restartLevelBtn = document.getElementById('restartLevelBtn');
-                
-                // عناصر المستوى
-                this.currentLevelSpan = document.getElementById('currentLevel');
-                this.maxLevelSpan = document.getElementById('maxLevel');
-                this.levelNameSpan = document.getElementById('levelName');
-                this.progressFill = document.getElementById('progressFill');
-                this.nextLevelInfo = document.getElementById('nextLevelInfo');
-
-                // تعريف المستويات
-                this.levels = [
-                    { name: 'سهل جداً', cols: 2, rows: 2 },
-                    { name: 'سهل', cols: 4, rows: 2 },
-                    { name: 'متوسط', cols: 4, rows: 3 },
-                    { name: 'متوسط +', cols: 4, rows: 4 },
-                    { name: 'صعب', cols: 6, rows: 4 },
-                    { name: 'صعب جداً', cols: 6, rows: 5 },
-                    { name: 'خبير', cols: 8, rows: 4 },
-                    { name: 'خبير +', cols: 8, rows: 5 },
-                    { name: 'محترف', cols: 8, rows: 6 },
-                    { name: 'أسطوري', cols: 10, rows: 6 }
-                ];
-
-                this.currentLevel = 0;
-                this.maxLevel = this.levels.length;
-                
-                this.cards = [];
-                this.flippedCards = [];
-                this.matchedPairs = 0;
-                this.moves = 0;
-                this.timer = null;
-                this.seconds = 0;
-                this.canFlip = true;
-                this.totalPairs = 0;
-
-                this.icons = [
-                    'fa-heart', 'fa-star', 'fa-moon', 'fa-sun', 'fa-cloud', 'fa-tree', 
-                    'fa-car', 'fa-bicycle', 'fa-cat', 'fa-dog', 'fa-fish', 'fa-plane',
-                    'fa-rocket', 'fa-gem', 'fa-crown', 'fa-flag', 'fa-anchor', 'fa-bell',
-                    'fa-bolt', 'fa-bomb', 'fa-book', 'fa-bug', 'fa-camera', 'fa-clock',
-                    'fa-coffee', 'fa-dragon', 'fa-feather', 'fa-fire', 'fa-ghost', 'fa-gift',
-                    'fa-key', 'fa-leaf', 'fa-lightbulb', 'fa-lock', 'fa-magic', 'fa-music',
-                    'fa-pencil', 'fa-phone', 'fa-smile', 'fa-snowflake'
-                ];
-
-                this.init();
-            }
-
-            init() {
-                this.setupEventListeners();
-                this.startNewGame();
-            }
-
-            setupEventListeners() {
-                this.newGameBtn.addEventListener('click', () => {
-                    this.currentLevel = 0;
-                    this.startNewGame();
-                });
-                
-                this.restartLevelBtn.addEventListener('click', () => {
-                    this.restartLevel();
-                });
-            }
-
-            startNewGame() {
-                this.stopTimer();
-                this.seconds = 0;
-                this.moves = 0;
-                this.matchedPairs = 0;
-                this.flippedCards = [];
-                this.canFlip = true;
-                
-                this.updateUI();
-                this.createBoard();
-                this.startTimer();
-                this.updateMessage(`المستوى ${this.currentLevel + 1}: ${this.getCurrentLevel().name}`);
-            }
-
-            restartLevel() {
-                this.stopTimer();
-                this.seconds = 0;
-                this.moves = 0;
-                this.matchedPairs = 0;
-                this.flippedCards = [];
-                this.canFlip = true;
-                
-                this.updateUI();
-                this.createBoard();
-                this.startTimer();
-                this.updateMessage(`إعادة المستوى ${this.currentLevel + 1}`);
-            }
-
-            getCurrentLevel() {
-                return this.levels[this.currentLevel];
-            }
-
-            updateUI() {
-                const level = this.getCurrentLevel();
-                const totalCards = level.cols * level.rows;
-                this.totalPairs = totalCards / 2;
-                
-                this.currentLevelSpan.textContent = this.currentLevel + 1;
-                this.maxLevelSpan.textContent = this.maxLevel;
-                this.levelNameSpan.textContent = level.name;
-                
-                const progress = ((this.currentLevel) / (this.maxLevel - 1)) * 100;
-                this.progressFill.style.width = `${progress}%`;
-                
-                if (this.currentLevel < this.maxLevel - 1) {
-                    this.nextLevelInfo.textContent = `المستوى التالي: ${this.levels[this.currentLevel + 1].name}`;
-                } else {
-                    this.nextLevelInfo.textContent = '🏆 المستوى النهائي!';
-                }
-                
-                this.updateMatchedDisplay();
-                this.updateTimerDisplay();
-                this.updateMovesDisplay();
-            }
-
-            createBoard() {
-                const level = this.getCurrentLevel();
-                const totalCards = level.cols * level.rows;
-                const pairCount = totalCards / 2;
-                
-                const selectedIcons = this.icons.slice(0, pairCount);
-                let cardIcons = [...selectedIcons, ...selectedIcons];
-                cardIcons = this.shuffleArray(cardIcons);
-
-                this.cards = cardIcons.map((icon, index) => ({
-                    id: index,
-                    icon: icon,
-                    isFlipped: false,
-                    isMatched: false
-                }));
-
-                this.renderBoard(level.cols);
-            }
-
-            renderBoard(cols) {
-                this.board.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-                this.board.innerHTML = '';
-
-                this.cards.forEach((card, index) => {
-                    const cardElement = document.createElement('div');
-                    cardElement.className = 'card';
-                    cardElement.dataset.index = index;
-                    
-                    const iconElement = document.createElement('i');
-                    iconElement.className = `fas ${card.icon}`;
-                    
-                    cardElement.appendChild(iconElement);
-                    
-                    cardElement.addEventListener('click', () => this.handleCardClick(index));
-                    
-                    this.board.appendChild(cardElement);
-                });
-            }
-
-            handleCardClick(index) {
-                if (!this.canFlip) return;
-                
-                const card = this.cards[index];
-                const cardElement = this.board.children[index];
-
-                if (card.isMatched || card.isFlipped) return;
-                if (this.flippedCards.length >= 2) return;
-
-                card.isFlipped = true;
-                cardElement.classList.add('flipped');
-                
-                this.flippedCards.push({ index, card, element: cardElement });
-
-                if (this.flippedCards.length === 2) {
-                    this.moves++;
-                    this.updateMovesDisplay();
-                    this.checkMatch();
-                }
-            }
-
-            checkMatch() {
-                const [card1, card2] = this.flippedCards;
-                
-                if (card1.card.icon === card2.card.icon) {
-                    setTimeout(() => {
-                        card1.card.isMatched = true;
-                        card2.card.isMatched = true;
-                        
-                        card1.element.classList.remove('flipped');
-                        card2.element.classList.remove('flipped');
-                        card1.element.classList.add('matched');
-                        card2.element.classList.add('matched');
-                        
-                        this.matchedPairs++;
-                        this.updateMatchedDisplay();
-                        
-                        this.flippedCards = [];
-                        
-                        if (this.matchedPairs === this.totalPairs) {
-                            this.levelComplete();
-                        }
-                    }, 500);
-                } else {
-                    this.canFlip = false;
-                    setTimeout(() => {
-                        card1.card.isFlipped = false;
-                        card2.card.isFlipped = false;
-                        
-                        card1.element.classList.remove('flipped');
-                        card2.element.classList.remove('flipped');
-                        
-                        this.flippedCards = [];
-                        this.canFlip = true;
-                    }, 1000);
-                }
-            }
-
-            levelComplete() {
-                this.stopTimer();
-                
-                if (this.currentLevel < this.maxLevel - 1) {
-                    this.currentLevel++;
-                    
-                    this.updateMessage(`🎉 مستوى رائع! انتقلت إلى المستوى ${this.currentLevel + 1}: ${this.getCurrentLevel().name} 🎉`);
-                    
-                    if (typeof confetti === 'function') {
-                        confetti({
-                            particleCount: 100,
-                            spread: 70,
-                            origin: { y: 0.6 }
-                        });
-                    }
-                    
-                    setTimeout(() => {
-                        this.startNewGame();
-                    }, 3000);
-                } else {
-                    this.gameComplete();
-                }
-            }
-
-            gameComplete() {
-                this.updateMessage(`
-                    🏆 تهانينا! لقد أكملت جميع المستويات! 🏆
-                `);
-                
-                if (typeof confetti === 'function') {
-                    for (let i = 0; i < 5; i++) {
-                        setTimeout(() => {
-                            confetti({
-                                particleCount: 200,
-                                spread: 100,
-                                origin: { y: 0.6 }
-                            });
-                        }, i * 200);
-                    }
-                }
-            }
-
-            shuffleArray(array) {
-                for (let i = array.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [array[i], array[j]] = [array[j], array[i]];
-                }
-                return array;
-            }
-
-            startTimer() {
-                this.timer = setInterval(() => {
-                    this.seconds++;
-                    this.updateTimerDisplay();
-                }, 1000);
-            }
-
-            stopTimer() {
-                if (this.timer) {
-                    clearInterval(this.timer);
-                    this.timer = null;
-                }
-            }
-
-            updateTimerDisplay() {
-                this.timerElement.textContent = this.formatTime(this.seconds);
-            }
-
-            formatTime(seconds) {
-                const mins = Math.floor(seconds / 60);
-                const secs = seconds % 60;
-                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            }
-
-            updateMovesDisplay() {
-                this.movesElement.textContent = this.moves;
-            }
-
-            updateMatchedDisplay() {
-                this.matchedElement.textContent = `${this.matchedPairs}/${this.totalPairs}`;
-            }
-
-            updateMessage(text) {
-                this.messageElement.innerHTML = text;
-            }
-        }
-
-        // إضافة مكتبة confetti
-        const confettiScript = document.createElement('script');
-        confettiScript.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1';
-        document.head.appendChild(confettiScript);
-
-        // بدء اللعبة
-        document.addEventListener('DOMContentLoaded', () => {
-            new MemoryGame();
-        });
-    </script>
-</body>
+<!DOCTYPE html> 
+<html lang="ar" dir="rtl"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"> 
+<title>لعبة الذاكرة - 1000 مستوى احترافي</title> 
+
+<style> 
+* { 
+margin: 0; 
+padding: 0; 
+box-sizing: border-box; 
+} 
+
+body { 
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+min-height: 100vh; 
+display: flex; 
+justify-content: center; 
+align-items: center; 
+padding: 10px; 
+} 
+
+/* المحتوى الرئيسي */ 
+.main-content { 
+width: 100%; 
+max-width: 1200px; 
+} 
+
+/* حاوية اللعبة */ 
+.game-container { 
+background: rgba(255, 255, 255, 0.95); 
+border-radius: 20px; 
+padding: 30px; 
+box-shadow: 0 20px 60px rgba(0,0,0,0.3); 
+backdrop-filter: blur(10px); 
+width: 100%; 
+} 
+
+/* تنسيقات اللعبة */ 
+.header { 
+text-align: center; 
+margin-bottom: 30px; 
+} 
+
+h1 { 
+color: #4a2b7c; 
+font-size: 2.5em; 
+margin-bottom: 20px; 
+text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
+} 
+
+/* شريط التقدم والمستوى */ 
+.level-progress { 
+background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
+color: white; 
+padding: 20px; 
+border-radius: 15px; 
+margin-bottom: 20px; 
+text-align: center; 
+box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+} 
+
+.level-info { 
+display: flex; 
+justify-content: space-between; 
+align-items: center; 
+margin-bottom: 15px; 
+font-size: 1.2em; 
+} 
+
+.level-badge { 
+background: white; 
+color: #4a2b7c; 
+padding: 8px 20px; 
+border-radius: 50px; 
+font-weight: bold; 
+font-size: 1.3em; 
+} 
+
+.progress-bar { 
+width: 100%; 
+height: 20px; 
+background: rgba(255,255,255,0.3); 
+border-radius: 10px; 
+overflow: hidden; 
+margin: 10px 0; 
+} 
+
+.progress-fill { 
+height: 100%; 
+background: white; 
+border-radius: 10px; 
+transition: width 0.3s ease; 
+width: 0%; 
+} 
+
+.next-level-info { 
+font-size: 1.1em; 
+margin-top: 10px; 
+} 
+
+.stats { 
+display: flex; 
+justify-content: space-around; 
+flex-wrap: wrap; 
+gap: 15px; 
+margin-bottom: 20px; 
+} 
+
+.stat-box { 
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+color: white; 
+padding: 15px 25px; 
+border-radius: 15px; 
+font-size: 1.2em; 
+box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+min-width: 150px; 
+flex: 1; 
+} 
+
+.stat-box span { 
+display: block; 
+font-size: 2em; 
+font-weight: bold; 
+margin-top: 5px; 
+} 
+
+.board { 
+display: grid; 
+gap: 15px; 
+margin: 30px 0; 
+} 
+
+.card { 
+aspect-ratio: 1; 
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+border-radius: 15px; 
+cursor: pointer; 
+display: flex; 
+justify-content: center; 
+align-items: center; 
+font-size: 2.5em; 
+color: white; 
+transition: all 0.3s ease; 
+box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+transform-style: preserve-3d; 
+position: relative; 
+} 
+
+.card.flipped { 
+background: white; 
+color: #4a2b7c; 
+transform: rotateY(180deg); 
+box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+} 
+
+.card.matched { 
+background: #4CAF50; 
+color: white; 
+cursor: default; 
+animation: pulse 0.5s ease; 
+transform: rotateY(180deg); 
+} 
+
+.card.matched i { 
+color: white; 
+} 
+
+.card:not(.flipped):not(.matched):hover { 
+transform: scale(1.05); 
+box-shadow: 0 15px 30px rgba(0,0,0,0.3); 
+} 
+
+@keyframes pulse { 
+0%, 100% { transform: scale(1) rotateY(180deg); } 
+50% { transform: scale(1.1) rotateY(180deg); } 
+} 
+
+.controls { 
+display: flex; 
+justify-content: center; 
+gap: 15px; 
+margin-top: 20px; 
+} 
+
+button { 
+padding: 15px 30px; 
+font-size: 1.1em; 
+border: none; 
+border-radius: 50px; 
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+color: white; 
+cursor: pointer; 
+transition: all 0.3s ease; 
+font-weight: bold; 
+box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+} 
+
+button:hover { 
+transform: translateY(-2px); 
+box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+} 
+
+button:active { 
+transform: translateY(0); 
+} 
+
+button:disabled { 
+opacity: 0.5; 
+cursor: not-allowed; 
+transform: none; 
+} 
+
+.message { 
+text-align: center; 
+margin-top: 20px; 
+font-size: 1.4em; 
+font-weight: bold; 
+color: #4a2b7c; 
+min-height: 60px; 
+padding: 15px; 
+background: rgba(255,255,255,0.9); 
+border-radius: 15px; 
+box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+} 
+
+/* ========== تنسيقات الموبيل ========== */ 
+@media (max-width: 900px) { 
+/* تصغير حجم الخط للعناوين */ 
+h1 { 
+font-size: 2em; 
+margin-bottom: 15px; 
+} 
+
+/* تقليل المسافات الداخلية */ 
+.game-container { 
+padding: 15px; 
+} 
+
+/* تحسين شريط المستوى للموبيل */ 
+.level-progress { 
+padding: 15px; 
+} 
+
+.level-info { 
+font-size: 1em; 
+} 
+
+.level-badge { 
+font-size: 1.1em; 
+padding: 5px 15px; 
+} 
+
+/* توزيع صناديق الإحصائيات بشكل أفضل */ 
+.stats { 
+gap: 10px; 
+} 
+
+.stat-box { 
+padding: 10px; 
+min-width: 80px; 
+} 
+
+.stat-box span { 
+font-size: 1.3em; 
+} 
+
+/* تحسين شبكة البطاقات للموبيل */ 
+.board { 
+gap: 8px; 
+margin: 20px 0; 
+} 
+
+.card { 
+font-size: 1.8em; 
+} 
+
+/* تحسين الأزرار للموبيل */ 
+.controls { 
+flex-direction: column; 
+gap: 10px; 
+} 
+
+button { 
+width: 100%; 
+padding: 12px; 
+font-size: 1em; 
+} 
+
+/* تحسين صندوق الرسائل */ 
+.message { 
+font-size: 1.1em; 
+padding: 12px; 
+min-height: 50px; 
+} 
+} 
+
+/* تنسيقات للشاشات الصغيرة جداً */ 
+@media (max-width: 400px) { 
+.game-container { 
+padding: 10px; 
+} 
+
+h1 { 
+font-size: 1.5em; 
+} 
+
+.level-info { 
+flex-direction: column; 
+gap: 10px; 
+} 
+
+.level-badge { 
+width: 100%; 
+text-align: center; 
+} 
+
+.stat-box { 
+font-size: 0.9em; 
+} 
+
+.card { 
+font-size: 1.5em; 
+} 
+} 
+
+/* تحسين شاشة اللمس */ 
+@media (hover: none) { 
+.card:not(.flipped):not(.matched):hover { 
+transform: none; 
+} 
+
+button:hover { 
+transform: none; 
+} 
+} 
+</style> 
+
+<!-- Font Awesome للأيقونات --> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+</head> 
+
+<body> 
+<div class="main-content"> 
+<!-- حاوية اللعبة --> 
+<div class="game-container"> 
+<div class="header"> 
+<h1>🧠 لعبة الذاكرة - 1000 مستوى احترافي</h1> 
+
+<!-- شريط التقدم والمستوى --> 
+<div class="level-progress"> 
+<div class="level-info"> 
+<span>المستوى <span id="currentLevel">1</span>/<span id="maxLevel">1000</span></span> 
+<span class="level-badge" id="levelName">مستوى 1</span> 
+</div> 
+<div class="progress-bar"> 
+<div class="progress-fill" id="progressFill" style="width: 0%"></div> 
+</div> 
+<div class="next-level-info"> 
+<span id="nextLevelInfo">الفوز للتقدم للمستوى التالي</span> 
+</div> 
+</div> 
+
+<div class="stats"> 
+<div class="stat-box"> 
+<i class="fas fa-clock"></i> 
+<span id="timer">00:00</span> 
+</div> 
+<div class="stat-box"> 
+<i class="fas fa-move"></i> 
+<span id="moves">0</span> 
+</div> 
+<div class="stat-box"> 
+<i class="fas fa-check"></i> 
+<span id="matched">0/4</span> 
+</div> 
+</div> 
+</div> 
+
+<div class="board" id="board"></div> 
+
+<div class="controls"> 
+<button id="newGameBtn"> 
+<i class="fas fa-redo-alt"></i> بدء من جديد 
+</button> 
+<button id="restartLevelBtn"> 
+<i class="fas fa-sync-alt"></i> إعادة المستوى 
+</button> 
+</div> 
+
+<div class="message" id="message"> 
+<i class="fas fa-arrow-up"></i> ابدأ بالمستوى الأول! 
+</div> 
+</div> 
+</div> 
+
+<!-- ===== كود الإعلانات - تم إضافته هنا دون التأثير على اللعبة ===== --> 
+<script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script> 
+<!-- ===== نهاية كود الإعلانات ===== --> 
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script> 
+<script> 
+class MemoryGame { 
+constructor() { 
+this.board = document.getElementById('board'); 
+this.timerElement = document.getElementById('timer'); 
+this.movesElement = document.getElementById('moves'); 
+this.matchedElement = document.getElementById('matched'); 
+this.messageElement = document.getElementById('message'); 
+this.newGameBtn = document.getElementById('newGameBtn'); 
+this.restartLevelBtn = document.getElementById('restartLevelBtn'); 
+
+// عناصر المستوى 
+this.currentLevelSpan = document.getElementById('currentLevel'); 
+this.maxLevelSpan = document.getElementById('maxLevel'); 
+this.levelNameSpan = document.getElementById('levelName'); 
+this.progressFill = document.getElementById('progressFill'); 
+this.nextLevelInfo = document.getElementById('nextLevelInfo'); 
+
+// إنشاء 1000 مستوى مع زيادة مربعين كل مرة 
+this.levels = []; 
+
+// المستوى الأول: 4 مربعات (2×2) 
+let totalCards = 4; 
+
+for (let i = 1; i <= 1000; i++) { 
+// حساب أبعاد مناسبة للشبكة 
+let cols = Math.min(12, Math.ceil(Math.sqrt(totalCards))); 
+let rows = Math.ceil(totalCards / cols); 
+
+// ضبط الأبعاد لتناسب البطاقات بالضبط 
+while (rows * cols < totalCards) { 
+cols = Math.min(12, cols + 1); 
+rows = Math.ceil(totalCards / cols); 
+} 
+
+// اسم المستوى 
+let levelName = `مستوى ${i}`; 
+if (i <= 10) levelName = `مستوى ${i} - مبتدئ`; 
+else if (i <= 50) levelName = `مستوى ${i} - متوسط`; 
+else if (i <= 200) levelName = `مستوى ${i} - متقدم`; 
+else if (i <= 500) levelName = `مستوى ${i} - خبير`; 
+else levelName = `مستوى ${i} - أسطوري`; 
+
+// وقت إضافي حسب عدد البطاقات 
+let timeBonus = 30 + Math.floor(totalCards * 1.5); 
+
+this.levels.push({ 
+name: levelName, 
+cols: cols, 
+rows: rows, 
+totalCards: totalCards, 
+timeBonus: timeBonus 
+}); 
+
+// زيادة مربعين لكل مستوى (لضمان العدد زوجي دائماً) 
+totalCards += 2; 
+} 
+
+this.currentLevel = 0; // 0-based index 
+this.maxLevel = this.levels.length; 
+this.cards = []; 
+this.flippedCards = []; 
+this.matchedPairs = 0; 
+this.moves = 0; 
+this.timer = null; 
+this.seconds = 0; 
+this.canFlip = true; 
+this.totalPairs = 0; 
+
+// إحصائيات المستوى 
+this.levelStats = { moves: 0, time: 0 }; 
+
+this.icons = [ 
+'fa-heart', 'fa-star', 'fa-moon', 'fa-sun', 'fa-cloud', 'fa-tree', 
+'fa-car', 'fa-bicycle', 'fa-cat', 'fa-dog', 'fa-fish', 'fa-plane', 
+'fa-rocket', 'fa-gem', 'fa-crown', 'fa-flag', 'fa-anchor', 'fa-bell', 
+'fa-bolt', 'fa-bomb', 'fa-book', 'fa-bug', 'fa-camera', 'fa-clock', 
+'fa-coffee', 'fa-dragon', 'fa-feather', 'fa-fire', 'fa-ghost', 'fa-gift', 
+'fa-key', 'fa-leaf', 'fa-lightbulb', 'fa-lock', 'fa-magic', 'fa-music', 
+'fa-pencil', 'fa-phone', 'fa-smile', 'fa-snowflake', 'fa-apple', 'fa-brain', 
+'fa-code', 'fa-gamepad', 'fa-headphones', 'fa-motorcycle', 'fa-umbrella', 
+'fa-volcano', 'fa-wifi', 'fa-trophy', 'fa-medal', 'fa-shield', 'fa-hat-wizard', 
+'fa-dragon', 'fa-frog', 'fa-hippo', 'fa-kiwi-bird', 'fa-otter', 'fa-paw', 
+'fa-spider', 'fa-dove', 'fa-crow', 'fa-cat-space', 'fa-dog-leashed', 'fa-fish-fins' 
+]; 
+
+this.init(); 
+} 
+
+init() { 
+this.setupEventListeners(); 
+this.startNewGame(); 
+} 
+
+setupEventListeners() { 
+this.newGameBtn.addEventListener('click', () => { 
+this.currentLevel = 0; 
+this.startNewGame(); 
+}); 
+
+this.restartLevelBtn.addEventListener('click', () => { 
+this.restartLevel(); 
+}); 
+} 
+
+startNewGame() { 
+this.stopTimer(); 
+this.seconds = 0; 
+this.moves = 0; 
+this.matchedPairs = 0; 
+this.flippedCards = []; 
+this.canFlip = true; 
+this.updateUI(); 
+this.createBoard(); 
+this.startTimer(); 
+this.updateMessage(`المستوى ${this.currentLevel + 1}: ${this.getCurrentLevel().name}`); 
+} 
+
+restartLevel() { 
+this.stopTimer(); 
+this.seconds = 0; 
+this.moves = 0; 
+this.matchedPairs = 0; 
+this.flippedCards = []; 
+this.canFlip = true; 
+this.updateUI(); 
+this.createBoard(); 
+this.startTimer(); 
+this.updateMessage(`إعادة المستوى ${this.currentLevel + 1}`); 
+} 
+
+getCurrentLevel() { 
+return this.levels[this.currentLevel]; 
+} 
+
+updateUI() { 
+const level = this.getCurrentLevel(); 
+this.totalPairs = level.totalCards / 2; 
+
+// تحديث عرض المستوى 
+this.currentLevelSpan.textContent = this.currentLevel + 1; 
+this.maxLevelSpan.textContent = this.maxLevel; 
+this.levelNameSpan.textContent = level.name; 
+
+// تحديث شريط التقدم 
+const progress = (this.currentLevel / (this.maxLevel - 1)) * 100; 
+this.progressFill.style.width = `${progress}%`; 
+
+// تحديث معلومات المستوى التالي 
+if (this.currentLevel < this.maxLevel - 1) { 
+this.nextLevelInfo.textContent = `المستوى التالي: ${this.levels[this.currentLevel + 1].name}`; 
+} else { 
+this.nextLevelInfo.textContent = '🏆 المستوى النهائي!'; 
+} 
+
+this.updateMatchedDisplay(); 
+this.updateTimerDisplay(); 
+this.updateMovesDisplay(); 
+} 
+
+createBoard() { 
+const level = this.getCurrentLevel(); 
+const totalCards = level.totalCards; 
+const pairCount = totalCards / 2; 
+
+// اختيار الأيقونات المطلوبة 
+const selectedIcons = []; 
+for (let i = 0; i < pairCount; i++) { 
+selectedIcons.push(this.icons[i % this.icons.length]); 
+} 
+
+// تكرار كل أيقونة مرتين 
+let cardIcons = [...selectedIcons, ...selectedIcons]; 
+
+// خلط البطاقات 
+cardIcons = this.shuffleArray(cardIcons); 
+
+// إنشاء مصفوفة البطاقات 
+this.cards = cardIcons.map((icon, index) => ({ 
+id: index, 
+icon: icon, 
+isFlipped: false, 
+isMatched: false 
+})); 
+
+this.renderBoard(level.cols); 
+} 
+
+renderBoard(cols) { 
+this.board.style.gridTemplateColumns = `repeat(${cols}, 1fr)`; 
+this.board.innerHTML = ''; 
+
+this.cards.forEach((card, index) => { 
+const cardElement = document.createElement('div'); 
+cardElement.className = 'card'; 
+cardElement.dataset.index = index; 
+
+const iconElement = document.createElement('i'); 
+iconElement.className = `fas ${card.icon}`; 
+cardElement.appendChild(iconElement); 
+
+cardElement.addEventListener('click', () => this.handleCardClick(index)); 
+this.board.appendChild(cardElement); 
+}); 
+} 
+
+handleCardClick(index) { 
+if (!this.canFlip) return; 
+
+const card = this.cards[index]; 
+const cardElement = this.board.children[index]; 
+
+if (card.isMatched || card.isFlipped) return; 
+if (this.flippedCards.length >= 2) return; 
+
+// قلب البطاقة 
+card.isFlipped = true; 
+cardElement.classList.add('flipped'); 
+this.flippedCards.push({ index, card, element: cardElement }); 
+
+if (this.flippedCards.length === 2) { 
+this.moves++; 
+this.updateMovesDisplay(); 
+this.checkMatch(); 
+} 
+} 
+
+checkMatch() { 
+const [card1, card2] = this.flippedCards; 
+
+if (card1.card.icon === card2.card.icon) { 
+// تطابق 
+setTimeout(() => { 
+card1.card.isMatched = true; 
+card2.card.isMatched = true; 
+card1.element.classList.remove('flipped'); 
+card2.element.classList.remove('flipped'); 
+card1.element.classList.add('matched'); 
+card2.element.classList.add('matched'); 
+
+this.matchedPairs++; 
+this.updateMatchedDisplay(); 
+this.flippedCards = []; 
+
+if (this.matchedPairs === this.totalPairs) { 
+this.levelComplete(); 
+} 
+}, 500); 
+} else { 
+// غير متطابقين 
+this.canFlip = false; 
+setTimeout(() => { 
+card1.card.isFlipped = false; 
+card2.card.isFlipped = false; 
+card1.element.classList.remove('flipped'); 
+card2.element.classList.remove('flipped'); 
+this.flippedCards = []; 
+this.canFlip = true; 
+}, 1000); 
+} 
+} 
+
+levelComplete() { 
+this.stopTimer(); 
+
+// حفظ إحصائيات المستوى 
+this.levelStats.moves = this.moves; 
+this.levelStats.time = this.seconds; 
+
+if (this.currentLevel < this.maxLevel - 1) { 
+// الانتقال للمستوى التالي 
+this.currentLevel++; 
+
+// رسالة احتفالية 
+this.updateMessage(`🎉 مستوى رائع! انتقلت إلى المستوى ${this.currentLevel + 1}: ${this.getCurrentLevel().name} 🎉`); 
+
+// تأثير احتفالي 
+if (typeof confetti === 'function') { 
+confetti({ 
+particleCount: 100, 
+spread: 70, 
+origin: { y: 0.6 } 
+}); 
+} 
+
+// تأخير قبل بدء المستوى الجديد 
+setTimeout(() => { 
+this.startNewGame(); 
+}, 3000); 
+} else { 
+// الفوز باللعبة كاملة 
+this.gameComplete(); 
+} 
+} 
+
+gameComplete() { 
+this.updateMessage(` 
+🏆 تهانينا! لقد أكملت جميع المستويات الـ 1000! 🏆<br> 
+إجمالي الحركات: ${this.moves} | الوقت: ${this.formatTime(this.seconds)} 
+`); 
+
+// احتفال كبير 
+if (typeof confetti === 'function') { 
+for (let i = 0; i < 10; i++) { 
+setTimeout(() => { 
+confetti({ 
+particleCount: 200, 
+spread: 100, 
+origin: { y: 0.6 } 
+}); 
+}, i * 200); 
+} 
+} 
+} 
+
+shuffleArray(array) { 
+for (let i = array.length - 1; i > 0; i--) { 
+const j = Math.floor(Math.random() * (i + 1)); 
+[array[i], array[j]] = [array[j], array[i]]; 
+} 
+return array; 
+} 
+
+startTimer() { 
+this.timer = setInterval(() => { 
+this.seconds++; 
+this.updateTimerDisplay(); 
+}, 1000); 
+} 
+
+stopTimer() { 
+if (this.timer) { 
+clearInterval(this.timer); 
+this.timer = null; 
+} 
+} 
+
+updateTimerDisplay() { 
+this.timerElement.textContent = this.formatTime(this.seconds); 
+} 
+
+formatTime(seconds) { 
+const mins = Math.floor(seconds / 60); 
+const secs = seconds % 60; 
+return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`; 
+} 
+
+updateMovesDisplay() { 
+this.movesElement.textContent = this.moves; 
+} 
+
+updateMatchedDisplay() { 
+this.matchedElement.textContent = `${this.matchedPairs}/${this.totalPairs}`; 
+} 
+
+updateMessage(text) { 
+this.messageElement.innerHTML = text; 
+} 
+} 
+
+// بدء اللعبة 
+document.addEventListener('DOMContentLoaded', () => { 
+new MemoryGame(); 
+}); 
+</script> 
+</body> 
 </html>
