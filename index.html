@@ -118,6 +118,7 @@
             border-radius: 10px;
             padding: 10px;
             border: 2px dashed #ff9800;
+            min-height: 90px;
         }
 
         .ad-side-left {
@@ -265,6 +266,30 @@
             border-radius: 25px;
             font-size: 14px;
             font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            background: #ff5722;
+            transform: scale(1.05);
+        }
+
+        .external-link {
+            display: inline-block;
+            padding: 8px 25px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .external-link:hover {
+            background: #45a049;
+            transform: scale(1.05);
         }
 
         /* قسم المقالات */
@@ -395,30 +420,13 @@
 
     <!-- ===== الإعلان الجانبي الأيسر (160x600) ===== -->
     <div class="ad-side-left">
-        <script>
-          atOptions = {
-            'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
-            'format' : 'iframe',
-            'height' : 600,
-            'width' : 160,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
+        <!-- سيتم تحميل الإعلانات من ملف ads.html -->
+        <div id="sidebar-left-ad"></div>
     </div>
 
     <!-- ===== الإعلان الجانبي الأيمن (160x600) ===== -->
     <div class="ad-side-right">
-        <script>
-          atOptions = {
-            'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
-            'format' : 'iframe',
-            'height' : 600,
-            'width' : 160,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
+        <div id="sidebar-right-ad"></div>
     </div>
 
     <header>
@@ -459,9 +467,7 @@
         </div>
 
         <!-- ===== الإعلان الأول (أعلى الصفحة) ===== -->
-        <div class="ad-container">
-            <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
-        </div>
+        <div class="ad-container" id="top-ad"></div>
 
         <!-- قسم الترحيب -->
         <div class="hero">
@@ -474,10 +480,10 @@
         <!-- قسم ألعاب مميزة -->
         <h2 class="section-title">🎲 ألعاب مميزة لهذا الأسبوع</h2>
         <div class="games-grid">
-            <!-- لعبة XO -->
+            <!-- لعبة XO من الرابط الداخلي -->
             <div class="game-card">
                 <a href="games/xo/index.html">
-                    <img src="images/xo.jpg" alt="لعبة XO">
+                    <img src="images/xo.jpg" alt="لعبة XO" onerror="this.src='https://via.placeholder.com/300x150/ff9800/ffffff?text=XO+Game'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">لعبة XO</h3>
@@ -486,47 +492,100 @@
                 </div>
             </div>
 
-            <!-- لعبة الثعبان -->
+            <!-- لعبة الثعبان من الرابط الداخلي -->
             <div class="game-card">
                 <a href="games/snake/index.html">
-                    <img src="images/snake.jpg" alt="لعبة الثعبان">
+                    <img src="images/snake.jpg" alt="لعبة الثعبان" onerror="this.src='https://via.placeholder.com/300x150/4CAF50/ffffff?text=Snake+Game'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">لعبة الثعبان</h3>
                     <p class="game-description">كلاسيكية الثعبان الجائع</p>
-                    <a href="games/Snake/index.html" class="play-btn">العب الآن</a>
+                    <a href="games/snake/index.html" class="play-btn">العب الآن</a>
                 </div>
             </div>
 
-            <!-- لعبة الذاكرة -->
+            <!-- لعبة الذاكرة من رابط خارجي (مثال) -->
             <div class="game-card">
-                <a href="games/memory/index.html">
-                    <img src="images/memory.jpg" alt="لعبة الذاكرة">
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/memory-game', '_blank'); return false;">
+                    <img src="images/memory.jpg" alt="لعبة الذاكرة" onerror="this.src='https://via.placeholder.com/300x150/2196F3/ffffff?text=Memory+Game'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">لعبة الذاكرة</h3>
-                    <p class="game-description">اختبر ذاكرتك</p>
-                    <a href="games/Memory/index.html" class="play-btn">العب الآن</a>
+                    <p class="game-description">اختبر ذاكرتك (رابط خارجي)</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/memory-game', '_blank'); return false;" class="external-link">🔗 العب على موقع خارجي</a>
                 </div>
             </div>
 
-            <!-- لعبة الألغاز -->
+            <!-- لعبة الألغاز من رابط خارجي (مثال) -->
             <div class="game-card">
-                <a href="games/puzzle/index.html">
-                    <img src="images/puzzle.jpg" alt="لعبة الألغاز">
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/puzzle', '_blank'); return false;">
+                    <img src="images/puzzle.jpg" alt="لعبة الألغاز" onerror="this.src='https://via.placeholder.com/300x150/9C27B0/ffffff?text=Puzzle+Game'">
                 </a>
                 <div class="game-info">
                     <h3 class="game-name">لعبة الألغاز</h3>
-                    <p class="game-description">حل الألغاز الشيقة</p>
-                    <a href="games/Puzzle/index.html" class="play-btn">العب الآن</a>
+                    <p class="game-description">حل الألغاز الشيقة (رابط خارجي)</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/puzzle', '_blank'); return false;" class="external-link">🔗 العب على موقع خارجي</a>
                 </div>
             </div>
         </div>
 
         <!-- ===== الإعلان الثاني (وسط الصفحة) ===== -->
-        <div class="ad-container">
-            <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
+        <div class="ad-container" id="middle-ad"></div>
+
+        <!-- قسم ألعاب إضافية بروابط خارجية -->
+        <h2 class="section-title">🌐 ألعاب من مواقع خارجية</h2>
+        <div class="games-grid">
+            <!-- لعبة 1 من رابط خارجي -->
+            <div class="game-card">
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/2048', '_blank'); return false;">
+                    <img src="images/2048.jpg" alt="لعبة 2048" onerror="this.src='https://via.placeholder.com/300x150/FF5722/ffffff?text=2048'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">2048</h3>
+                    <p class="game-description">لعبة الأرقام الشهيرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/2048', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
+
+            <!-- لعبة 2 من رابط خارجي -->
+            <div class="game-card">
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/temple-run-2', '_blank'); return false;">
+                    <img src="images/temple.jpg" alt="Temple Run" onerror="this.src='https://via.placeholder.com/300x150/795548/ffffff?text=Temple+Run'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">Temple Run 2</h3>
+                    <p class="game-description">لعبة الجري والمغامرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/temple-run-2', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
+
+            <!-- لعبة 3 من رابط خارجي -->
+            <div class="game-card">
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/subway-surfers', '_blank'); return false;">
+                    <img src="images/subway.jpg" alt="Subway Surfers" onerror="this.src='https://via.placeholder.com/300x150/607D8B/ffffff?text=Subway+Surfers'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">Subway Surfers</h3>
+                    <p class="game-description">اهرب من المفتش</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/subway-surfers', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
+
+            <!-- لعبة 4 من رابط خارجي -->
+            <div class="game-card">
+                <a href="#" onclick="window.open('https://www.crazygames.com/game/minecraft-classic', '_blank'); return false;">
+                    <img src="images/minecraft.jpg" alt="Minecraft Classic" onerror="this.src='https://via.placeholder.com/300x150/8BC34A/ffffff?text=Minecraft'">
+                </a>
+                <div class="game-info">
+                    <h3 class="game-name">Minecraft Classic</h3>
+                    <p class="game-description">لعبة البناء الشهيرة</p>
+                    <a href="#" onclick="window.open('https://www.crazygames.com/game/minecraft-classic', '_blank'); return false;" class="external-link">🔗 العب على CrazyGames</a>
+                </div>
+            </div>
         </div>
+
+        <!-- ===== الإعلان الثالث (أسفل الصفحة) ===== -->
+        <div class="ad-container" id="bottom-ad"></div>
 
         <!-- قسم أحدث المقالات -->
         <h2 class="section-title">📝 أحدث المقالات</h2>
@@ -564,11 +623,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- ===== الإعلان الثالث (أسفل الصفحة) ===== -->
-        <div class="ad-container">
-            <script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
-        </div>
     </div>
 
     <footer>
@@ -599,8 +653,40 @@
     </footer>
 
     <script>
-        // عداد الزيارات
-        (function() {
+        // دالة تحميل الإعلانات من ملف ads.html
+        function loadAds() {
+            fetch('ads.html')
+                .then(response => response.text())
+                .then(data => {
+                    // تقسيم محتوى الإعلانات (يمكن تخصيص هذا حسب هيكل ملف ads.html)
+                    const adSections = data.split('<!--ad-separator-->');
+                    
+                    // تعيين الإعلانات للأماكن المخصصة
+                    if (adSections[0]) document.getElementById('top-ad').innerHTML = adSections[0];
+                    if (adSections[1]) document.getElementById('middle-ad').innerHTML = adSections[1];
+                    if (adSections[2]) document.getElementById('bottom-ad').innerHTML = adSections[2];
+                    if (adSections[3]) document.getElementById('sidebar-left-ad').innerHTML = adSections[3];
+                    if (adSections[4]) document.getElementById('sidebar-right-ad').innerHTML = adSections[4];
+                })
+                .catch(error => {
+                    console.log('لم يتم العثور على ملف ads.html، استخدام الإعلانات الافتراضية');
+                    // إعلانات افتراضية في حالة عدم وجود ملف
+                    document.getElementById('top-ad').innerHTML = '<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>';
+                    document.getElementById('middle-ad').innerHTML = '<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>';
+                    document.getElementById('bottom-ad').innerHTML = '<script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"><\/script>';
+                    
+                    // الإعلانات الجانبية
+                    const sidebarAd = '<script>atOptions = {"key" : "d97eda55927b2ccbf2ad42d5cb6201f8","format" : "iframe","height" : 600,"width" : 160,"params" : {}};<\/script><script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>';
+                    document.getElementById('sidebar-left-ad').innerHTML = sidebarAd;
+                    document.getElementById('sidebar-right-ad').innerHTML = sidebarAd;
+                });
+        }
+
+        // تشغيل تحميل الإعلانات عند تحميل الصفحة
+        window.onload = function() {
+            loadAds();
+            
+            // عداد الزيارات
             try {
                 const BASE_NUMBER = 2500500;
                 const STORAGE_KEY = 'visitor_counter';
@@ -639,7 +725,7 @@
                 updateClock();
                 setInterval(updateClock, 1000);
             } catch(e) {}
-        })();
+        };
     </script>
 </body>
 </html>
