@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>ألعاب عربي - أفضل الألعاب المجانية</title>
+    
+    <!-- ===== تحسينات SEO ومحرك البحث جوجل ===== -->
+    <title>ألعاب عربي | أفضل الألعاب المجانية على الإنترنت</title>
+    <meta name="description" content="ألعاب عربي - أكبر موقع للألعاب المجانية على الإنترنت. العب ألعاب ذكاء، ألعاب أكشن، ألعاب ألغاز، ألعاب سباق وأكثر من 100 لعبة مجانية بدون تحميل">
+    <meta name="keywords" content="ألعاب مجانية, ألعاب عربي, ألعاب ذكاء, ألعاب أكشن, ألعاب ألغاز, ألعاب سباق, ألعاب بدون تحميل, العاب كمبيوتر, العاب اون لاين">
+    <meta name="author" content="ألعاب عربي">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Open Graph / فيسبوك -->
+    <meta property="og:title" content="ألعاب عربي | أفضل الألعاب المجانية">
+    <meta property="og:description" content="أكبر موقع للألعاب المجانية - العب أكثر من 100 لعبة بدون تحميل">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ألعاب عربي | أفضل الألعاب المجانية">
+    <meta name="twitter:description" content="أكبر موقع للألعاب المجانية - العب أكثر من 100 لعبة بدون تحميل">
+    
+    <!-- Favicon / شعار الموقع -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
     
     <style>
         * {
@@ -66,6 +88,29 @@
             color: #1e2b3a;
         }
 
+        /* شعار الموقع مع صورة */
+        .site-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff9800;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        
+        .site-logo span {
+            font-size: 28px;
+        }
+        
+        .site-logo-text {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
         /* زر تسجيل الدخول على اليسار */
         .login-area {
             display: flex;
@@ -91,14 +136,6 @@
         .signup-btn:hover {
             background: #ff9800;
             color: #1e2b3a !important;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff9800;
-            text-decoration: none;
-            margin-left: 20px;
         }
 
         /* شريط البحث تحت القائمة */
@@ -240,6 +277,7 @@
             min-height: 90px;
         }
 
+        /* إعلانات جانبية - تظهر فقط على الكمبيوتر */
         .ad-side-left, .ad-side-right {
             position: fixed;
             top: 50%;
@@ -454,7 +492,7 @@
             font-size: 14px;
         }
 
-        /* الفوتر - جميع الروابط في الأسفل */
+        /* الفوتر */
         footer {
             background: #1e2b3a;
             color: white;
@@ -502,7 +540,14 @@
             font-size: 13px;
         }
 
-        /* تنسيقات للموبايل */
+        /* تنسيقات للكمبيوتر (إظهار الإعلانات الجانبية) */
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0 200px;
+            }
+        }
+
+        /* تنسيقات للموبايل - إخفاء الإعلانات الجانبية */
         @media (max-width: 768px) {
             .games-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -531,9 +576,12 @@
                 font-size: 12px;
             }
             
-            .logo {
-                font-size: 20px;
+            .site-logo {
                 margin-left: 10px;
+            }
+            
+            .site-logo span {
+                font-size: 20px;
             }
             
             .stats-bar {
@@ -553,6 +601,7 @@
                 font-size: 10px;
             }
             
+            /* إخفاء الإعلانات الجانبية في الموبايل */
             .ad-side-left, .ad-side-right {
                 display: none;
             }
@@ -610,17 +659,22 @@
 </head>
 <body>
 
-    <!-- الإعلانات الجانبية -->
+    <!-- الإعلانات الجانبية (تظهر فقط على الكمبيوتر) -->
     <div class="ad-side-left" id="sidebar-left-ad"></div>
     <div class="ad-side-right" id="sidebar-right-ad"></div>
 
     <header>
         <div class="container">
-            <!-- الصف العلوي: الرئيسية يمين - تسجيل الدخول يسار -->
             <div class="top-header">
                 <div class="main-nav">
-                    <a href="index.html" class="logo">🎮 ألعاب عربي</a>
+                    <!-- شعار الموقع مع أيقونة ونص -->
+                    <a href="index.html" class="site-logo">
+                        <span>🎮</span>
+                        <span class="site-logo-text">ألعاب عربي</span>
+                    </a>
                     <a href="index.html" class="active">الرئيسية</a>
+                    <a href="games.html">الألعاب</a>
+                    <a href="about.html">من نحن</a>
                 </div>
                 
                 <div class="login-area">
@@ -629,7 +683,6 @@
                 </div>
             </div>
             
-            <!-- شريط البحث تحت القائمة -->
             <div class="search-section">
                 <div class="search-container">
                     <input type="text" class="search-input" placeholder="ابحث عن لعبة..." id="searchInput">
@@ -677,7 +730,7 @@
             </div>
         </div>
 
-        <!-- الإعلان الأول (أعلى الصفحة) -->
+        <!-- الإعلان الأول (أعلى الصفحة) - يعمل على الكمبيوتر والجوال -->
         <div class="ad-container" id="top-ad"></div>
 
         <!-- قسم الترحيب -->
@@ -787,7 +840,7 @@
                 </div>
             </div>
 
-            <!-- لعبة جديدة -->
+            <!-- لعبة Moto X3M -->
             <div class="game-card" data-category="رياضة سباق">
                 <a href="#" onclick="window.open('https://www.crazygames.com/game/moto-x3m', '_blank'); return false;">
                     <img src="images/moto.jpg" alt="Moto X3M" onerror="this.src='https://via.placeholder.com/150x100/FFC107/ffffff?text=Moto+X3M'">
@@ -800,7 +853,7 @@
             </div>
         </div>
 
-        <!-- الإعلان الثاني (وسط الصفحة) -->
+        <!-- الإعلان الثاني (وسط الصفحة) - يعمل على الكمبيوتر والجوال -->
         <div class="ad-container" id="middle-ad"></div>
 
         <!-- قسم أحدث المقالات -->
@@ -835,13 +888,12 @@
             </div>
         </div>
 
-        <!-- الإعلان الثالث (أسفل الصفحة) -->
+        <!-- الإعلان الثالث (أسفل الصفحة) - يعمل على الكمبيوتر والجوال -->
         <div class="ad-container" id="bottom-ad"></div>
     </div>
 
     <footer>
         <div class="container">
-            <!-- روابط الفوتر في الأسفل -->
             <div class="footer-links">
                 <a href="index.html">الرئيسية</a>
                 <a href="games.html">الألعاب</a>
@@ -850,7 +902,6 @@
                 <a href="privacy.html">الخصوصية</a>
             </div>
             
-            <!-- روابط التواصل الاجتماعي -->
             <div class="footer-social">
                 <a href="#">فيسبوك</a>
                 <a href="#">تويتر</a>
@@ -887,7 +938,6 @@
             category.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // إزالة active من جميع التصنيفات
                 document.querySelectorAll('.category-item').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
                 
@@ -911,26 +961,19 @@
 
         // تحميل الإعلانات
         function loadAds() {
-            fetch('ads.html')
-                .then(response => response.text())
-                .then(data => {
-                    const adSections = data.split('<!--ad-separator-->');
-                    if (adSections[0]) document.getElementById('top-ad').innerHTML = adSections[0];
-                    if (adSections[1]) document.getElementById('middle-ad').innerHTML = adSections[1];
-                    if (adSections[2]) document.getElementById('bottom-ad').innerHTML = adSections[2];
-                    if (adSections[3]) document.getElementById('sidebar-left-ad').innerHTML = adSections[3];
-                    if (adSections[4]) document.getElementById('sidebar-right-ad').innerHTML = adSections[4];
-                })
-                .catch(() => {
-                    // إعلانات افتراضية
-                    document.getElementById('top-ad').innerHTML = '<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>';
-                    document.getElementById('middle-ad').innerHTML = '<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>';
-                    document.getElementById('bottom-ad').innerHTML = '<script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"><\/script>';
-                    
-                    const sidebarAd = '<script>atOptions = {"key" : "d97eda55927b2ccbf2ad42d5cb6201f8","format" : "iframe","height" : 600,"width" : 160,"params" : {}};<\/script><script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>';
-                    document.getElementById('sidebar-left-ad').innerHTML = sidebarAd;
-                    document.getElementById('sidebar-right-ad').innerHTML = sidebarAd;
-                });
+            // الإعلان العلوي
+            document.getElementById('top-ad').innerHTML = '<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>';
+            
+            // الإعلان الأوسط
+            document.getElementById('middle-ad').innerHTML = '<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>';
+            
+            // الإعلان السفلي
+            document.getElementById('bottom-ad').innerHTML = '<script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"><\/script>';
+            
+            // الإعلانات الجانبية (تظهر فقط على الكمبيوتر)
+            const sidebarAd = '<script>atOptions = {"key" : "d97eda55927b2ccbf2ad42d5cb6201f8","format" : "iframe","height" : 600,"width" : 160,"params" : {}};<\/script><script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>';
+            document.getElementById('sidebar-left-ad').innerHTML = sidebarAd;
+            document.getElementById('sidebar-right-ad').innerHTML = sidebarAd;
         }
 
         window.onload = function() {
