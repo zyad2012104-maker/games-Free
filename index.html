@@ -11,10 +11,6 @@
     
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
     
-    <!-- ===== أكواد الإعلانات ===== -->
-    <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
-    <script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -198,44 +194,67 @@
             margin: 5px auto;
         }
 
-        /* إعلانات الجانبية */
+        /* ===== الإعلانات الجانبية ===== */
         .side-ads-wrapper {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             margin: 15px 0;
         }
+        
         .side-ad {
             width: 160px;
             flex-shrink: 0;
             background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 8px;
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 10px;
             text-align: center;
             align-self: flex-start;
             position: sticky;
-            top: 80px;
+            top: 100px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+        
+        .ad-title {
+            background: #ff9800;
+            color: white;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .ad-box {
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .ad-placeholder {
+            color: #999;
+            font-size: 12px;
+            text-align: center;
+            padding: 20px;
+        }
+        
         .main-content {
             flex: 1;
             min-width: 0;
         }
-        .ad-badge {
-            background: #ff9800;
-            color: white;
-            font-size: 10px;
-            padding: 3px 8px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            display: inline-block;
-        }
+        
         .bottom-ad {
             width: 100%;
             margin: 15px 0;
             background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 8px;
+            border: 1px solid #ff9800;
+            border-radius: 10px;
+            padding: 10px;
             text-align: center;
         }
 
@@ -346,8 +365,13 @@
         .copyright { text-align: center; color: #999; font-size: 11px; }
 
         @media (max-width: 992px) {
-            .side-ad { display: none; }
-            .side-ads-wrapper { display: block; }
+            .side-ad {
+                display: none;
+            }
+            .side-ads-wrapper {
+                display: block;
+            }
+            .games-grid { grid-template-columns: repeat(4, 1fr); }
         }
         @media (max-width: 768px) {
             .games-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
@@ -403,12 +427,14 @@
             </div>
         </div>
 
-        <!-- الإعلانات الجانبية والمحتوى -->
+        <!-- ===== الإعلانات الجانبية والمحتوى ===== -->
         <div class="side-ads-wrapper">
-            <!-- إعلان جانبي يسار -->
+            <!-- إعلان جانبي يسار (160×600) -->
             <div class="side-ad">
-                <span class="ad-badge">إعلان 160×600</span>
-                <div id="leftAd"></div>
+                <div class="ad-title">إعلان 160×600</div>
+                <div class="ad-box" id="leftAdBox">
+                    <div class="ad-placeholder">جاري تحميل الإعلان...</div>
+                </div>
             </div>
 
             <!-- المحتوى الرئيسي -->
@@ -424,15 +450,17 @@
 
                 <!-- الإعلان السفلي -->
                 <div class="bottom-ad">
-                    <span class="ad-badge">إعلان سفلي</span>
-                    <div id="bottomAd"></div>
+                    <div class="ad-title">إعلان سفلي</div>
+                    <div id="bottomAdBox"></div>
                 </div>
             </div>
 
-            <!-- إعلان جانبي يمين -->
+            <!-- إعلان جانبي يمين (160×600) -->
             <div class="side-ad">
-                <span class="ad-badge">إعلان 160×600</span>
-                <div id="rightAd"></div>
+                <div class="ad-title">إعلان 160×600</div>
+                <div class="ad-box" id="rightAdBox">
+                    <div class="ad-placeholder">جاري تحميل الإعلان...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -462,6 +490,38 @@
     </footer>
 
     <script>
+        // ========== أكواد الإعلانات المباشرة ==========
+        // إعلان جانبي يسار
+        const leftAdCode = `
+            <script>
+              atOptions = {
+                'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+                'format' : 'iframe',
+                'height' : 600,
+                'width' : 160,
+                'params' : {}
+              };
+            <\/script>
+            <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>
+        `;
+        
+        // إعلان جانبي يمين (نفس الكود)
+        const rightAdCode = `
+            <script>
+              atOptions = {
+                'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+                'format' : 'iframe',
+                'height' : 600,
+                'width' : 160,
+                'params' : {}
+              };
+            <\/script>
+            <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>
+        `;
+        
+        // إعلان سفلي
+        const bottomAdCode = `<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>`;
+        
         // ========== قائمة الألعاب ==========
         const gamesList = [
             // ألعاب داخلية
@@ -525,14 +585,12 @@
             document.body.style.overflow = 'auto';
         }
 
-        // إغلاق عند الضغط على الخلفية
         function closeGameOnBackground(event) {
             if (event.target === document.getElementById('gameModal')) {
                 closeGame();
             }
         }
 
-        // البحث
         function searchGames() {
             const term = document.getElementById('searchInput').value.toLowerCase();
             const filtered = gamesList.filter(game => 
@@ -543,7 +601,6 @@
             renderGames(filtered);
         }
 
-        // فلترة حسب التصنيف
         function filterByCategory(category) {
             if (category === 'all') {
                 currentGames = [...gamesList];
@@ -553,7 +610,6 @@
             renderGames(currentGames);
         }
 
-        // عرض جميع الألعاب
         function showAllGames() {
             currentGames = [...gamesList];
             renderGames(currentGames);
@@ -564,32 +620,22 @@
 
         // ========== تحميل الإعلانات ==========
         function loadAds() {
-            // الإعلان الجانبي الأيسر
-            const leftAd = document.getElementById('leftAd');
-            if (leftAd) {
-                leftAd.innerHTML = `
-                    <script>
-                      atOptions = {'key': 'd97eda55927b2ccbf2ad42d5cb6201f8','format': 'iframe','height': 600,'width': 160,'params': {}};
-                    <\/script>
-                    <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>
-                `;
+            // تحميل الإعلان الجانبي الأيسر
+            const leftAdBox = document.getElementById('leftAdBox');
+            if (leftAdBox) {
+                leftAdBox.innerHTML = leftAdCode;
             }
             
-            // الإعلان الجانبي الأيمن
-            const rightAd = document.getElementById('rightAd');
-            if (rightAd) {
-                rightAd.innerHTML = `
-                    <script>
-                      atOptions = {'key': 'd97eda55927b2ccbf2ad42d5cb6201f8','format': 'iframe','height': 600,'width': 160,'params': {}};
-                    <\/script>
-                    <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>
-                `;
+            // تحميل الإعلان الجانبي الأيمن
+            const rightAdBox = document.getElementById('rightAdBox');
+            if (rightAdBox) {
+                rightAdBox.innerHTML = rightAdCode;
             }
             
-            // الإعلان السفلي
-            const bottomAd = document.getElementById('bottomAd');
-            if (bottomAd) {
-                bottomAd.innerHTML = `<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>`;
+            // تحميل الإعلان السفلي
+            const bottomAdBox = document.getElementById('bottomAdBox');
+            if (bottomAdBox) {
+                bottomAdBox.innerHTML = bottomAdCode;
             }
         }
 
