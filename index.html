@@ -11,6 +11,10 @@
     
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
     
+    <!-- ===== أكواد الإعلانات الأساسية (موجودة في HEAD) ===== -->
+    <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
+    <script src="https://pl28941417.profitablecpmratenetwork.com/56/78/41/567841b929b9b0b5da580931d4c9140c.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -236,13 +240,6 @@
             overflow: hidden;
         }
         
-        .ad-placeholder {
-            color: #999;
-            font-size: 12px;
-            text-align: center;
-            padding: 20px;
-        }
-        
         .main-content {
             flex: 1;
             min-width: 0;
@@ -427,13 +424,22 @@
             </div>
         </div>
 
-        <!-- ===== الإعلانات الجانبية والمحتوى ===== -->
+        <!-- ===== الإعلانات الجانبية والمحتوى - إعلانات مباشرة ===== -->
         <div class="side-ads-wrapper">
-            <!-- إعلان جانبي يسار (160×600) -->
+            <!-- إعلان جانبي يسار (160×600) - كود مباشر -->
             <div class="side-ad">
                 <div class="ad-title">إعلان 160×600</div>
-                <div class="ad-box" id="leftAdBox">
-                    <div class="ad-placeholder">جاري تحميل الإعلان...</div>
+                <div class="ad-box">
+                    <script>
+                      atOptions = {
+                        'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+                        'format' : 'iframe',
+                        'height' : 600,
+                        'width' : 160,
+                        'params' : {}
+                      };
+                    </script>
+                    <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
                 </div>
             </div>
 
@@ -448,18 +454,27 @@
                 <h2 class="section-title">🎲 أحدث الألعاب</h2>
                 <div class="games-grid" id="gamesGrid"></div>
 
-                <!-- الإعلان السفلي -->
+                <!-- الإعلان السفلي - كود مباشر -->
                 <div class="bottom-ad">
                     <div class="ad-title">إعلان سفلي</div>
-                    <div id="bottomAdBox"></div>
+                    <script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"></script>
                 </div>
             </div>
 
-            <!-- إعلان جانبي يمين (160×600) -->
+            <!-- إعلان جانبي يمين (160×600) - كود مباشر -->
             <div class="side-ad">
                 <div class="ad-title">إعلان 160×600</div>
-                <div class="ad-box" id="rightAdBox">
-                    <div class="ad-placeholder">جاري تحميل الإعلان...</div>
+                <div class="ad-box">
+                    <script>
+                      atOptions = {
+                        'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
+                        'format' : 'iframe',
+                        'height' : 600,
+                        'width' : 160,
+                        'params' : {}
+                      };
+                    </script>
+                    <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"></script>
                 </div>
             </div>
         </div>
@@ -490,38 +505,6 @@
     </footer>
 
     <script>
-        // ========== أكواد الإعلانات المباشرة ==========
-        // إعلان جانبي يسار
-        const leftAdCode = `
-            <script>
-              atOptions = {
-                'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
-                'format' : 'iframe',
-                'height' : 600,
-                'width' : 160,
-                'params' : {}
-              };
-            <\/script>
-            <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>
-        `;
-        
-        // إعلان جانبي يمين (نفس الكود)
-        const rightAdCode = `
-            <script>
-              atOptions = {
-                'key' : 'd97eda55927b2ccbf2ad42d5cb6201f8',
-                'format' : 'iframe',
-                'height' : 600,
-                'width' : 160,
-                'params' : {}
-              };
-            <\/script>
-            <script src="https://www.highperformanceformat.com/d97eda55927b2ccbf2ad42d5cb6201f8/invoke.js"><\/script>
-        `;
-        
-        // إعلان سفلي
-        const bottomAdCode = `<script src="https://pl28941680.profitablecpmratenetwork.com/8b/d5/21/8bd5212efbe7fc123c0c78afb316cd4f.js"><\/script>`;
-        
         // ========== قائمة الألعاب ==========
         const gamesList = [
             // ألعاب داخلية
@@ -551,7 +534,6 @@
 
         let currentGames = [...gamesList];
 
-        // عرض الألعاب
         function renderGames(games) {
             const grid = document.getElementById('gamesGrid');
             if (!grid) return;
@@ -565,7 +547,6 @@
             `).join('');
         }
 
-        // فتح اللعبة
         function openGame(title, url) {
             const modal = document.getElementById('gameModal');
             const iframe = document.getElementById('gameIframe');
@@ -576,7 +557,6 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // إغلاق اللعبة
         function closeGame() {
             const modal = document.getElementById('gameModal');
             const iframe = document.getElementById('gameIframe');
@@ -618,28 +598,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ========== تحميل الإعلانات ==========
-        function loadAds() {
-            // تحميل الإعلان الجانبي الأيسر
-            const leftAdBox = document.getElementById('leftAdBox');
-            if (leftAdBox) {
-                leftAdBox.innerHTML = leftAdCode;
-            }
-            
-            // تحميل الإعلان الجانبي الأيمن
-            const rightAdBox = document.getElementById('rightAdBox');
-            if (rightAdBox) {
-                rightAdBox.innerHTML = rightAdCode;
-            }
-            
-            // تحميل الإعلان السفلي
-            const bottomAdBox = document.getElementById('bottomAdBox');
-            if (bottomAdBox) {
-                bottomAdBox.innerHTML = bottomAdCode;
-            }
-        }
-
-        // تهيئة التصنيفات
         document.querySelectorAll('.category-item').forEach(cat => {
             cat.addEventListener('click', function() {
                 document.querySelectorAll('.category-item').forEach(c => c.classList.remove('active'));
@@ -649,7 +607,7 @@
             });
         });
 
-        // ========== عداد الزيارات ==========
+        // عداد الزيارات
         (function() {
             try {
                 const BASE_NUMBER = 2500500;
@@ -670,11 +628,7 @@
             } catch(e) {}
         })();
 
-        // تحميل الصفحة
-        window.onload = function() {
-            loadAds();
-            renderGames(gamesList);
-        };
+        renderGames(gamesList);
     </script>
 </body>
 </html>
